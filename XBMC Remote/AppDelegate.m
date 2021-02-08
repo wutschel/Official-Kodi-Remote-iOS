@@ -2985,6 +2985,10 @@ NSMutableArray *hostRightMenuItems;
                               @"ascending",@"order",
                               [NSNumber numberWithBool:FALSE],@"ignorearticle",
                               @"label", @"method",
+                             [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSMutableArray arrayWithObjects:NSLocalizedString(@"Title", nil), NSLocalizedString(@"Date", nil), nil], @"label",
+                              [NSArray arrayWithObjects:@"label", @"date", nil], @"method",
+                              nil], @"available_methods",
                               nil],@"sort",
                             [[NSArray alloc] initWithObjects:@"title", @"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
                             nil], @"parameters",
@@ -3010,6 +3014,10 @@ NSMutableArray *hostRightMenuItems;
                               @"ascending",@"order",
                               [NSNumber numberWithBool:FALSE],@"ignorearticle",
                               @"label", @"method",
+                            [NSDictionary dictionaryWithObjectsAndKeys:
+                             [NSMutableArray arrayWithObjects:NSLocalizedString(@"Title", nil), NSLocalizedString(@"Date", nil), nil], @"label",
+                             [NSArray arrayWithObjects:@"label", @"date", nil], @"method",
+                             nil], @"available_methods",
                               nil],@"sort",
                             [[NSArray alloc] initWithObjects:@"title", @"summary", @"channelid", @"isradio", @"starttime", @"endtime", @"runtime", @"lifetime", @"firstday",@"weekdays", @"priority", @"startmargin", @"endmargin", @"state", @"file", @"directory", nil], @"properties",
                             nil], @"parameters",
