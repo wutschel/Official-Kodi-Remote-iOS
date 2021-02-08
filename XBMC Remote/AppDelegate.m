@@ -2981,6 +2981,11 @@ NSMutableArray *hostRightMenuItems;
 
                           [NSMutableArray arrayWithObjects:
                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                              @"ascending",@"order",
+                              [NSNumber numberWithBool:FALSE],@"ignorearticle",
+                              @"label", @"method",
+                              nil],@"sort",
                             [[NSArray alloc] initWithObjects:@"title", @"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
                             nil], @"parameters",
                            [NSDictionary dictionaryWithObjectsAndKeys:
@@ -3001,6 +3006,11 @@ NSMutableArray *hostRightMenuItems;
                           
                           [NSMutableArray arrayWithObjects:
                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                              @"ascending",@"order",
+                              [NSNumber numberWithBool:FALSE],@"ignorearticle",
+                              @"label", @"method",
+                              nil],@"sort",
                             [[NSArray alloc] initWithObjects:@"title", @"summary", @"channelid", @"isradio", @"starttime", @"endtime", @"runtime", @"lifetime", @"firstday",@"weekdays", @"priority", @"startmargin", @"endmargin", @"state", @"file", @"directory", nil], @"properties",
                             nil], @"parameters",
                            [NSDictionary dictionaryWithObjectsAndKeys:
