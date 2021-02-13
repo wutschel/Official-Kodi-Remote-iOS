@@ -2981,15 +2981,7 @@ NSMutableArray *hostRightMenuItems;
 
                           [NSMutableArray arrayWithObjects:
                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                              @"descending",@"order",
-                              @"date", @"method",
-                             [NSDictionary dictionaryWithObjectsAndKeys:
-                              [NSMutableArray arrayWithObjects:NSLocalizedString(@"Title", nil), NSLocalizedString(@"Channel", nil), NSLocalizedString(@"Date", nil), NSLocalizedString(@"Runtime", nil), nil], @"label",
-                              [NSArray arrayWithObjects:@"label", @"channel", @"date", @"runtime", nil], @"method",
-                              nil], @"available_methods",
-                              nil],@"sort",
-                            [[NSArray alloc] initWithObjects:@"title",@"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
+                            [[NSArray alloc] initWithObjects:@"title", @"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
                             nil], @"parameters",
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             [[NSArray alloc] initWithObjects:@"title", @"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
@@ -3009,14 +3001,6 @@ NSMutableArray *hostRightMenuItems;
                           
                           [NSMutableArray arrayWithObjects:
                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                              @"descending",@"order",
-                              @"date", @"method",
-                            [NSDictionary dictionaryWithObjectsAndKeys:
-                             [NSMutableArray arrayWithObjects:NSLocalizedString(@"Title", nil), NSLocalizedString(@"Channel", nil), NSLocalizedString(@"Date", nil), NSLocalizedString(@"Runtime", nil), nil], @"label",
-                             [NSArray arrayWithObjects:@"label", @"channel", @"date", @"runtime", nil], @"method",
-                             nil], @"available_methods",
-                              nil],@"sort",
                             [[NSArray alloc] initWithObjects:@"title", @"summary", @"channelid", @"isradio", @"starttime", @"endtime", @"runtime", @"lifetime", @"firstday",@"weekdays", @"priority", @"startmargin", @"endmargin", @"state", @"file", @"directory", nil], @"properties",
                             nil], @"parameters",
                            [NSDictionary dictionaryWithObjectsAndKeys:
