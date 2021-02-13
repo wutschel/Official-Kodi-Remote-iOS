@@ -2981,7 +2981,21 @@ NSMutableArray *hostRightMenuItems;
 
                           [NSMutableArray arrayWithObjects:
                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                            [[NSArray alloc] initWithObjects:@"title", @"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
+                            [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                              @"descending",@"order",
+                              @"date", @"method",
+                             [NSDictionary dictionaryWithObjectsAndKeys:
+                              [NSMutableArray arrayWithObjects:NSLocalizedString(@"Title", nil),
+                                                               NSLocalizedString(@"Starttime", nil),
+                                                               NSLocalizedString(@"Duration", nil),
+                                                               NSLocalizedString(@"Filename", nil), nil], @"label",
+                              [NSArray arrayWithObjects:@"title",
+                                                        @"starttime",
+                                                        @"runtime",
+                                                        @"file", nil], @"method",
+                              nil], @"available_methods",
+                              nil],@"sort",
+                            [[NSArray alloc] initWithObjects:@"title",@"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
                             nil], @"parameters",
                            [NSDictionary dictionaryWithObjectsAndKeys:
                             [[NSArray alloc] initWithObjects:@"title", @"starttime", @"endtime", @"plot", @"plotoutline", @"genre", @"playcount",@"resume", @"channel",  @"runtime",@"lifetime", @"icon", @"art", @"streamurl", @"file", @"directory", nil], @"properties",
