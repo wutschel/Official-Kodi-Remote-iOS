@@ -688,4 +688,24 @@
     return shadowedImage;
 }
 
++ (UIImage*)makeRoundedImage:(UIImage*)image radius:(CGFloat)radius {
+    CALayer *imageLayer = [CALayer layer];
+    imageLayer.frame = CGRectMake(0, 0, image.size.width, image.size.height);
+    imageLayer.contents = (id) image.CGImage;
+    imageLayer.masksToBounds = YES;
+    //imageLayer.cornerRadius = radius;
+    imageLayer.cornerRadius = MAX(MIN(image.size.width, image.size.height) * 1.0/10.0, 8.0);
+    
+    CGFloat thumbBorder = 2*1.0/[[UIScreen mainScreen] scale];
+    imageLayer.borderWidth = thumbBorder;
+    imageLayer.borderColor = [UIColor blackColor].CGColor;
+    
+    UIGraphicsBeginImageContext(image.size);
+    [imageLayer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *roundedImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return roundedImage;
+}
+
 @end
