@@ -608,7 +608,8 @@ int count = 0;
 }
 
 - (UIImage*)imageWithBorderFromImage:(UIImage*)source {
-    return [Utilities imageWithShadow:source radius:10];
+    //return [Utilities imageWithShadow:source radius:10];
+    return [Utilities makeRoundedImage:source radius:8.0];
 }
 
 - (BOOL)enableJewelCases {

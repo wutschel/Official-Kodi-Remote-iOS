@@ -8,6 +8,7 @@
 
 #import "UIImageView+WebCache.h"
 #import "objc/runtime.h"
+#import "Utilities.h"
 
 static char operationKey;
 
@@ -70,7 +71,7 @@ static char operationKey;
                 return;
             }
             if (image) {
-                sself.image = image;
+                sself.image = [Utilities makeRoundedImage:image radius:8.0];
                 [sself setNeedsLayout];
             }
             if (completedBlock && finished) {
