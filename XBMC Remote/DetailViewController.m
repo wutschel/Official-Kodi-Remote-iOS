@@ -2461,17 +2461,6 @@ int originYear = 0;
                            placeholderImage:[UIImage imageNamed:displayThumb]
                                   andResize:CGSizeMake(albumThumbHeight, albumThumbHeight)
                                   completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                                      CGFloat thumbBorder = 1.0/[[UIScreen mainScreen] scale];
-                                      [thumbImageContainer setBackgroundColor:[UIColor clearColor]];
-                                      thumbImageContainer.layer.shadowColor = [UIColor blackColor].CGColor;
-                                      thumbImageContainer.layer.shadowOpacity = 1.0f;
-                                      thumbImageContainer.layer.shadowOffset = CGSizeZero;
-                                      thumbImageContainer.layer.shadowRadius = 2.0;
-                                      thumbImageContainer.layer.masksToBounds = NO;
-                                      thumbImageContainer.layer.borderWidth = thumbBorder;
-                                      thumbImageContainer.layer.borderColor = [UIColor blackColor].CGColor;
-                                      UIBezierPath *path = [UIBezierPath bezierPathWithRect:thumbImageContainer.bounds];
-                                      thumbImageContainer.layer.shadowPath = path.CGPath;
                                       if (enableBarColor) {
                                           albumColor = [utils averageColor:image inverse:NO];
                                           UIColor *lightAlbumColor = [utils lighterColorForColor:albumColor];
@@ -2632,7 +2621,6 @@ int originYear = 0;
             CGFloat origin_x = seasonThumbWidth + toggleIconSpace + (albumViewPadding * 2);
             CGFloat labelwidth = viewWidth - albumViewHeight - albumViewPadding;
             CGFloat bottomMargin = albumViewHeight - albumViewPadding - (trackCountFontSize + (labelPadding / 2) - 1);
-            UIImageView *thumbImageShadowView = [[UIImageView alloc] initWithFrame:CGRectMake(albumViewPadding + toggleIconSpace - 3, albumViewPadding - 3, seasonThumbWidth + 6, albumViewHeight - (albumViewPadding * 2) + 6)];
             UILabel *artist = [[UILabel alloc] initWithFrame:CGRectMake(origin_x, (albumViewPadding / 2), labelwidth, artistFontSize + labelPadding)];
             UILabel *albumLabel = [[UILabel alloc] initWithFrame:CGRectMake(origin_x, artist.frame.origin.y + artistFontSize + 2, labelwidth, albumFontSize + labelPadding)];
             UILabel *trackCountLabel = [[UILabel alloc] initWithFrame:CGRectMake(origin_x, bottomMargin, labelwidth - toggleIconSpace, trackCountFontSize + labelPadding)];
@@ -2670,10 +2658,6 @@ int originYear = 0;
                 [self setLabelColor:seasonFontColor label34Color:seasonDetailsColor fontshadow:seasonFontShadowColor label1:artist label2:albumLabel label3:trackCountLabel label4:releasedLabel];
             }
             [albumDetailView addSubview:thumbImageView];
-            
-            [thumbImageShadowView setContentMode:UIViewContentModeScaleToFill];
-            thumbImageShadowView.image = [UIImage imageNamed:@"coverbox_back_section_shadow"];
-            [albumDetailView addSubview:thumbImageShadowView];
             
             [artist setBackgroundColor:[UIColor clearColor]];
             [artist setShadowOffset:CGSizeMake(0, 1)];
