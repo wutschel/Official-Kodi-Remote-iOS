@@ -225,8 +225,85 @@
     return img;
 }
 
-+ (void)setLogoBackgroundColor:(UIImageView*)imageview mode:(LogoBackgroundType)mode {
-    Utilities *utils = [Utilities new];
+- (UIImage*)colorizeBackground:(UIImage *)image withColor:(UIColor*)color {
+    //  Create rect to fit the PNG image
+    CGRect rect = CGRectMake(0, 0, image.size.width, image.size.height);
+
+    //  Create bitmap contect
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSaveGState(context);
+
+    // Draw background first
+
+    //  Set background color (will be under the PNG)
+    [color setFill];
+
+    //  Fill all context with background image
+    CGContextFillRect(context, rect);
+
+    //  Draw the PNG over the background
+    [image drawInRect:rect];
+
+    //  Create new image from the context
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+
+    //  Release context
+    UIGraphicsEndImageContext();
+
+    return img;
+}
+
+-(UIImage *)resizeImage:(UIImage *)image width:(int)destWidth height:(int)destHeight padding:(int)destPadding {
+    int w = image.size.width;
+    int h = image.size.height;
+    if (!w || !h) return image;
+    destPadding = 0;
+    CGImageRef imageRef = [image CGImage];
+    
+    int width, height;
+    
+    if(w > h){
+        width = destWidth - destPadding;
+        height = h * (destWidth - destPadding) / w;
+    } else {
+        height = destHeight - destPadding;
+        width = w * (destHeight - destPadding) / h;
+    }
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    
+    CGContextRef bitmap;
+    bitmap = CGBitmapContextCreate(NULL, destWidth, destHeight, 8, 4 * destWidth, colorSpace, kCGBitmapAlphaInfoMask & kCGImageAlphaPremultipliedLast);
+    /*
+    if (image.imageOrientation == UIImageOrientationLeft) {
+        CGContextRotateCTM (bitmap, M_PI/2);
+        CGContextTranslateCTM (bitmap, 0, -height);
+        
+    } else if (image.imageOrientation == UIImageOrientationRight) {
+        CGContextRotateCTM (bitmap, -M_PI/2);
+        CGContextTranslateCTM (bitmap, -width, 0);
+        
+    } else if (image.imageOrientation == UIImageOrientationUp) {
+        
+    } else if (image.imageOrientation == UIImageOrientationDown) {
+        CGContextTranslateCTM (bitmap, width,height);
+        CGContextRotateCTM (bitmap, -M_PI);
+        
+    }
+    */
+    CGContextDrawImage(bitmap, CGRectMake((destWidth / 2) - (width / 2), (destHeight / 2) - (height / 2), width, height), imageRef);
+    CGImageRef ref = CGBitmapContextCreateImage(bitmap);
+    UIImage *result = [UIImage imageWithCGImage:ref];
+    
+    CGContextRelease(bitmap);
+    CGColorSpaceRelease(colorSpace);
+    CGImageRelease(ref);
+    
+    return result;
+}
+    
++ (void)setLogoBackgroundColor:(UIImageView*)imageview mode:(LogoBackgroundType)mode{
+    Utilities *utils = [[Utilities alloc] init];
     UIColor *bgcolor = [UIColor clearColor];
     UIColor *imgcolor = nil;
     UIColor *bglight = [Utilities getGrayColor:242 alpha:1.0];
@@ -250,7 +327,21 @@
             NSLog(@"setLogoBackgroundColor: unknown mode %d", mode);
             break;
     }
-    [imageview setBackgroundColor:bgcolor];
+    {
+        CGFloat newWidth = imageview.image.size.width;
+        CGFloat newHeight = imageview.image.size.height;
+        CGFloat targetAspect = 9.0/7.0;
+        CGFloat imageAspect = imageview.image.size.width / imageview.image.size.height;
+        if (imageAspect > targetAspect) {
+            newHeight *= imageAspect / targetAspect;
+        }
+        else {
+            newWidth *= imageAspect / targetAspect;
+        }
+        imageview.image = [utils resizeImage:imageview.image width:newWidth height:newHeight padding:0];
+        imageview.image = [utils colorizeBackground:imageview.image withColor:bgcolor];
+    }
+    //[imageview setBackgroundColor:bgcolor];
 }
 
 + (LogoBackgroundType)getLogoBackgroundMode {
