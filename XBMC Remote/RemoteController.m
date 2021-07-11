@@ -423,10 +423,10 @@
                 }
                 [[Utilities getJsonRPC]
                  callMethod:@"Player.GetProperties"
-                 withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                 response, @"playerid",
-                                 @[@"subtitleenabled", @"currentsubtitle", @"subtitles"], @"properties",
-                                 nil]
+                 withParameters:@{@"playerid": response,
+                                  @"properties": @[@"subtitleenabled",
+                                                   @"currentsubtitle",
+                                                   @"subtitles"]}
                  onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError* error) {
                      if (error == nil && methodError == nil) {
                          if ([NSJSONSerialization isValidJSONObject:methodResult]) {
@@ -492,10 +492,9 @@
                 }
                 [[Utilities getJsonRPC]
                  callMethod:@"Player.GetProperties"
-                 withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
-                                 response, @"playerid",
-                                 @[@"currentaudiostream", @"audiostreams"], @"properties",
-                                 nil]
+                 withParameters:@{@"playerid": response,
+                                  @"properties": @[@"currentaudiostream",
+                                                   @"audiostreams"]}
                  onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError* error) {
                      if (error == nil && methodError == nil) {
                          if ([NSJSONSerialization isValidJSONObject:methodResult]) {
