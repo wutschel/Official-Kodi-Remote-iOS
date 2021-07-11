@@ -2051,7 +2051,7 @@ int currentItemID;
                 obj = @{@"artist": artistFrodoWorkaround};
             }
             else {
-                obj = [NSDictionary dictionaryWithObjectsAndKeys: @([item[mainFields[@"row6"]] intValue]), mainFields[@"row6"], nil];
+                obj = @{mainFields[@"row6"]: @([item[mainFields[@"row6"]] intValue])};
             }
             objKey = @"filter";
         }
