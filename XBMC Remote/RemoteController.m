@@ -58,30 +58,24 @@
 - (void)setEmbeddedView {
     CGRect frame = TransitionalView.frame;
     CGFloat newWidth = remoteControlView.frame.size.width - ANCHOR_RIGHT_PEEK;
-    [self hideButton: [NSArray arrayWithObjects:
-                       [(UIButton*)self.view viewWithTag:2],
+    [self hideButton:@[[(UIButton*)self.view viewWithTag:2],
                        [(UIButton*)self.view viewWithTag:3],
                        [(UIButton*)self.view viewWithTag:4],
                        [(UIButton*)self.view viewWithTag:5],
-                       [(UIButton*)self.view viewWithTag:8],
-                       nil]
+                       [(UIButton*)self.view viewWithTag:8]]
                 hide:YES];
     if ([[UIScreen mainScreen] bounds].size.height >= 568) {
-        [self moveButton: [NSArray arrayWithObjects:
-                           (UIButton*)[self.view viewWithTag:21],
+        [self moveButton:@[(UIButton*)[self.view viewWithTag:21],
                            (UIButton*)[self.view viewWithTag:22],
                            (UIButton*)[self.view viewWithTag:23],
-                           (UIButton*)[self.view viewWithTag:24],
-                           nil]
+                           (UIButton*)[self.view viewWithTag:24]]
                     ypos: -32];
     }
     else {
-        [self hideButton: [NSArray arrayWithObjects:
-                           [(UIButton*)self.view viewWithTag:21],
+        [self hideButton:@[[(UIButton*)self.view viewWithTag:21],
                            [(UIButton*)self.view viewWithTag:22],
                            [(UIButton*)self.view viewWithTag:23],
-                           [(UIButton*)self.view viewWithTag:24],
-                           nil]
+                           [(UIButton*)self.view viewWithTag:24]]
                     hide: YES];
     }
     // Place the transitional view in the middle between the two button rows
@@ -650,7 +644,7 @@
             NSString *actiontitle = sheetActions[i];
             UIAlertAction* action = [UIAlertAction actionWithTitle:actiontitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                 if (![audiostreamsDictionary[@"audiostreams"][i] isEqual:audiostreamsDictionary[@"currentaudiostream"]]) {
-                    [self playbackAction:@"Player.SetAudioStream" params:[NSArray arrayWithObjects:audiostreamsDictionary[@"audiostreams"][i][@"index"], @"stream", nil]];
+                    [self playbackAction:@"Player.SetAudioStream" params:@[audiostreamsDictionary[@"audiostreams"][i][@"index"], @"stream"]];
                     [self showSubInfo:actiontitle timeout:2.0 color:[UIColor whiteColor]];
                 }
             }];
@@ -688,7 +682,7 @@
             NSString *actiontitle = sheetActions[i];
             UIAlertAction* action = [UIAlertAction actionWithTitle:actiontitle style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
                 if (![subsDictionary[@"subtitles"][i] isEqual:subsDictionary[@"currentsubtitle"]] || ![subsDictionary[@"subtitleenabled"] boolValue]) {
-                    [self playbackAction:@"Player.SetSubtitle" params:[NSArray arrayWithObjects:subsDictionary[@"subtitles"][i][@"index"], @"subtitle", nil]];
+                    [self playbackAction:@"Player.SetSubtitle" params:@[subsDictionary[@"subtitles"][i][@"index"], @"subtitle"]];
                     [self playbackAction:@"Player.SetSubtitle" params:@[@"on", @"subtitle"]];
                     [self showSubInfo:actiontitle timeout:2.0 color:[UIColor whiteColor]];
                 }
