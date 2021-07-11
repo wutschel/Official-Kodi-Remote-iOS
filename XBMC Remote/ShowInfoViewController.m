@@ -1362,10 +1362,8 @@ int count = 0;
         [self.navigationController setNavigationBarHidden:YES animated:YES];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
             if (![self isModal]) {
-                NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        @(YES), @"hideToolbar",
-                                        @(YES), @"clipsToBounds",
-                                        nil];
+                NSDictionary *params = @{@"hideToolbar": @(YES),
+                                         @"clipsToBounds": @(YES)};
                 [[NSNotificationCenter defaultCenter] postNotificationName: @"StackScrollFullScreenEnabled" object:self.view userInfo:params];
             }
             [UIView animateWithDuration:1.5
