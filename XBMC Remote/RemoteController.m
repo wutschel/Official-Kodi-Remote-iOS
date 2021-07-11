@@ -58,11 +58,11 @@
 - (void)setEmbeddedView {
     CGRect frame = TransitionalView.frame;
     CGFloat newWidth = remoteControlView.frame.size.width - ANCHOR_RIGHT_PEEK;
-    [self hideButton:@[[(UIButton*)self.view viewWithTag:2],
-                       [(UIButton*)self.view viewWithTag:3],
-                       [(UIButton*)self.view viewWithTag:4],
-                       [(UIButton*)self.view viewWithTag:5],
-                       [(UIButton*)self.view viewWithTag:8]]
+    [self hideButton:@[(UIButton*)[self.view viewWithTag:2],
+                       (UIButton*)[self.view viewWithTag:3],
+                       (UIButton*)[self.view viewWithTag:4],
+                       (UIButton*)[self.view viewWithTag:5],
+                       (UIButton*)[self.view viewWithTag:8]]
                 hide:YES];
     if ([[UIScreen mainScreen] bounds].size.height >= 568) {
         [self moveButton:@[(UIButton*)[self.view viewWithTag:21],
@@ -72,10 +72,10 @@
                     ypos: -32];
     }
     else {
-        [self hideButton:@[[(UIButton*)self.view viewWithTag:21],
-                           [(UIButton*)self.view viewWithTag:22],
-                           [(UIButton*)self.view viewWithTag:23],
-                           [(UIButton*)self.view viewWithTag:24]]
+        [self hideButton:@[(UIButton*)[self.view viewWithTag:21],
+                           (UIButton*)[self.view viewWithTag:22],
+                           (UIButton*)[self.view viewWithTag:23],
+                           (UIButton*)[self.view viewWithTag:24]]
                     hide: YES];
     }
     // Place the transitional view in the middle between the two button rows
