@@ -252,36 +252,26 @@
 }
 
 - (IBAction)togglePartyMode:(id)sender {
-    if (AppDelegate.instance.serverVersion == 11) {
-        storedItemID = SELECTED_NONE;
-        PartyModeButton.selected = YES;
-        [Utilities sendXbmcHttp:@"ExecBuiltIn&parameter=PlayerControl(Partymode('music'))"];
-        playerID = PLAYERID_UNKNOWN;
-        selectedPlayerID = PLAYERID_UNKNOWN;
-        [self createPlaylist:NO animTableView:YES];
+    if (musicPartyMode) {
+        PartyModeButton.selected = NO;
+        [[Utilities getJsonRPC]
+         callMethod:@"Player.SetPartymode"
+         withParameters:@{@"playerid": @(0), @"partymode": @"toggle"}
+         onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
+             PartyModeButton.selected = NO;
+         }];
     }
     else {
-        if (musicPartyMode) {
-            PartyModeButton.selected = NO;
-            [[Utilities getJsonRPC]
-             callMethod:@"Player.SetPartymode"
-             withParameters:@{@"playerid": @(0), @"partymode": @"toggle"}
-             onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
-                 PartyModeButton.selected = NO;
-             }];
-        }
-        else {
-            PartyModeButton.selected = YES;
-            [[Utilities getJsonRPC]
-             callMethod:@"Player.Open"
-             withParameters:@{@"item": @{@"partymode": @"music"}}
-             onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
-                 PartyModeButton.selected = YES;
-                 playerID = PLAYERID_UNKNOWN;
-                 selectedPlayerID = PLAYERID_UNKNOWN;
-                 storedItemID = SELECTED_NONE;
-             }];
-        }
+        PartyModeButton.selected = YES;
+        [[Utilities getJsonRPC]
+         callMethod:@"Player.Open"
+         withParameters:@{@"item": @{@"partymode": @"music"}}
+         onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
+             PartyModeButton.selected = YES;
+             playerID = PLAYERID_UNKNOWN;
+             selectedPlayerID = PLAYERID_UNKNOWN;
+             storedItemID = SELECTED_NONE;
+         }];
     }
     return;
 }
@@ -548,10 +538,8 @@
                                                 @"description",
                                                 @"year",
                                                 @"director",
-                                                @"plot"] mutableCopy];
-                if (AppDelegate.instance.serverVersion > 11) {
-                    [properties addObject:@"art"];
-                }
+                                                @"plot",
+                                                @"art"] mutableCopy];
                 [[Utilities getJsonRPC]
                  callMethod:@"Player.GetItem" 
                  withParameters:@{@"playerid": @(currentPlayerID),
@@ -1013,29 +1001,7 @@
         [self nothingIsPlaying];
         return;
     }
-    if (AppDelegate.instance.serverVersion == 11) {
-        [[Utilities getJsonRPC]
-         callMethod:@"XBMC.GetInfoBooleans" 
-         withParameters:@{@"booleans": @[@"Window.IsActive(virtualkeyboard)", @"Window.IsActive(selectdialog)"]}
-         onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
-             
-             if (error == nil && methodError == nil && [methodResult isKindOfClass: [NSDictionary class]]) {
-                 if (methodResult[@"Window.IsActive(virtualkeyboard)"] != [NSNull null] && methodResult[@"Window.IsActive(selectdialog)"] != [NSNull null]) {
-                     NSNumber *virtualKeyboardActive = methodResult[@"Window.IsActive(virtualkeyboard)"];
-                     NSNumber *selectDialogActive = methodResult[@"Window.IsActive(selectdialog)"];
-                     if ([virtualKeyboardActive intValue] == 1 || [selectDialogActive intValue] == 1) {
-                         return;
-                     }
-                     else {
-                         [self getActivePlayers];
-                     }
-                 }
-             }
-         }];
-    }
-    else {
-        [self getActivePlayers];
-    }
+    [self getActivePlayers];
 }
 
 - (void)clearPlaylist:(int)playlistID {
@@ -1274,7 +1240,7 @@
     NSMutableDictionary *mutableParameters = [parameters[@"extra_info_parameters"] mutableCopy];
     NSMutableArray *mutableProperties = [parameters[@"extra_info_parameters"][@"properties"] mutableCopy];
     
-    if ([parameters[@"FrodoExtraArt"] boolValue] && AppDelegate.instance.serverVersion > 11) {
+    if ([parameters[@"FrodoExtraArt"] boolValue]) {
         [mutableProperties addObject:@"art"];
         mutableParameters[@"properties"] = mutableProperties;
     }
@@ -1309,7 +1275,7 @@
     UITableViewCell *cell = [playlistTableView cellForRowAtIndexPath:indexPath];
     UIActivityIndicatorView *activityIndicator = (UIActivityIndicatorView*)[cell viewWithTag:XIB_PLAYLIST_CELL_ACTIVTYINDICATOR];
     id object;
-    if (AppDelegate.instance.serverVersion > 11 && [methodToCall isEqualToString:@"AudioLibrary.GetArtistDetails"]) {
+    if ([methodToCall isEqualToString:@"AudioLibrary.GetArtistDetails"]) {
         // WORKAROUND due to the lack of the artistid with Playlist.GetItems
         methodToCall = @"AudioLibrary.GetArtists";
         object = @{@"songid": @([item[@"idItem"] intValue])};
@@ -1345,7 +1311,7 @@
          if (error == nil && methodError == nil) {
              if ([methodResult isKindOfClass:[NSDictionary class]]) {
                  NSDictionary *itemExtraDict;
-                 if (AppDelegate.instance.serverVersion > 11 && [methodToCall isEqualToString:@"AudioLibrary.GetArtists"]) {
+                 if ([methodToCall isEqualToString:@"AudioLibrary.GetArtists"]) {
                      // WORKAROUND due to the lack of the artistid with Playlist.GetItems
                      NSString *itemid_extra_info = @"artists";
                      if ([methodResult[itemid_extra_info] count]) {
@@ -1502,16 +1468,9 @@
     NSDictionary *params;
     switch ([sender tag]) {
         case TAG_ID_PREVIOUS:
-            if (AppDelegate.instance.serverVersion > 11) {
-                action = @"Player.GoTo";
-                params = @{@"to": @"previous"};
-                [self playbackAction:action params:params checkPartyMode:YES];
-            }
-            else {
-                action = @"Player.GoPrevious";
-                params = nil;
-                [self playbackAction:action params:nil checkPartyMode:YES];
-            }
+            action = @"Player.GoTo";
+            params = @{@"to": @"previous"};
+            [self playbackAction:action params:params checkPartyMode:YES];
             ProgressSlider.value = 0;
             break;
             
@@ -1529,16 +1488,9 @@
             break;
             
         case TAG_ID_NEXT:
-            if (AppDelegate.instance.serverVersion > 11) {
-                action = @"Player.GoTo";
-                params = @{@"to": @"next"};
-                [self playbackAction:action params:params checkPartyMode:YES];
-            }
-            else {
-                action = @"Player.GoNext";
-                params = nil;
-                [self playbackAction:action params:nil checkPartyMode:YES];
-            }
+            action = @"Player.GoTo";
+            params = @{@"to": @"next"};
+            [self playbackAction:action params:params checkPartyMode:YES];
             break;
             
         case TAG_ID_TOGGLE:
@@ -1606,13 +1558,7 @@
     BOOL newShuffleStatus = !shuffled;
     
     // Send the command to Kodi
-    if (AppDelegate.instance.serverVersion > 11) {
-        [self SimpleAction:@"Player.SetShuffle" params:@{@"playerid": @(currentPlayerID), @"shuffle": @"toggle"} reloadPlaylist:YES startProgressBar:NO];
-    }
-    else {
-        NSString *shuffleCommand = newShuffleStatus ? @"Player.Shuffle" : @"Player.UnShuffle";
-        [self SimpleAction:shuffleCommand params:@{@"playerid": @(currentPlayerID)} reloadPlaylist:YES startProgressBar:NO];
-    }
+    [self SimpleAction:@"Player.SetShuffle" params:@{@"playerid": @(currentPlayerID), @"shuffle": @"toggle"} reloadPlaylist:YES startProgressBar:NO];
     
     // Update the button status
     [self updateShuffleButton:newShuffleStatus];
@@ -1635,12 +1581,7 @@
     }
     
     // Send the command to Kodi
-    if (AppDelegate.instance.serverVersion > 11) {
-        [self SimpleAction:@"Player.SetRepeat" params:@{@"playerid": @(currentPlayerID), @"repeat": @"cycle"} reloadPlaylist:NO startProgressBar:NO];
-    }
-    else {
-        [self SimpleAction:@"Player.Repeat" params:@{@"playerid": @(currentPlayerID), @"state": newRepeatStatus} reloadPlaylist:NO startProgressBar:NO];
-    }
+    [self SimpleAction:@"Player.SetRepeat" params:@{@"playerid": @(currentPlayerID), @"repeat": @"cycle"} reloadPlaylist:NO startProgressBar:NO];
     
     // Update the button status
     [self updateRepeatButton:newRepeatStatus];
@@ -1737,7 +1678,7 @@
             if ([item[@"albumid"] intValue] > 0) {
                 [sheetActions addObjectsFromArray:@[LOCALIZED_STR(@"Album Details"), LOCALIZED_STR(@"Album Tracks")]];
             }
-            if ([item[@"artistid"] intValue] > 0 || ([item[@"type"] isEqualToString:@"song"] && AppDelegate.instance.serverVersion > 11)) {
+            if ([item[@"artistid"] intValue] > 0 || [item[@"type"] isEqualToString:@"song"]) {
                 [sheetActions addObjectsFromArray:@[LOCALIZED_STR(@"Artist Details"), LOCALIZED_STR(@"Artist Albums")]];
             }
             if ([item[@"movieid"] intValue] > 0) {
@@ -1922,7 +1863,7 @@
         }
         id obj = @([item[mainFields[@"row6"]] intValue]);
         id objKey = mainFields[@"row6"];
-        if (AppDelegate.instance.serverVersion > 11 && ![parameters[@"disableFilterParameter"] boolValue]) {
+        if (![parameters[@"disableFilterParameter"] boolValue]) {
             if ([mainFields[@"row6"] isEqualToString:@"artistid"]) {
                 // WORKAROUND due to the lack of the artistid with Playlist.GetItems
                 NSString *artistFrodoWorkaround = [NSString stringWithFormat:@"%@", [item[@"artist"] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]]];

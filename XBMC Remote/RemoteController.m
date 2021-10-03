@@ -760,8 +760,7 @@ NSInteger buttonAction;
 }
 
 - (void)playerStep:(NSString*)step musicPlayerGo:(NSString*)musicAction musicPlayerAction:(NSString*)musicMethod {
-    if (AppDelegate.instance.serverVersion > 11) {
-        [[Utilities getJsonRPC]
+    [[Utilities getJsonRPC]
          callMethod:@"GUI.GetProperties"
          withParameters:@{@"properties": @[@"currentwindow",
                                            @"fullscreen"]}
@@ -804,7 +803,6 @@ NSInteger buttonAction;
                  }
              }
          }];
-    }
     return;
 }
 
@@ -894,16 +892,9 @@ NSInteger buttonAction;
             break;
             
         case TAG_BUTTON_PREVIOUS:
-            if (AppDelegate.instance.serverVersion > 11) {
-                action = @"Player.GoTo";
-                params = @{@"to": @"previous"};
-                [self playbackAction:action params:params];
-            }
-            else {
-                action = @"Player.GoPrevious";
-                params = nil;
-                [self playbackAction:action params:nil];
-            }
+            action = @"Player.GoTo";
+            params = @{@"to": @"previous"};
+            [self playbackAction:action params:params];
             break;
             
         case TAG_BUTTON_STOP:
@@ -913,16 +904,9 @@ NSInteger buttonAction;
             break;
             
         case TAG_BUTTON_NEXT:
-            if (AppDelegate.instance.serverVersion > 11) {
-                action = @"Player.GoTo";
-                params = @{@"to": @"next"};
-                [self playbackAction:action params:params];
-            }
-            else {
-                action = @"Player.GoNext";
-                params = nil;
-                [self playbackAction:action params:nil];
-            }
+            action = @"Player.GoTo";
+            params = @{@"to": @"next"};
+            [self playbackAction:action params:params];
             break;
         
         case TAG_BUTTON_HOME: // HOME

@@ -24,10 +24,7 @@ int offsetY = 5;
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = UIColor.clearColor;
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (AppDelegate.instance.serverVersion > 11) {
-            self.selectionStyle = UITableViewCellSelectionStyleGray;
-        }
+        self.selectionStyle = UITableViewCellSelectionStyleGray;
         
         UIView *actorContainer = [[UIView alloc] initWithFrame:CGRectMake(offsetX, offsetY, castWidth, castHeight)];
         actorContainer.clipsToBounds = NO;

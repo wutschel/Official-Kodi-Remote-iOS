@@ -271,7 +271,7 @@ double round(double d) {
         choosedMenuItem = menuItem.subItem;
         choosedMenuItem.mainLabel = [NSString stringWithFormat:@"%@", item[@"label"]];
     }
-    else if ([item[@"family"] isEqualToString:@"movieid"] && AppDelegate.instance.serverVersion > 11) {
+    else if ([item[@"family"] isEqualToString:@"movieid"]) {
         if ([sender isKindOfClass:[NSString class]]) {
             NSString *actorName = (NSString*)sender;
             choosedTab = 2;
@@ -282,7 +282,7 @@ double round(double d) {
             choosedMenuItem.mainLabel = actorName;
         }
     }
-    else if (([item[@"family"] isEqualToString:@"episodeid"] || [item[@"family"] isEqualToString:@"tvshowid"]) && AppDelegate.instance.serverVersion > 11) {
+    else if (([item[@"family"] isEqualToString:@"episodeid"] || [item[@"family"] isEqualToString:@"tvshowid"])) {
         if ([sender isKindOfClass:[NSString class]]) {
             NSString *actorName = (NSString*)sender;
             choosedTab = 0;
@@ -315,7 +315,7 @@ double round(double d) {
             obj = movieObj;
             objKey = movieObjKey;
         }
-        else if (AppDelegate.instance.serverVersion > 11 && ![parameters[@"disableFilterParameter"] boolValue]) {
+        else if (![parameters[@"disableFilterParameter"] boolValue]) {
             obj = [NSDictionary dictionaryWithObjectsAndKeys: @([item[mainFields[@"row6"]] intValue]), mainFields[@"row6"], nil];
             objKey = @"filter";
         }
@@ -1607,7 +1607,7 @@ double round(double d) {
 }
 
 - (void)tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (AppDelegate.instance.serverVersion > 11 && ![self isModal]) {
+    if (![self isModal]) {
         UIImage *image = [Utilities colorizeImage:[UIImage imageNamed:@"table_arrow_right"] withColor:UIColor.grayColor];
         cell.accessoryView = [[UIImageView alloc] initWithImage:image];
         cell.accessoryView.alpha = ARROW_ALPHA;
@@ -1618,7 +1618,7 @@ double round(double d) {
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (AppDelegate.instance.serverVersion > 11 && ![self isModal] && castList.count > indexPath.row) {
+    if (![self isModal] && castList.count > indexPath.row) {
         [self showContent:castList[indexPath.row][@"name"]];
     }
 }

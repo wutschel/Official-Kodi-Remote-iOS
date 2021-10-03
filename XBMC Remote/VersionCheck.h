@@ -16,6 +16,5 @@
 + (BOOL)hasShowEmptyTvShowsSupport;
 + (BOOL)hasSortTokenReadSupport;
 + (BOOL)hasPvrSortSupport;
-+ (BOOL)hasAlbumArtistOnlySupport;
 
 @end
