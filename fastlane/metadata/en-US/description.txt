@@ -21,7 +21,7 @@ Features
 
 ------------------------------------------------------------
 Please note
-Supported Versions are: Kodi/XBMC version Eden (11) or higher
+Supported Versions are: Kodi version Frodo (12) or higher
 
 Additional actions can be accessed by long pressing items and remote control buttons.
 ------------------------------------------------------------
