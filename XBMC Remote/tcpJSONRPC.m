@@ -210,6 +210,10 @@ NSInputStream	*inStream;
                     NSDictionary *serverInfo = methodResult[@"version"];
                     AppDelegate.instance.serverVersion = [serverInfo[@"major"] intValue];
                     AppDelegate.instance.serverMinorVersion = [serverInfo[@"minor"] intValue];
+                    if (AppDelegate.instance.serverVersion <= 11) {
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"XBMCServerConnectionError" object:nil userInfo:[NSDictionary dictionaryWithObjectsAndKeys:LOCALIZED_STR(@"Supported Kodi version is Frodo (12) or higher"), @"error_message", nil]];
+                        return;
+                    }
                     NSString *realServerName = methodResult[@"name"];
                     if ([realServerName isEqualToString:@"MrMC"]) {
                         AppDelegate.instance.serverVersion += MRMC_TIMEWARP;
