@@ -3329,6 +3329,9 @@
                 if (![VersionCheck hasPlayUsingSupport]) {
                     [sheetActions removeObject:LOCALIZED_STR(@"Play using...")];
                 }
+                if ([item[@"file"] length] > 0 && ![item[@"filetype"] isEqualToString:@"directory"]) {
+                    [sheetActions addObject:LOCALIZED_STR(@"Share")];
+                }
                 BOOL isRecording = [self isTimerActiveForItem:item];
                 UIView *showFromView = self.view;
                 CGPoint sheetOrigin = [activeRecognizer locationInView:showFromView];
@@ -3537,6 +3540,9 @@
                 [fromctrl presentViewController:alertCtrl animated:YES completion:nil];
             }
         }];
+    }
+    else if ([actiontitle isEqualToString:LOCALIZED_STR(@"Share")]) {
+        [self shareItem:item indexPath:selectedIndexPath];
     }
     else if ([actiontitle isEqualToString:LOCALIZED_STR(@"Record")] ||
              [actiontitle isEqualToString:LOCALIZED_STR(@"Stop Recording")]) {
@@ -4220,6 +4226,47 @@
             [[NSNotificationCenter defaultCenter] postNotificationName: @"XBMCPlaylistHasChanged" object: nil];
             [self showNowPlaying];
             [Utilities checkForReviewRequest];
+        }
+    }];
+}
+
+- (void)shareItem:(NSDictionary*)item indexPath:(NSIndexPath*)indexPath {
+    [[Utilities getJsonRPC]
+     callMethod:@"Files.PrepareDownload"
+     withParameters:[NSDictionary dictionaryWithObjectsAndKeys:item[@"file"], @"path", nil]
+     onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
+        if (!error && !methodError) {
+            GlobalData *obj = [GlobalData getInstance];
+            NSString *serverURL = [NSString stringWithFormat:@"%@:%@/", obj.serverIP, obj.serverPort];
+            NSString *stringURL = [NSString stringWithFormat:@"http://%@%@", serverURL, methodResult[@"details"][@"path"]];
+            NSURL *videoURL = [NSURL URLWithString:stringURL];
+            
+            NSArray *activityItems = @[videoURL];
+            NSArray *applicationActivities = nil;
+            NSArray *excludeActivities = @[UIActivityTypePostToFacebook,
+                                           UIActivityTypePostToTwitter,
+                                           UIActivityTypePostToVimeo,
+                                           UIActivityTypePostToWeibo,
+                                           UIActivityTypePostToTencentWeibo,
+                                           UIActivityTypePrint,
+                                           UIActivityTypeAddToReadingList,
+                                           UIActivityTypePostToFlickr,
+            ];
+            UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
+            activityController.excludedActivityTypes = excludeActivities;
+            activityController.completionWithItemsHandler = nil;
+            
+            // Origin of popover is center of selected item
+            UIView *cell = [self getCell:indexPath];
+            CGPoint origin = cell.center;
+            
+            // Position the source of the popover
+            UIPopoverPresentationController *popPresenter = [activityController popoverPresentationController];
+            if (popPresenter != nil) {
+                popPresenter.sourceView = activeLayoutView;
+                popPresenter.sourceRect = CGRectMake(origin.x, origin.y, 1, 1);
+            }
+            [self presentViewController:activityController animated:YES completion:nil];
         }
     }];
 }
