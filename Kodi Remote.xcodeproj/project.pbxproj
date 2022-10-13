@@ -100,6 +100,7 @@
 		C76451DC29C51221000AE949 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = C76451CB29C51221000AE949 /* UIButton+WebCache.m */; };
 		C76451DD29C51221000AE949 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = C76451CD29C51221000AE949 /* UIImage+MultiFormat.m */; };
 		C78C30F528F877870055CD95 /* VersionCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C30F428F877870055CD95 /* VersionCheck.m */; };
+		C78C30FA28F8AADA0055CD95 /* SharingActivityItemSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C30F928F89A3E0055CD95 /* SharingActivityItemSource.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -309,6 +310,8 @@
 		C7868BB727491FB7001B35B6 /* en-US */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "en-US"; path = "en-US.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C78C30F428F877870055CD95 /* VersionCheck.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VersionCheck.m; sourceTree = "<group>"; };
 		C78C30F628F8779A0055CD95 /* VersionCheck.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionCheck.h; sourceTree = "<group>"; };
+		C78C30F828F89A1E0055CD95 /* SharingActivityItemSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SharingActivityItemSource.h; sourceTree = "<group>"; };
+		C78C30F928F89A3E0055CD95 /* SharingActivityItemSource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SharingActivityItemSource.m; sourceTree = "<group>"; };
 		C7A030F128B60DB200B27764 /* ca-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ca-ES"; path = "ca-ES.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C7A030F228B60DB200B27764 /* ca-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ca-ES"; path = "ca-ES.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C7A030F328B60EB900B27764 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -588,6 +591,7 @@
 				0F7F0DC71703490A0098FF75 /* BDKCollectionIndexView */,
 				0F05FB66170D79B000BBA833 /* NSString+MD5 */,
 				0FDC8917170DCAEA00419F58 /* SVPullToRefresh */,
+				C78C30F728F899DF0055CD95 /* SharingActivityItemSource */,
 				0F7983891C26ABBD002863D0 /* Network */,
 			);
 			name = classes;
@@ -698,6 +702,15 @@
 				0FDC8919170DCAEA00419F58 /* UIScrollView+SVPullToRefresh.m */,
 			);
 			path = SVPullToRefresh;
+			sourceTree = "<group>";
+		};
+		C78C30F728F899DF0055CD95 /* SharingActivityItemSource */ = {
+			isa = PBXGroup;
+			children = (
+				C78C30F828F89A1E0055CD95 /* SharingActivityItemSource.h */,
+				C78C30F928F89A3E0055CD95 /* SharingActivityItemSource.m */,
+			);
+			path = SharingActivityItemSource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -852,6 +865,7 @@
 				0FB133AA165EC1E5003756C1 /* tcpJSONRPC.m in Sources */,
 				C76451DB29C51221000AE949 /* UIImageView+WebCache.m in Sources */,
 				0FEA79FC165FBBED00BB281F /* XBMCVirtualKeyboard.m in Sources */,
+				C78C30FA28F8AADA0055CD95 /* SharingActivityItemSource.m in Sources */,
 				0F90904516E53C590021EFA9 /* Utilities.m in Sources */,
 				0FEAE76816EA632800387DED /* ActorCell.m in Sources */,
 				0F00207816EE247A003822B5 /* OBSlider.m in Sources */,
