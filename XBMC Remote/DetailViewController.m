@@ -29,6 +29,7 @@
 #import "SettingsValuesViewController.h"
 #import "customButton.h"
 #import "VersionCheck.h"
+#import "SharingActivityItemSource.h"
 
 @interface DetailViewController ()
 - (void)configureView;
@@ -4239,18 +4240,18 @@
             GlobalData *obj = [GlobalData getInstance];
             NSString *serverURL = [NSString stringWithFormat:@"%@:%@/", obj.serverIP, obj.serverPort];
             NSString *stringURL = [NSString stringWithFormat:@"http://%@%@", serverURL, methodResult[@"details"][@"path"]];
-            NSURL *videoURL = [NSURL URLWithString:stringURL];
             
-            NSArray *activityItems = @[videoURL];
+            NSArray *activityItems = @[[[SharingActivityItemSource alloc] initWithUrlString:stringURL]];
             NSArray *applicationActivities = nil;
-            NSArray *excludeActivities = @[UIActivityTypePostToFacebook,
-                                           UIActivityTypePostToTwitter,
-                                           UIActivityTypePostToVimeo,
-                                           UIActivityTypePostToWeibo,
-                                           UIActivityTypePostToTencentWeibo,
-                                           UIActivityTypePrint,
-                                           UIActivityTypeAddToReadingList,
-                                           UIActivityTypePostToFlickr,
+            NSArray *excludeActivities = @[
+                UIActivityTypePostToFacebook,
+                UIActivityTypePostToTwitter,
+                UIActivityTypePostToVimeo,
+                UIActivityTypePostToWeibo,
+                UIActivityTypePostToTencentWeibo,
+                UIActivityTypePrint,
+                UIActivityTypeAddToReadingList,
+                UIActivityTypePostToFlickr,
             ];
             UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
             activityController.excludedActivityTypes = excludeActivities;
