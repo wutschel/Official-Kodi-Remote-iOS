@@ -14,14 +14,16 @@
 @interface SharingActivityItemSource ()
 @property (nonatomic, copy) NSURL *url;
 @property (nonatomic, copy) NSString *label;
+@property (nonatomic, copy) UIImage *thumbnail;
 @end
 
 @implementation SharingActivityItemSource
 
-- (instancetype)initWithUrlString:(NSString*)urlString label:(NSString*)label {
+- (instancetype)initWithUrlString:(NSString*)urlString label:(NSString*)label image:(UIImage*)image {
     if (self = [super init]) {
         self.url = [NSURL URLWithString:urlString];
         self.label = label;
+        self.thumbnail = image ? image : [UIImage imageNamed:@"AppIcon.png"];
     }
     return self;
 }
@@ -39,7 +41,7 @@
     meta.originalURL = self.url;
     meta.URL = meta.originalURL;
     meta.title = self.label;
-    meta.imageProvider = [[NSItemProvider alloc] initWithObject:[UIImage imageNamed:@"AppIcon.png"]];
+    meta.imageProvider = [[NSItemProvider alloc] initWithObject:self.thumbnail];
     return meta;
 }
 
