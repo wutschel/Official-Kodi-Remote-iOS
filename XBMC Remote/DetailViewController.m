@@ -4296,10 +4296,9 @@
             GlobalData *obj = [GlobalData getInstance];
             NSString *serverURL = [NSString stringWithFormat:@"%@:%@/", obj.serverIP, obj.serverPort];
             NSString *stringURL = [NSString stringWithFormat:@"http://%@%@", serverURL, methodResult[@"details"][@"path"]];
-            
-            UIImageView *dummyView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-            [dummyView setImageWithURL:[NSURL URLWithString:item[@"thumbnail"]]
-                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            NSString *thumbnail = item[@"thumbnail"];
+
+            [[SDImageCache sharedImageCache] queryDiskCacheForKey:thumbnail done:^(UIImage *image, SDImageCacheType cacheType) {
                 // Image is loaded, now create an show the share action sheet
                 NSArray *activityItems = @[[[SharingActivityItemSource alloc] initWithUrlString:stringURL label:item[@"label"] image:image]];
                 NSArray *applicationActivities = nil;
