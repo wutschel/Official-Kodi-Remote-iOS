@@ -13,9 +13,10 @@
 
 @implementation SharingActivityItemSource
 
-- (instancetype)initWithUrlString:(NSString*)urlString {
+- (instancetype)initWithUrlString:(NSString*)urlString label:(NSString*)label {
     if (self = [super init]) {
         self.url = [NSURL URLWithString:urlString];
+        self.label = label;
     }
     return self;
 }
@@ -32,7 +33,7 @@
     __auto_type meta = [LPLinkMetadata new];
     meta.originalURL = self.url;
     meta.URL = meta.originalURL;
-    meta.title = nil;
+    meta.title = self.label;
     meta.imageProvider = [[NSItemProvider alloc] initWithObject:[UIImage imageNamed:@"AppIcon.png"]];
     return meta;
 }

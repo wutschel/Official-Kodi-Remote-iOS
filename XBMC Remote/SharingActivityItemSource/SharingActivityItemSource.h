@@ -8,8 +8,9 @@
 
 @interface SharingActivityItemSource : NSObject <UIActivityItemSource>
 
-- (instancetype)initWithUrlString:(NSString*)urlString;
+- (instancetype)initWithUrlString:(NSString*)urlString label:(NSString*)label;
 
 @property (nonatomic, copy) NSURL *url;
+@property (nonatomic, copy) NSString *label;
 
 @end
