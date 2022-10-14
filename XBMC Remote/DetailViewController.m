@@ -4299,32 +4299,37 @@
             NSString *serverURL = [NSString stringWithFormat:@"%@:%@/", obj.serverIP, obj.serverPort];
             NSString *stringURL = [NSString stringWithFormat:@"http://%@%@", serverURL, methodResult[@"details"][@"path"]];
             
-            NSArray *activityItems = @[[[SharingActivityItemSource alloc] initWithUrlString:stringURL label:item[@"label"]]];
-            NSArray *applicationActivities = nil;
-            NSArray *excludeActivities = @[UIActivityTypePostToFacebook,
-                                           UIActivityTypePostToTwitter,
-                                           UIActivityTypePostToVimeo,
-                                           UIActivityTypePostToWeibo,
-                                           UIActivityTypePostToTencentWeibo,
-                                           UIActivityTypePrint,
-                                           UIActivityTypeAddToReadingList,
-                                           UIActivityTypePostToFlickr,
-            ];
-            UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
-            activityController.excludedActivityTypes = excludeActivities;
-            activityController.completionWithItemsHandler = nil;
-            
-            // Origin of popover is center of selected item
-            UIView *cell = [self getCell:indexPath];
-            CGPoint origin = cell.center;
-            
-            // Position the source of the popover
-            UIPopoverPresentationController *popPresenter = [activityController popoverPresentationController];
-            if (popPresenter != nil) {
-                popPresenter.sourceView = activeLayoutView;
-                popPresenter.sourceRect = CGRectMake(origin.x, origin.y, 1, 1);
-            }
-            [self presentViewController:activityController animated:YES completion:nil];
+            UIImageView *dummyView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+            [dummyView setImageWithURL:[NSURL URLWithString:item[@"thumbnail"]]
+                             completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                // Image is loaded, now create an show the share action sheet
+                NSArray *activityItems = @[[[SharingActivityItemSource alloc] initWithUrlString:stringURL label:item[@"label"] image:image]];
+                NSArray *applicationActivities = nil;
+                NSArray *excludeActivities = @[UIActivityTypePostToFacebook,
+                                               UIActivityTypePostToTwitter,
+                                               UIActivityTypePostToVimeo,
+                                               UIActivityTypePostToWeibo,
+                                               UIActivityTypePostToTencentWeibo,
+                                               UIActivityTypePrint,
+                                               UIActivityTypeAddToReadingList,
+                                               UIActivityTypePostToFlickr,
+                ];
+                UIActivityViewController *activityController = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:applicationActivities];
+                activityController.excludedActivityTypes = excludeActivities;
+                activityController.completionWithItemsHandler = nil;
+                
+                // Origin of popover is center of selected item
+                UIView *cell = [self getCell:indexPath];
+                CGPoint origin = cell.center;
+                
+                // Position the source of the popover
+                UIPopoverPresentationController *popPresenter = [activityController popoverPresentationController];
+                if (popPresenter != nil) {
+                    popPresenter.sourceView = activeLayoutView;
+                    popPresenter.sourceRect = CGRectMake(origin.x, origin.y, 1, 1);
+                }
+                [self presentViewController:activityController animated:YES completion:nil];
+            }];
         }
     }];
 }
