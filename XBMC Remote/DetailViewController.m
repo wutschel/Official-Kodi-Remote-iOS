@@ -4215,7 +4215,7 @@
             NSString *serverURL = [NSString stringWithFormat:@"%@:%@/", obj.serverIP, obj.serverPort];
             NSString *stringURL = [NSString stringWithFormat:@"http://%@%@", serverURL, methodResult[@"details"][@"path"]];
             
-            NSArray *activityItems = @[[[SharingActivityItemSource alloc] initWithUrlString:stringURL]];
+            NSArray *activityItems = @[[[SharingActivityItemSource alloc] initWithUrlString:stringURL label:item[@"label"]]];
             NSArray *applicationActivities = nil;
             NSArray *excludeActivities = @[UIActivityTypePostToFacebook,
                                            UIActivityTypePostToTwitter,
