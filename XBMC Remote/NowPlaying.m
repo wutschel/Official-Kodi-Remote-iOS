@@ -1236,17 +1236,8 @@
 - (void)showInfo:(NSDictionary*)item menuItem:(mainMenu*)menuItem indexPath:(NSIndexPath*)indexPath {
     NSDictionary *methods = [Utilities indexKeyedDictionaryFromArray:menuItem.mainMethod[choosedTab]];
     NSDictionary *parameters = [Utilities indexKeyedDictionaryFromArray:menuItem.mainParameters[choosedTab]];
-    
-    NSMutableDictionary *mutableParameters = [parameters[@"extra_info_parameters"] mutableCopy];
-    NSMutableArray *mutableProperties = [parameters[@"extra_info_parameters"][@"properties"] mutableCopy];
-    
-    if ([parameters[@"FrodoExtraArt"] boolValue]) {
-        [mutableProperties addObject:@"art"];
-        mutableParameters[@"properties"] = mutableProperties;
-    }
-
     if (parameters[@"extra_info_parameters"] != nil && methods[@"extra_info_method"] != nil) {
-        [self retrieveExtraInfoData:methods[@"extra_info_method"] parameters:mutableParameters index:indexPath item:item menuItem:menuItem];
+        [self retrieveExtraInfoData:methods[@"extra_info_method"] parameters:parameters[@"extra_info_parameters"] index:indexPath item:item menuItem:menuItem];
     }
     else {
         [self displayInfoView:item];

@@ -456,9 +456,6 @@
 }
 
 - (void)addExtraProperties:(NSMutableArray*)mutableProperties newParams:(NSMutableDictionary*)mutableParameters params:(NSDictionary*)parameters {
-    if ([parameters[@"FrodoExtraArt"] boolValue]) {
-        [mutableProperties addObject:@"art"];
-    }
     if (parameters[@"kodiExtrasPropertiesMinimumVersion"] != nil) {
         for (id key in parameters[@"kodiExtrasPropertiesMinimumVersion"]) {
             if (AppDelegate.instance.serverVersion >= [key integerValue]) {
@@ -1403,7 +1400,6 @@
                                        libraryThumbWidth, @"thumbWidth",
                                        parameters[@"label"], @"label",
                                        [NSDictionary dictionaryWithDictionary:parameters[@"itemSizes"]], @"itemSizes",
-                                       @([parameters[@"FrodoExtraArt"] boolValue]), @"FrodoExtraArt",
                                        @([parameters[@"enableLibraryCache"] boolValue]), @"enableLibraryCache",
                                        @([parameters[@"enableCollectionView"] boolValue]), @"enableCollectionView",
                                        @([parameters[@"forceActionSheet"] boolValue]), @"forceActionSheet",
@@ -3429,11 +3425,6 @@
     mainMenu *menuItem = [self getMainMenu:item];
     NSDictionary *parameters = [Utilities indexKeyedDictionaryFromArray:menuItem.mainParameters[choosedTab]];
     NSMutableDictionary *mutableParameters = [parameters[@"parameters"] mutableCopy];
-    NSMutableArray *mutableProperties = [parameters[@"parameters"][@"properties"] mutableCopy];
-    if ([parameters[@"FrodoExtraArt"] boolValue]) {
-        [mutableProperties addObject:@"art"];
-        mutableParameters[@"properties"] = mutableProperties;
-    }
     [self addFileProperties:mutableParameters];
     [self saveData:mutableParameters];
 }
@@ -3953,9 +3944,6 @@
     NSNumber *filemodeRowHeight = parameters[@"rowHeight"] ?: @44;
     NSNumber *filemodeThumbWidth = parameters[@"thumbWidth"] ?: @44;
     NSMutableArray *mutableProperties = [parameters[@"parameters"][@"file_properties"] mutableCopy];
-    if ([parameters[@"FrodoExtraArt"] boolValue]) {
-        [mutableProperties addObject:@"art"];
-    }
     NSMutableArray *newParameters = [NSMutableArray arrayWithObjects:
                                    [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                     item[mainFields[@"row6"]], @"directory",
@@ -4342,16 +4330,8 @@
 - (void)showInfo:(NSIndexPath*)indexPath menuItem:(mainMenu*)menuItem item:(NSDictionary*)item tabToShow:(int)tabToShow {
     NSDictionary *methods = [Utilities indexKeyedDictionaryFromArray:menuItem.mainMethod[tabToShow]];
     NSDictionary *parameters = [Utilities indexKeyedDictionaryFromArray:menuItem.mainParameters[tabToShow]];
-    
-    NSMutableDictionary *mutableParameters = [parameters[@"extra_info_parameters"] mutableCopy];
-    NSMutableArray *mutableProperties = [parameters[@"extra_info_parameters"][@"properties"] mutableCopy];
-    
-    if ([parameters[@"FrodoExtraArt"] boolValue]) {
-        [mutableProperties addObject:@"art"];
-        mutableParameters[@"properties"] = mutableProperties;
-    }
     if (parameters[@"extra_info_parameters"] != nil && methods[@"extra_info_method"] != nil) {
-        [self retrieveExtraInfoData:methods[@"extra_info_method"] parameters:mutableParameters index:indexPath item:item menuItem:menuItem tabToShow:tabToShow];
+        [self retrieveExtraInfoData:methods[@"extra_info_method"] parameters:parameters[@"extra_info_parameters"] index:indexPath item:item menuItem:menuItem tabToShow:tabToShow];
     }
     else {
         [self displayInfoView:item];
