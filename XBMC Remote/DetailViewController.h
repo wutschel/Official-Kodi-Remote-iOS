@@ -92,7 +92,6 @@
     BOOL enableDiskCache;
     CGFloat iOSYDelta;
     __weak IBOutlet UIToolbar *buttonsViewBgToolbar;
-    BOOL isViewDidLoad;
     BOOL forceMusicAlbumMode;
     NSMutableDictionary *epgDict;
     NSMutableArray *epgDownloadQueue;
