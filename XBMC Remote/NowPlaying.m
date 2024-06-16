@@ -71,6 +71,7 @@
 #define TRANSITION_TIME 0.2
 #define PLAYLIST_DEBOUNCE_TIMEOUT 0.2
 #define PLAYLIST_DEBOUNCE_TIMEOUT_MAX 1.0
+#define UPDATE_INFO_TIMEOUT 1.0
 
 #define XIB_PLAYLIST_CELL_MAINTITLE 1
 #define XIB_PLAYLIST_CELL_SUBTITLE 2
@@ -2636,13 +2637,13 @@
     storedItemID = SELECTED_NONE;
     [self playbackInfo];
     updateProgressBar = YES;
-    [timer invalidate];
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateInfo) userInfo:nil repeats:YES];
+    [updateInfoTimer invalidate];
+    updateInfoTimer = [NSTimer scheduledTimerWithTimeInterval:UPDATE_INFO_TIMEOUT target:self selector:@selector(updateInfo) userInfo:nil repeats:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    [timer invalidate];
+    [updateInfoTimer invalidate];
     storedItemID = SELECTED_NONE;
     self.slidingViewController.panGesture.delegate = nil;
 }
@@ -2841,7 +2842,7 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver: self];
-    [timer invalidate];
+    [updateInfoTimer invalidate];
     [debounceTimer invalidate];
 }
 
