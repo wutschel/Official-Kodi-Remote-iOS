@@ -64,6 +64,11 @@
 
 #define FULLSCREEN_LABEL_HEIGHT 20
 
+/* Font scaling */
+#define FONT_SCALING_MIN 0.8
+#define FONT_SCALING_DEFAULT 0.9
+#define FONT_SCALING_NONE 1.0
+
 /* Global definition for player id */
 #define PLAYERID_UNKNOWN -1
 #define PLAYERID_MUSIC 0
