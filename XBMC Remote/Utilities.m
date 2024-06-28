@@ -964,6 +964,14 @@
     return labelSize;
 }
 
++ (CGFloat)getHeightOfFont:(UIFont*)font {
+    CGRect rect = [@"" boundingRectWithSize:CGSizeMake(CGFLOAT_MAX, CGFLOAT_MAX)
+                                    options:NSStringDrawingUsesLineFragmentOrigin
+                                 attributes:@{NSFontAttributeName: font}
+                                    context:nil];
+    return ceil(rect.size.height);
+}
+
 + (UIImage*)roundedCornerImage:(UIImage*)image drawBorder:(BOOL)drawBorder {
     CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
