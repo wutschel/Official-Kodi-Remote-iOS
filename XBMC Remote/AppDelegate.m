@@ -5671,6 +5671,7 @@
         @"st_music_addon",
         @"st_kodi_action",
         @"st_kodi_window",
+        @"st_profile",
     ];
     
     xbmcSettings.mainMethod = [@[
@@ -5691,6 +5692,9 @@
         },
         @{
             @"method": @"JSONRPC.Introspect",
+        },
+        @{
+            @"method": @"Profiles.GetProfiles",
         },
     ] mutableCopy];
     
@@ -5788,6 +5792,20 @@
             @"thumbWidth": @0,
             @"morelabel": LOCALIZED_STR(@"Activate a specific window"),
         },
+        
+        @{
+            @"parameters": @{
+                @"properties": @[
+                    @"lockmode",
+                    @"thumbnail",
+                ],
+            },
+            @"label": LOCALIZED_STR(@"Profiles"),
+            @"defaultThumb": @"nocover_profile",
+            @"rowHeight": @FILEMODE_ROW_HEIGHT,
+            @"thumbWidth": @FILEMODE_THUMB_WIDTH,
+            @"morelabel": LOCALIZED_STR(@"Profiles"),
+        },
     ] mutableCopy];
     
     xbmcSettings.mainFields = @[
@@ -5872,6 +5890,12 @@
             @"row8": @"addonid",
             @"row9": @"addonid",
         },
+        
+        @{
+            @"itemid": @"profiles",
+            @"row1": @"label",
+            @"row8": @"profile",
+        },
     ];
     
     xbmcSettings.sheetActions = @[
@@ -5896,6 +5920,7 @@
             LOCALIZED_STR(@"Activate window"),
             LOCALIZED_STR(@"Add window activation button"),
         ],
+        @[],
     ];
     
     xbmcSettings.subItem.disableNowPlaying = YES;
@@ -5903,6 +5928,7 @@
         @{
             @"method": @"Settings.GetCategories",
         },
+        @{},
         @{},
         @{},
         @{},
@@ -5937,6 +5963,8 @@
         @{
             @"forceActionSheet": @YES,
         },
+        
+        @{},
     ] mutableCopy];
     
     xbmcSettings.subItem.mainFields = @[
@@ -5952,6 +5980,7 @@
             @"row8": @"categoryid",
             @"row9": @"id",
         },
+        @{},
         @{},
         @{},
         @{},
