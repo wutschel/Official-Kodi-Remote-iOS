@@ -777,6 +777,24 @@
     return text;
 }
 
++ (NSNumber*)getNumberFromItem:(id)item {
+    NSNumber *value = @(0);
+    // Prefer highest precision for conversion. If integer value is not supported, convert via NSString.
+    if ([item respondsToSelector:@selector(longLongValue)]) {
+        value = @([item longLongValue]);
+    }
+    else if ([item respondsToSelector:@selector(longValue)]) {
+        value = @([item longValue]);
+    }
+    else if ([item respondsToSelector:@selector(intValue)]) {
+        value = @([item intValue]);
+    }
+    else {
+        value = @([[Utilities getStringFromItem:item] longLongValue]);
+    }
+    return value;
+}
+
 + (NSString*)getTimeFromItem:(id)item sec2min:(int)secondsToMinute {
     NSString *runtime = @"";
     if (item == nil || [item isKindOfClass:[NSNull class]]) {
