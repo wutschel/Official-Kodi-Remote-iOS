@@ -466,14 +466,12 @@
             parameterName = @"broadcastid";
         }
     }
-    self.navigationItem.rightBarButtonItem.enabled = NO;
     [activityIndicatorView startAnimating];
     NSDictionary *parameters = @{parameterName: itemid};
     [[Utilities getJsonRPC] callMethod:methodToCall
          withParameters:parameters
            onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
                [activityIndicatorView stopAnimating];
-               self.navigationItem.rightBarButtonItem.enabled = YES;
                if (error == nil && methodError == nil) {
                    [self animateRecordAction];
                    NSNumber *status = @(![item[@"isrecording"] boolValue]);
@@ -515,7 +513,6 @@
     NowPlaying *nowPlaying = [[NowPlaying alloc] initWithNibName:@"NowPlaying" bundle:nil];
     nowPlaying.detailItem = self.detailItem;
     [self.navigationController pushViewController:nowPlaying animated:YES];
-    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 - (BOOL)enableJewelCases {
@@ -1639,7 +1636,6 @@
         [Utilities showMessage:LOCALIZED_STR(@"Cannot do that") color:ERROR_MESSAGE_COLOR];
         return;
     }
-    self.navigationItem.rightBarButtonItem.enabled = NO;
     [activityIndicatorView startAnimating];
     NSDictionary *playlistParams = @{
         @"playlistid": @(playlistid),
@@ -1669,7 +1665,6 @@
                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"XBMCPlaylistHasChanged" object:nil];
                              }
                          }];
-                         self.navigationItem.rightBarButtonItem.enabled = YES;
                      }
                      else {
                          [self addToPlaylist:playlistParams];
@@ -1695,7 +1690,6 @@
         if (error == nil && methodError == nil) {
             [[NSNotificationCenter defaultCenter] postNotificationName: @"XBMCPlaylistHasChanged" object: nil];
         }
-        self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
 }
 
@@ -1711,7 +1705,6 @@
         [Utilities showMessage:LOCALIZED_STR(@"Cannot do that") color:ERROR_MESSAGE_COLOR];
         return;
     }
-    self.navigationItem.rightBarButtonItem.enabled = NO;
     [activityIndicatorView startAnimating];
     NSDictionary *params = @{
         @"item": @{
@@ -1733,7 +1726,6 @@
             [self showNowPlaying];
             [Utilities checkForReviewRequest];
         }
-        self.navigationItem.rightBarButtonItem.enabled = YES;
     }];
 }
 
