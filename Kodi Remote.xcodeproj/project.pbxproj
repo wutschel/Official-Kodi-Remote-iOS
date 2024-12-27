@@ -98,6 +98,7 @@
 		C76594B62C5E885B00B93A2A /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE6087E164B3094009CA3A9 /* Roboto-Regular.ttf */; };
 		C76594B72C5E8A5B00B93A2A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = C70F41D02BA4D98E00847C75 /* PrivacyInfo.xcprivacy */; };
 		C78C30F528F877870055CD95 /* VersionCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = C78C30F428F877870055CD95 /* VersionCheck.m */; };
+		C7E176482D1ECD6C0060AE86 /* ProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7E176472D1ECD6C0060AE86 /* ProgressBarView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -313,6 +314,8 @@
 		C7A030F428B60EB900B27764 /* es-MX */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "es-MX"; path = "es-MX.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		C7A1381F296AF0B500D84A72 /* hr-HR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hr-HR"; path = "hr-HR.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		C7A13820296AF0B500D84A72 /* hr-HR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "hr-HR"; path = "hr-HR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		C7E176472D1ECD6C0060AE86 /* ProgressBarView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProgressBarView.m; sourceTree = "<group>"; };
+		C7E176492D1ECD7D0060AE86 /* ProgressBarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgressBarView.h; sourceTree = "<group>"; };
 		C7F28D4826961FE50004B112 /* ConvenienceMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConvenienceMacros.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -357,6 +360,8 @@
 				0F554910151D1187007E633F /* DetailViewController.m */,
 				0F089AA318EC4E3300F32430 /* SettingsValuesViewController.h */,
 				0F089AA418EC4E3300F32430 /* SettingsValuesViewController.m */,
+				C7E176492D1ECD7D0060AE86 /* ProgressBarView.h */,
+				C7E176472D1ECD6C0060AE86 /* ProgressBarView.m */,
 				0F44EC4F18A6672100BE44BD /* ProgressPieView.h */,
 				0F44EC5018A6672100BE44BD /* ProgressPieView.m */,
 				0FEE08141704819A00EC9BC7 /* FloatingHeaderFlowLayout.h */,
@@ -849,6 +854,7 @@
 				C78C30F528F877870055CD95 /* VersionCheck.m in Sources */,
 				C76451D629C51221000AE949 /* UIView+WebCacheOperation.m in Sources */,
 				0F4019B318F415A50064E4DC /* MessagesView.m in Sources */,
+				C7E176482D1ECD6C0060AE86 /* ProgressBarView.m in Sources */,
 				0F7F0DCC1703490A0098FF75 /* BDKCollectionIndexView.m in Sources */,
 				0FEE08161704819A00EC9BC7 /* FloatingHeaderFlowLayout.m in Sources */,
 				0F7B951A1708975500880F33 /* UIImage+Resize.m in Sources */,
