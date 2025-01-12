@@ -40,6 +40,8 @@
     barLabel.textAlignment = NSTextAlignmentRight;
     barLabel.textColor = [Utilities get1stLabelColor];
     [self addSubview:barLabel];
+    
+    [progressBarView setTrackColor:UIColor.darkGrayColor];
 }
 
 - (void)setProgress:(CGFloat)progress {

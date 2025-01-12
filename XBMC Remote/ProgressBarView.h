@@ -13,6 +13,7 @@
     UIView *progressBar;
 }
 
+- (void)setTrackColor:(UIColor*)color;
 - (void)setProgress:(CGFloat)progress;
 
 @end

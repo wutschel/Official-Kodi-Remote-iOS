@@ -23,7 +23,6 @@
 
 - (void)createProgressBar {
     progressBarTrack = [UIView new];
-    progressBarTrack.backgroundColor = UIColor.darkGrayColor;
     progressBarTrack.layer.cornerRadius = PROGRESSBAR_RADIUS;
     progressBarTrack.clipsToBounds = YES;
     [self addSubview:progressBarTrack];
@@ -31,6 +30,10 @@
     progressBar = [UIView new];
     progressBar.backgroundColor = KODI_BLUE_COLOR;
     [progressBarTrack addSubview:progressBar];
+}
+
+- (void)setTrackColor:(UIColor*)color {
+    progressBarTrack.backgroundColor = color;
 }
 
 - (void)setProgress:(CGFloat)progress {
