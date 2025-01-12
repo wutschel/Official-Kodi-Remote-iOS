@@ -11,7 +11,6 @@
 
 #define RESERVED_WIDTH 14
 #define PROGRESSBAR_HEIGHT 8
-#define PROGRESSBAR_RADIUS 2
 #define FONT_SIZE 10
 
 @implementation BroadcastProgressView
@@ -22,21 +21,14 @@
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        [self createProgressBar];
+        [self createProgressView];
     }
     return self;
 }
 
-- (void)createProgressBar {
-    progressBarMask = [UIView new];
-    progressBarMask.backgroundColor = UIColor.darkGrayColor;
-    progressBarMask.layer.cornerRadius = PROGRESSBAR_RADIUS;
-    progressBarMask.clipsToBounds = YES;
-    [self addSubview:progressBarMask];
-    
-    progressBar = [UIView new];
-    progressBar.backgroundColor = KODI_BLUE_COLOR;
-    [progressBarMask addSubview:progressBar];
+- (void)createProgressView {
+    progressBarView = [ProgressBarView new];
+    [self addSubview:progressBarView];
     
     reservedArea = [UILabel new];
     [self addSubview:reservedArea];
@@ -50,10 +42,8 @@
     [self addSubview:barLabel];
 }
 
-- (void)setProgressBarPercentage:(CGFloat)progressPercentage {
-    CGRect frame = progressBar.frame;
-    frame.size.width = ceil(progressPercentage / 100.0 * CGRectGetWidth(self.frame));
-    progressBar.frame = frame;
+- (void)setProgress:(CGFloat)progress {
+    [progressBarView setProgress:progress];
 }
 
 - (void)layoutSubviews {
@@ -63,8 +53,7 @@
     CGFloat labelWidth = CGRectGetWidth(frame) - RESERVED_WIDTH;
     barLabel.frame = CGRectMake(RESERVED_WIDTH, PROGRESSBAR_HEIGHT, labelWidth, labelHeight);
     reservedArea.frame = CGRectMake(0, PROGRESSBAR_HEIGHT, RESERVED_WIDTH, labelHeight);
-    progressBarMask.frame = CGRectMake(0, 0, CGRectGetWidth(frame), PROGRESSBAR_HEIGHT);
-    progressBar.frame = CGRectMake(0, 0, 0, PROGRESSBAR_HEIGHT);
+    progressBarView.frame = CGRectMake(0, 0, CGRectGetWidth(frame), PROGRESSBAR_HEIGHT);
 }
 
 @end

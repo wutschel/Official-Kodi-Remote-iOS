@@ -267,7 +267,7 @@
     BroadcastProgressView *progressView = (BroadcastProgressView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
     if (![current.text isEqualToString:LOCALIZED_STR(@"Not Available")] && [channelEPG[@"starttime"] isKindOfClass:[NSDate class]] && [channelEPG[@"endtime"] isKindOfClass:[NSDate class]]) {
         float percent_elapsed = [Utilities getPercentElapsed:channelEPG[@"starttime"] EndDate:channelEPG[@"endtime"]];
-        [progressView setProgressBarPercentage:percent_elapsed];
+        [progressView setProgress:percent_elapsed / 100.0];
         progressView.hidden = NO;
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
         NSUInteger unitFlags = NSCalendarUnitMinute;
@@ -2788,7 +2788,7 @@
             programStartTime.font = [UIFont systemFontOfSize:14];
             cell.backgroundColor = [Utilities getSystemGray4];
             
-            [progressView setProgressBarPercentage:percent_elapsed];
+            [progressView setProgress:percent_elapsed / 100.0];
             progressView.barLabel.hidden = NO;
             NSCalendar *gregorian = [[NSCalendar alloc]
                                      initWithCalendarIdentifier:NSCalendarIdentifierGregorian];

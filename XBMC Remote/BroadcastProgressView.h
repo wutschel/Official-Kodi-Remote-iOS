@@ -6,14 +6,14 @@
 //  Copyright © 2024 Team Kodi. All rights reserved.
 //
 
+#import "ProgressBarView.h"
 @import UIKit;
 
 @interface BroadcastProgressView : UIView {
-    UIView *progressBarMask;
-    UIView *progressBar;
+    ProgressBarView *progressBarView;
 }
 
-- (void)setProgressBarPercentage:(CGFloat)progressPercentage;
+- (void)setProgress:(CGFloat)progress;
 
 @property (nonatomic, readonly) UILabel *barLabel;
 @property (nonatomic, readonly) UIView *reservedArea;
