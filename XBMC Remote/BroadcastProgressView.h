@@ -1,5 +1,5 @@
 //
-//  ProgressBarView.h
+//  BroadcastProgressView.h
 //  Kodi Remote
 //
 //  Created by Buschmann on 27.12.24.
@@ -8,7 +8,7 @@
 
 @import UIKit;
 
-@interface ProgressBarView : UIView {
+@interface BroadcastProgressView : UIView {
     UIView *progressBarMask;
     UIView *progressBar;
 }

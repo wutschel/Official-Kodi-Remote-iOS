@@ -25,7 +25,7 @@
 #import "RecentlyAddedCell.h"
 #import "NSString+MD5.h"
 #import "UIScrollView+SVPullToRefresh.h"
-#import "ProgressBarView.h"
+#import "BroadcastProgressView.h"
 #import "SettingsValuesViewController.h"
 #import "customButton.h"
 #import "VersionCheck.h"
@@ -264,7 +264,7 @@
     if (channelEPG[@"current_details"] != nil) {
         item[@"genre"] = channelEPG[@"current_details"];
     }
-    ProgressBarView *progressView = (ProgressBarView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
+    BroadcastProgressView *progressView = (BroadcastProgressView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
     if (![current.text isEqualToString:LOCALIZED_STR(@"Not Available")] && [channelEPG[@"starttime"] isKindOfClass:[NSDate class]] && [channelEPG[@"endtime"] isKindOfClass:[NSDate class]]) {
         float percent_elapsed = [Utilities getPercentElapsed:channelEPG[@"starttime"] EndDate:channelEPG[@"endtime"]];
         [progressView setProgressBarPercentage:percent_elapsed];
@@ -2613,7 +2613,7 @@
             CGFloat originY = CGRectGetMaxY(frame) + SMALL_PADDING;
             CGFloat height = cellHeight - originY - SMALL_PADDING;
             CGRect barFrame = CGRectMake(SMALL_PADDING, originY, CGRectGetWidth(frame), height);
-            ProgressBarView *progressView = (ProgressBarView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
+            BroadcastProgressView *progressView = (BroadcastProgressView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
             progressView.frame = barFrame;
         }
         if (channelListView) {
@@ -2624,7 +2624,7 @@
             genre.frame = frame;
             genre.textColor = [Utilities get1stLabelColor];
             genre.font = [UIFont boldSystemFontOfSize:14];
-            ProgressBarView *progressView = (ProgressBarView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
+            BroadcastProgressView *progressView = (BroadcastProgressView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
             progressView.hidden = YES;
             UIImageView *isRecordingImageView = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
             isRecordingImageView.hidden = ![item[@"isrecording"] boolValue];
@@ -2765,7 +2765,7 @@
         genre.minimumScaleFactor = FONT_SCALING_DEFAULT;
         [genre sizeToFit];
         UILabel *programStartTime = (UILabel*)[cell viewWithTag:EPG_VIEW_CELL_STARTTIME];
-        ProgressBarView *progressView = (ProgressBarView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
+        BroadcastProgressView *progressView = (BroadcastProgressView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
         NSDate *starttime = [xbmcDateFormatter dateFromString:item[@"starttime"]];
         NSDate *endtime = [xbmcDateFormatter dateFromString:item[@"endtime"]];
         programStartTime.text = [localHourMinuteFormatter stringFromDate:starttime];
@@ -3160,7 +3160,7 @@
 }
 
 - (void)addProgressBar:(UITableViewCell*)cell recDotSize:(CGFloat)dotSize {
-    ProgressBarView *progressView = [ProgressBarView new];
+    BroadcastProgressView *progressView = [BroadcastProgressView new];
     progressView.tag = EPG_VIEW_CELL_PROGRESSVIEW;
     progressView.hidden = YES;
     [cell.contentView addSubview:progressView];

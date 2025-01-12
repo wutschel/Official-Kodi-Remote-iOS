@@ -1,12 +1,12 @@
 //
-//  ProgressBarView.m
+//  BroadcastProgressView.m
 //  Kodi Remote
 //
 //  Created by Buschmann on 27.12.24.
 //  Copyright © 2024 Team Kodi. All rights reserved.
 //
 
-#import "ProgressBarView.h"
+#import "BroadcastProgressView.h"
 #import "Utilities.h"
 
 #define RESERVED_WIDTH 14
@@ -14,7 +14,7 @@
 #define PROGRESSBAR_RADIUS 2
 #define FONT_SIZE 10
 
-@implementation ProgressBarView
+@implementation BroadcastProgressView
 
 @synthesize barLabel;
 @synthesize reservedArea;
