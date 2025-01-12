@@ -35,7 +35,7 @@
 
 - (void)setProgress:(CGFloat)progress {
     CGRect frame = progressBar.frame;
-    frame.size.width = ceil(progress * CGRectGetWidth(self.frame));
+    frame.size.width = progress * CGRectGetWidth(self.frame);
     progressBar.frame = frame;
 }
 
