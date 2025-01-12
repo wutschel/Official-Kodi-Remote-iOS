@@ -36,7 +36,8 @@
     progressBarTrack.backgroundColor = color;
 }
 
-- (void)setProgress:(CGFloat)progress {
+- (void)setProgress:(CGFloat)newProgress {
+    progress = newProgress;
     CGRect frame = progressBar.frame;
     frame.size.width = progress * CGRectGetWidth(self.frame);
     progressBar.frame = frame;
@@ -46,7 +47,7 @@
     [super layoutSubviews];
     CGRect frame = self.frame;
     progressBarTrack.frame = CGRectMake(0, 0, CGRectGetWidth(frame), CGRectGetHeight(frame));
-    progressBar.frame = CGRectMake(0, 0, 0, CGRectGetHeight(frame));
+    progressBar.frame = CGRectMake(0, 0, progress * CGRectGetWidth(self.frame), CGRectGetHeight(frame));
 }
 
 @end

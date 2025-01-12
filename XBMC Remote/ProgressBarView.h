@@ -11,9 +11,10 @@
 @interface ProgressBarView : UIView {
     UIView *progressBarTrack;
     UIView *progressBar;
+    CGFloat progress;
 }
 
 - (void)setTrackColor:(UIColor*)color;
-- (void)setProgress:(CGFloat)progress;
+- (void)setProgress:(CGFloat)newProgress;
 
 @end
