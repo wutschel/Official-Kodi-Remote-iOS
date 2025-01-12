@@ -41,7 +41,7 @@
 }
 
 - (void)setProgress:(CGFloat)progress {
-    [progressBarView setProgress:progress];
+    progressBarView.progress = progress;
 }
 
 - (CGPoint)getReservedCenter {

@@ -13,6 +13,8 @@
 
 @implementation ProgressBarView
 
+@synthesize progress;
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {

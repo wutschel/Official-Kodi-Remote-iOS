@@ -11,10 +11,10 @@
 @interface ProgressBarView : UIView {
     UIView *progressBarTrack;
     UIView *progressBar;
-    CGFloat progress;
 }
 
 - (void)setTrackColor:(UIColor*)color;
-- (void)setProgress:(CGFloat)newProgress;
+
+@property (nonatomic, assign) CGFloat progress;
 
 @end
