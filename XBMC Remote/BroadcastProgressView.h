@@ -14,8 +14,8 @@
 }
 
 - (void)setProgress:(CGFloat)progress;
+- (CGPoint)getReservedCenter;
 
 @property (nonatomic, readonly) UILabel *barLabel;
-@property (nonatomic, readonly) UIView *reservedArea;
 
 @end

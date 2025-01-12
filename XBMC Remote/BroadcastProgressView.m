@@ -16,7 +16,6 @@
 @implementation BroadcastProgressView
 
 @synthesize barLabel;
-@synthesize reservedArea;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -29,9 +28,6 @@
 - (void)createProgressView {
     progressBarView = [ProgressBarView new];
     [self addSubview:progressBarView];
-    
-    reservedArea = [UILabel new];
-    [self addSubview:reservedArea];
     
     barLabel = [UILabel new];
     barLabel.font = [UIFont systemFontOfSize:FONT_SIZE];
@@ -48,13 +44,16 @@
     [progressBarView setProgress:progress];
 }
 
+- (CGPoint)getReservedCenter {
+    return CGPointMake(RESERVED_WIDTH / 2, (CGRectGetHeight(self.frame) + PROGRESSBAR_HEIGHT) / 2);
+}
+
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGRect frame = self.frame;
     CGFloat labelHeight = CGRectGetHeight(frame) - PROGRESSBAR_HEIGHT;
     CGFloat labelWidth = CGRectGetWidth(frame) - RESERVED_WIDTH;
     barLabel.frame = CGRectMake(RESERVED_WIDTH, PROGRESSBAR_HEIGHT, labelWidth, labelHeight);
-    reservedArea.frame = CGRectMake(0, PROGRESSBAR_HEIGHT, RESERVED_WIDTH, labelHeight);
     progressBarView.frame = CGRectMake(0, 0, CGRectGetWidth(frame), PROGRESSBAR_HEIGHT);
 }
 

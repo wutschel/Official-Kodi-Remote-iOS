@@ -2615,6 +2615,9 @@
             CGRect barFrame = CGRectMake(SMALL_PADDING, originY, CGRectGetWidth(frame), height);
             BroadcastProgressView *progressView = (BroadcastProgressView*)[cell viewWithTag:EPG_VIEW_CELL_PROGRESSVIEW];
             progressView.frame = barFrame;
+            
+            UIImageView *timerView = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
+            timerView.center = [progressView convertPoint:[progressView getReservedCenter] toView:cell.contentView];
         }
         if (channelListView) {
             runtime.hidden = NO;
@@ -2776,6 +2779,9 @@
                                           CGRectGetWidth(programStartTime.frame),
                                           EPGCHANNELBAR_HEIGHT);
         progressView.frame = progressFrame;
+        
+        UIImageView *timerView = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
+        timerView.center = [progressView convertPoint:[progressView getReservedCenter] toView:cell.contentView];
         
         title.textColor = [Utilities get1stLabelColor];
         genre.textColor = [Utilities get2ndLabelColor];
@@ -3169,8 +3175,7 @@
     timerView.tag = EPG_VIEW_CELL_RECORDING_ICON;
     timerView.hidden = YES;
     timerView.backgroundColor = UIColor.clearColor;
-    timerView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [progressView.reservedArea addSubview:timerView];
+    [cell.contentView addSubview:timerView];
 }
 
 - (CGFloat)tableView:(UITableView*)tableView heightForHeaderInSection:(NSInteger)section {
