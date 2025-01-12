@@ -4154,7 +4154,6 @@
                if (error == nil && methodError == nil) {
                    id cell = [self getCell:indexPath];
                    UIImageView *timerView = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
-                   timerView.hidden = !timerView.hidden;
                    NSNumber *status = @(![item[@"isrecording"] boolValue]);
                    if ([item[@"broadcastid"] longLongValue] > 0) {
                        status = @(![item[@"hastimer"] boolValue]);
@@ -4164,6 +4163,7 @@
                        @"broadcastid": storeBroadcastid,
                        @"status": status,
                    };
+                   timerView.hidden = ![status boolValue];
                    [[NSNotificationCenter defaultCenter] postNotificationName: @"KodiServerRecordTimerStatusChange" object:nil userInfo:params];
                }
                else {
