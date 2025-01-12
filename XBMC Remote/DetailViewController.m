@@ -2789,7 +2789,6 @@
             cell.backgroundColor = [Utilities getSystemGray4];
             
             [progressView setProgress:percent_elapsed / 100.0];
-            progressView.barLabel.hidden = NO;
             NSCalendar *gregorian = [[NSCalendar alloc]
                                      initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
             NSUInteger unitFlags = NSCalendarUnitMinute;
@@ -2808,7 +2807,6 @@
             cell.backgroundColor = [Utilities getSystemGray6];
             
             progressView.hidden = YES;
-            progressView.barLabel.hidden = YES;
         }
         UIImageView *hasTimer = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
         if ([item[@"hastimer"] boolValue]) {
