@@ -3232,9 +3232,7 @@
             title = [NSString stringWithFormat:@"%@\n\n%@", title, LOCALIZED_STR(@"-- WARNING --\nKodi API prior Krypton (v17) don't allow timers editing. Use the Kodi GUI for adding, editing and removing timers. Thank you.")];
             sheetActions = @[LOCALIZED_STR(@"Ok")];
         }
-        id cell = [self getCell:indexPath];
-        UIImageView *isRecordingImageView = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
-        BOOL isRecording = isRecordingImageView == nil ? NO : !isRecordingImageView.hidden;
+        BOOL isRecording = [item[@"hastimer"] boolValue] || [item[@"isrecording"] boolValue];
         CGPoint sheetOrigin = CGPointMake(rectOriginX, rectOriginY);
         UIViewController *showFromCtrl = [Utilities topMostController];
         [self showActionSheetOptions:title options:sheetActions recording:isRecording origin:sheetOrigin fromcontroller:showFromCtrl fromview:self.view];
@@ -3340,8 +3338,7 @@
                 if (![VersionCheck hasPlayUsingSupport]) {
                     [sheetActions removeObject:LOCALIZED_STR(@"Play using...")];
                 }
-                UIImageView *isRecordingImageView = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
-                BOOL isRecording = isRecordingImageView == nil ? NO : !isRecordingImageView.hidden;
+                BOOL isRecording = [item[@"hastimer"] boolValue] || [item[@"isrecording"] boolValue];
                 UIViewController *showFromCtrl = [Utilities topMostController];
                 UIView *showFromView = self.view;
                 CGPoint sheetOrigin = [activeRecognizer locationInView:showFromView];
