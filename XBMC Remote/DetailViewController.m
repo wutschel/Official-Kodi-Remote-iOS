@@ -3309,7 +3309,6 @@
                 if (item[@"genre"] != nil && ![item[@"genre"] isEqualToString:@""]) {
                     title = [NSString stringWithFormat:@"%@\n%@", title, item[@"genre"]];
                 }
-                id cell = [self getCell:selectedIndexPath];
                 
                 if ([item[@"trailer"] isKindOfClass:[NSString class]]) {
                     if ([item[@"trailer"] length] != 0 && [sheetActions isKindOfClass:[NSMutableArray class]]) {
