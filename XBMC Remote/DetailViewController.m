@@ -442,6 +442,10 @@
 
 #pragma mark - Utility
 
+- (BOOL)isTimerActiveForItem:(id)item {
+    return [item[@"hastimer"] boolValue] || [item[@"isrecording"] boolValue];
+}
+
 - (void)enterSubmenuOfMenu:(mainMenu*)menuItem label:(NSString*)label params:(NSDictionary*)parameters {
     menuItem.subItem.mainLabel = label;
     mainMenu *newMenuItem = [menuItem.subItem copy];
@@ -3224,7 +3228,7 @@
             title = [NSString stringWithFormat:@"%@\n\n%@", title, LOCALIZED_STR(@"-- WARNING --\nKodi API prior Krypton (v17) don't allow timers editing. Use the Kodi GUI for adding, editing and removing timers. Thank you.")];
             sheetActions = @[LOCALIZED_STR(@"Ok")];
         }
-        BOOL isRecording = [item[@"hastimer"] boolValue] || [item[@"isrecording"] boolValue];
+        BOOL isRecording = [self isTimerActiveForItem:item];
         CGPoint sheetOrigin = CGPointMake(rectOriginX, rectOriginY);
         UIViewController *showFromCtrl = [Utilities topMostController];
         [self showActionSheetOptions:title options:sheetActions recording:isRecording origin:sheetOrigin fromcontroller:showFromCtrl fromview:self.view];
@@ -3330,7 +3334,7 @@
                 if (![VersionCheck hasPlayUsingSupport]) {
                     [sheetActions removeObject:LOCALIZED_STR(@"Play using...")];
                 }
-                BOOL isRecording = [item[@"hastimer"] boolValue] || [item[@"isrecording"] boolValue];
+                BOOL isRecording = [self isTimerActiveForItem:item];
                 UIViewController *showFromCtrl = [Utilities topMostController];
                 UIView *showFromView = self.view;
                 CGPoint sheetOrigin = [activeRecognizer locationInView:showFromView];
