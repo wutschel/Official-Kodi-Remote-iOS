@@ -1506,6 +1506,7 @@
                 }
                 else {
                     [self addPlayback:item indexPath:indexPath position:indexPath.row shuffle:NO];
+                    [self deselectAtIndexPath:indexPath];
                 }
                 return;
             }
@@ -1606,6 +1607,7 @@
             NSString *message = [NSString stringWithFormat:@"%@ (type = '%@')", LOCALIZED_STR(@"Cannot do that"), item[@"type"]];
             [Utilities showMessage:message color:[Utilities getSystemRed:0.95]];
         }
+        [self deselectAtIndexPath:indexPath];
     }
     else if (methods[@"method"] != nil && ![parameters[@"forceActionSheet"] boolValue] && !stackscrollFullscreen) {
         // There is a child and we want to show it (only when not in fullscreen)
@@ -1624,6 +1626,7 @@
             }
             else {
                 [self addPlayback:item indexPath:indexPath position:indexPath.row shuffle:NO];
+                [self deselectAtIndexPath:indexPath];
             }
         }
     }
