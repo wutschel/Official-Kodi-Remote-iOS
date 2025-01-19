@@ -3213,6 +3213,15 @@
     return cell;
 }
 
+- (void)selectAtIndexPath:(NSIndexPath*)indexPath {
+    if (enableCollectionView) {
+        [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
+    }
+    else {
+        [dataList selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+}
+
 - (void)deselectAtIndexPath:(NSIndexPath*)indexPath {
     if (enableCollectionView) {
         [collectionView deselectItemAtIndexPath:indexPath animated:NO];
@@ -3284,18 +3293,6 @@
             selectedIndexPath = indexPath;
             
             NSDictionary *item = [self getItemFromIndexPath:indexPath];
-            
-            if ([self doesShowSearchResults]) {
-                [dataList selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            }
-            else {
-                if (enableCollectionView) {
-                    [collectionView selectItemAtIndexPath:indexPath animated:NO scrollPosition:UICollectionViewScrollPositionNone];
-                }
-                else {
-                    [dataList selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-                }
-            }
             mainMenu *menuItem = [self getMainMenu:item];
             int activeTab = [self getActiveTab:item];
             NSMutableArray *sheetActions = [menuItem.sheetActions[activeTab] mutableCopy];
@@ -3347,6 +3344,7 @@
 - (void)showActionSheetOptions:(NSString*)title options:(NSArray*)sheetActions recording:(BOOL)isRecording origin:(CGPoint)origin fromview:(UIView*)fromview {
     NSInteger numActions = sheetActions.count;
     if (numActions) {
+        [self selectAtIndexPath:selectedIndexPath];
         UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:title message:nil preferredStyle:UIAlertControllerStyleActionSheet];
         
         UIAlertAction *action_cancel = [UIAlertAction actionWithTitle:LOCALIZED_STR(@"Cancel") style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
