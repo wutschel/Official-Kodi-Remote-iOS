@@ -3359,6 +3359,11 @@
             }
             UIAlertAction *action = [UIAlertAction actionWithTitle:actiontitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 [self actionSheetHandler:actiontitle origin:origin fromview:fromview];
+                
+                // Deselect for all actions, except for "Play using..." will bring up a 2nd sction sheet
+                if (![actiontitle isEqualToString:LOCALIZED_STR(@"Play using...")]) {
+                    [self deselectAtIndexPath:selectedIndexPath];
+                }
             }];
             [alertCtrl addAction:action];
         }
@@ -3529,6 +3534,7 @@
                 for (NSString *actiontitle in sheetActions) {
                     UIAlertAction *action = [UIAlertAction actionWithTitle:actiontitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                         [self addPlayback:item indexPath:selectedIndexPath using:actiontitle shuffle:NO];
+                        [self deselectAtIndexPath:selectedIndexPath];
                     }];
                     [alertCtrl addAction:action];
                 }
@@ -4069,7 +4075,6 @@
          withParameters:parameters
            onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
                [cellActivityIndicator stopAnimating];
-               [self deselectAtIndexPath:indexPath];
                if (error == nil && methodError == nil) {
                    [self.searchController setActive:NO];
                    [Utilities AnimView:activeLayoutView AnimDuration:0.3 Alpha:1.0 XPos:viewWidth];
@@ -4116,7 +4121,6 @@
          withParameters:parameters
            onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
                [cellActivityIndicator stopAnimating];
-               [self deselectAtIndexPath:indexPath];
                if (error == nil && methodError == nil) {
                    id cell = [self getCell:indexPath];
                    UIImageView *timerView = (UIImageView*)[cell viewWithTag:EPG_VIEW_CELL_RECORDING_ICON];
