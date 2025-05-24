@@ -1471,4 +1471,8 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XBMCServerHasChanged" object:nil];
 }
 
++ (void)setIdleTimerFromUserDefaults {
+    UIApplication.sharedApplication.idleTimerDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"lockscreen_preference"];
+}
+
 @end
