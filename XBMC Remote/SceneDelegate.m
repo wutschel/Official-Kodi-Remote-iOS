@@ -8,6 +8,7 @@
 
 #import "SceneDelegate.h"
 #import "AppDelegate.h"
+#import "Utilities.h"
 
 @implementation SceneDelegate
 
@@ -22,6 +23,10 @@
     
     // Set interface style for window
     [self setInterfaceStyleFromUserDefaults];
+}
+
+- (void)sceneWillEnterForeground:(UIScene*)scene {
+    [Utilities setIdleTimerFromUserDefaults];
 }
 
 - (void)setInterfaceStyleFromUserDefaults {
