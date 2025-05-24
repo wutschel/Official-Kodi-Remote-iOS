@@ -14,7 +14,6 @@
 #import "InitialSlidingViewController.h"
 #import "UIImageView+WebCache.h"
 #import "Utilities.h"
-#import "Kodi_Remote-Swift.h"
 
 #include <arpa/inet.h>
 #include <net/if.h>
@@ -424,7 +423,7 @@
     // Load user defaults, if not yet set. Avoids need to check for nil.
     [self registerDefaultsFromSettingsBundle];
     
-    [self setIdleTimerFromUserDefaults];
+    [Utilities setIdleTimerFromUserDefaults];
     
     NSString *filemodeVideoType = @"video";
     NSString *filemodeMusicType = @"music";
@@ -6167,10 +6166,6 @@
 }
 
 #pragma mark - Helper
-
-- (void)setIdleTimerFromUserDefaults {
-    UIApplication.sharedApplication.idleTimerDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"lockscreen_preference"];
-}
     
 - (NSNumber*)getGlobalSearchTab:(mainMenu*)menuItem label:(NSString*)subLabel {
     // Search for the method index with the desired sub label (e.g. "All Songs")
@@ -6257,19 +6252,6 @@
             NSLog(@"CFSocketSendData error: %li", CFSocketSendData_error);
         }
     }
-}
-
-- (void)applicationWillEnterForeground:(UIApplication*)application {
-    [self setIdleTimerFromUserDefaults];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication*)application {
-    // Trigger Local Network Privacy Alert once after app launch
-    static dispatch_once_t once;
-    dispatch_once(&once, ^{
-        LocalNetworkAlertClass *localNetworkAlert = [LocalNetworkAlertClass new];
-        [localNetworkAlert triggerLocalNetworkPrivacyAlert];
-    });
 }
 
 - (void)applicationDidReceiveMemoryWarning:(UIApplication*)application {

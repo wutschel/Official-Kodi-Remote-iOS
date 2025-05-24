@@ -1417,4 +1417,8 @@
     return vmInfo.phys_footprint;
 }
 
++ (void)setIdleTimerFromUserDefaults {
+    UIApplication.sharedApplication.idleTimerDisabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"lockscreen_preference"];
+}
+
 @end
