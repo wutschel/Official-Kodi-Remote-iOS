@@ -6185,6 +6185,7 @@
         @"st_filemode",
         @"st_kodi_action",
         @"st_kodi_window",
+        @"st_profile",
     ];
     
     menu_Settings.mainMethod = [@[
@@ -6196,6 +6197,9 @@
         },
         @{
             @"method": @"JSONRPC.Introspect",
+        },
+        @{
+            @"method": @"Profiles.GetProfiles",
         },
     ] mutableCopy];
     
@@ -6236,6 +6240,20 @@
             @"thumbWidth": @0,
             @"morelabel": LOCALIZED_STR(@"Activate a specific window"),
             @"forceActionSheet": @YES,
+        },
+        
+        @{
+            @"parameters": @{
+                @"properties": @[
+                    @"lockmode",
+                    @"thumbnail",
+                ],
+            },
+            @"label": LOCALIZED_STR(@"Profiles"),
+            @"defaultThumb": @"nocover_profile",
+            @"rowHeight": @FILEMODE_ROW_HEIGHT,
+            @"thumbWidth": @FILEMODE_THUMB_WIDTH,
+            @"morelabel": LOCALIZED_STR(@"Profiles"),
         },
     ] mutableCopy];
     
@@ -6282,6 +6300,12 @@
             @"row8": @"addonid",
             @"row9": @"addonid",
         },
+        
+        @{
+            @"itemid": @"profiles",
+            @"row1": @"label",
+            @"row8": @"profile",
+        },
     ];
     
     menu_Settings.sheetActions = @[
@@ -6294,6 +6318,7 @@
             LOCALIZED_STR(@"Activate window"),
             LOCALIZED_STR(@"Add window activation button"),
         ],
+        @[],
     ];
     
     menu_Settings.subItem = [mainMenu new];
@@ -6301,6 +6326,7 @@
         @{
             @"method": @"Settings.GetCategories",
         },
+        @{},
         @{},
         @{},
     ] mutableCopy];
@@ -6314,6 +6340,7 @@
         },
         @{},
         @{},
+        @{}
     ] mutableCopy];
     
     menu_Settings.subItem.mainFields = @[
@@ -6331,6 +6358,7 @@
         },
         @{},
         @{},
+        @{}
     ];
     
     menu_Settings.subItem.rowHeight = SETTINGS_ROW_HEIGHT;
