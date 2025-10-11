@@ -275,11 +275,12 @@
     
     if (rotation > ROTATION_TRIGGER && audioVolume < 100) {
         audioVolume += 1;
+        [self changeServerVolume:@"increment"];
     }
     else if (rotation < -ROTATION_TRIGGER && audioVolume > 0) {
         audioVolume -= 1;
+        [self changeServerVolume:@"decrement"];
     }
-    [self changeServerVolume];
 	lastRotation = [(UIRotationGestureRecognizer*)sender rotation];
 }
 
@@ -518,10 +519,10 @@
     }
 }
 
-- (void)changeServerVolume {
+- (void)changeServerVolume:(id)value {
     [[Utilities getJsonRPC]
      callMethod:@"Application.SetVolume" 
-     withParameters:@{@"volume": @(audioVolume)}];
+     withParameters:@{@"volume": value}];
 }
 
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
