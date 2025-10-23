@@ -271,10 +271,10 @@
 	CGFloat rotation = 0.0 - (lastRotation - [(UIRotationGestureRecognizer*)sender rotation]);
     
     if (rotation > ROTATION_TRIGGER) {
-        [self changeServerVolume:@"increment"];
+        [volumeSliderView changeVolume:VOLUME_BUTTON_UP];
     }
     else if (rotation < -ROTATION_TRIGGER) {
-        [self changeServerVolume:@"decrement"];
+        [volumeSliderView changeVolume:VOLUME_BUTTON_DOWN];
     }
 	lastRotation = [(UIRotationGestureRecognizer*)sender rotation];
 }
@@ -503,12 +503,6 @@
             [Utilities sendXbmcHttp:callback];
         }
     }];
-}
-
-- (void)changeServerVolume:(id)value {
-    [[Utilities getJsonRPC]
-     callMethod:@"Application.SetVolume" 
-     withParameters:@{@"volume": value}];
 }
 
 - (void)touchesBegan:(NSSet*)touches withEvent:(UIEvent*)event {
