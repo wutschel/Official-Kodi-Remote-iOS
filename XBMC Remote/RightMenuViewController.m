@@ -45,27 +45,22 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    CustomButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customButtonCellIdentifier"];
-    if (cell == nil) {
-        cell = [[CustomButtonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"customButtonCellIdentifier"];
-        cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.tintColor = UIColor.lightGrayColor;
-        if (@available(iOS 13.0, *)) {
-            cell.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
-        }
-        
-        // UISwitch calls toggleSwitch
-        UISwitch *onoff = cell.onoffSwitch;
-        [onoff addTarget:self action:@selector(toggleSwitch:) forControlEvents:UIControlEventValueChanged];
+    CustomButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customButtonCellIdentifier" forIndexPath:indexPath];
+    cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.tintColor = UIColor.lightGrayColor;
+    if (@available(iOS 13.0, *)) {
+        cell.overrideUserInterfaceStyle = UIUserInterfaceStyleDark;
     }
+    
+    // UISwitch calls toggleSwitch
+    UISwitch *onoff = cell.onoffSwitch;
+    onoff.hidden = YES;
+    [onoff addTarget:self action:@selector(toggleSwitch:) forControlEvents:UIControlEventValueChanged];
     
     // Reset to default for each cell to allow dequeuing
     UIImageView *icon = cell.buttonIcon;
     icon.hidden = NO;
-    
-    UISwitch *onoff = cell.onoffSwitch;
-    onoff.hidden = YES;
     
     UILabel *title = cell.buttonLabel;
     title.text = tableData[indexPath.row][@"label"];
@@ -408,6 +403,7 @@
     [self.view addSubview:[self createToolbarView:toolbarHeight]];
     
     menuTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    [menuTableView registerClass:[CustomButtonCell class] forCellReuseIdentifier:@"customButtonCellIdentifier"];
     if (IS_IPHONE) {
         CGFloat deltaY = [Utilities getTopPadding];
         self.slidingViewController.anchorLeftPeekAmount = ANCHOR_RIGHT_PEEK;
