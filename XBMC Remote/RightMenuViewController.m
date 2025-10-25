@@ -203,7 +203,7 @@
     }
     
     // Build table with custom buttons
-    tableData = [NSMutableArray new];
+    tableData = [[NSMutableArray alloc] initWithCapacity:arrayButtons.buttons.count];
     for (NSDictionary *item in arrayButtons.buttons) {
         NSString *label = item[@"label"] ?: @"";
         NSString *icon = item[@"icon"] ?: @"";
