@@ -226,15 +226,14 @@
 
 #pragma mark - UISwitch
 
-- (void)toggleSwitch:(id)sender {
+- (void)toggleSwitch:(UISwitch*)onoff {
     // Gather NSIndexPath from sender
-    CGPoint hitPoint = [sender convertPoint:CGPointZero toView:menuTableView];
+    CGPoint hitPoint = [onoff convertPoint:CGPointZero toView:menuTableView];
     NSIndexPath *hitIndex = [menuTableView indexPathForRowAtPoint:hitPoint];
     
     // Process the clicked UISwitch
     NSInteger tableIdx = hitIndex.row;
     if (tableIdx < tableData.count) {
-        UISwitch *onoff = (UISwitch*)sender;
         NSMutableDictionary *params = tableData[tableIdx][@"action"][@"params"];
         NSString *command = tableData[tableIdx][@"action"][@"command"];
         NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:params[@"setting"], @"setting", @(onoff.on), @"value", nil];
