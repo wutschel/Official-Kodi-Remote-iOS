@@ -18,6 +18,7 @@
 #define TOOLBAR_HEIGHT 44.0
 #define BUTTON_SPACING 8.0
 #define BUTTON_WIDTH 100.0
+#define CUSTOM_BUTTON_CELL_IDENTIFIER @"customButtonCellIdentifier"
 
 @implementation RightMenuViewController
 
@@ -45,7 +46,7 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    CustomButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:@"customButtonCellIdentifier" forIndexPath:indexPath];
+    CustomButtonCell *cell = [tableView dequeueReusableCellWithIdentifier:CUSTOM_BUTTON_CELL_IDENTIFIER forIndexPath:indexPath];
     cell.editingAccessoryType = UITableViewCellAccessoryDetailDisclosureButton;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.tintColor = UIColor.lightGrayColor;
@@ -405,7 +406,7 @@
     [self.view addSubview:[self createToolbarView:toolbarHeight]];
     
     menuTableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
-    [menuTableView registerClass:[CustomButtonCell class] forCellReuseIdentifier:@"customButtonCellIdentifier"];
+    [menuTableView registerClass:[CustomButtonCell class] forCellReuseIdentifier:CUSTOM_BUTTON_CELL_IDENTIFIER];
     if (IS_IPHONE) {
         CGFloat deltaY = [Utilities getTopPadding];
         self.slidingViewController.anchorLeftPeekAmount = ANCHOR_RIGHT_PEEK;
