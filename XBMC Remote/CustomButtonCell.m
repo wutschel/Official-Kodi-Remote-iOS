@@ -41,7 +41,7 @@
         [self insertSubview:buttonBackground belowSubview:self.contentView];
         
         // OnOff switch is placed right aligned in the content view
-        UISwitch *onoff = [[UISwitch alloc] initWithFrame:CGRectZero];
+        UISwitch *onoff = [UISwitch new];
         onoff.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - CGRectGetWidth(onoff.frame) - CUSTOM_BUTTON_ITEM_SPACING,
                                  (CUSTOM_BUTTON_ITEM_HEIGHT - CGRectGetHeight(onoff.frame)) / 2,
                                  CGRectGetHeight(onoff.frame),
