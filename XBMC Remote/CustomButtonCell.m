@@ -28,10 +28,10 @@
         
         // OnOff switch is placed right aligned in the content view
         UISwitch *onoff = [UISwitch new];
-        onoff.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - CGRectGetWidth(onoff.frame) - CUSTOM_BUTTON_ITEM_SPACING,
-                                 (CUSTOM_BUTTON_ITEM_HEIGHT - CGRectGetHeight(onoff.frame)) / 2,
-                                 CGRectGetHeight(onoff.frame),
-                                 CGRectGetHeight(onoff.frame));
+        CGRect frame = onoff.frame;
+        frame.origin = CGPointMake(CGRectGetWidth(self.contentView.frame) - CGRectGetWidth(onoff.frame) - CUSTOM_BUTTON_ITEM_SPACING,
+                                   (CUSTOM_BUTTON_ITEM_HEIGHT - CGRectGetHeight(onoff.frame)) / 2);
+        onoff.frame = frame;
         onoff.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
         onoff.hidden = YES;
         onoff.alpha = 0.9;
