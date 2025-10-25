@@ -15,11 +15,6 @@
 
 @implementation CustomButtonCell
 
-@synthesize buttonLabel;
-@synthesize buttonIcon;
-@synthesize onoffSwitch;
-@synthesize busyView;
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
