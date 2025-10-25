@@ -9,7 +9,7 @@
 #import "CustomButtonCell.h"
 #import "Utilities.h"
 
-@implementation CustomButtonCell;
+@implementation CustomButtonCell
 
 @synthesize buttonLabel;
 @synthesize buttonIcon;
