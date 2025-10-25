@@ -40,7 +40,7 @@
         
         // Icon frame follows onoffSwitch size
         CGFloat iconSize = CGRectGetHeight(self.onoffSwitch.frame);
-        UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectZero];
+        UIImageView *icon = [UIImageView new];
         icon.frame = CGRectMake(CGRectGetWidth(self.contentView.frame) - (CGRectGetWidth(self.onoffSwitch.frame) + iconSize) / 2 - CUSTOM_BUTTON_ITEM_SPACING,
                                 (CGRectGetHeight(self.contentView.frame) - iconSize) / 2,
                                 iconSize,
@@ -51,7 +51,7 @@
         self.buttonIcon = icon;
         
         // Label follows onoffSwitch/icon size
-        UILabel *title = [[UILabel alloc] initWithFrame:CGRectZero];
+        UILabel *title = [UILabel new];
         title.frame = CGRectMake(CUSTOM_BUTTON_LABEL_PADDING,
                                  CUSTOM_BUTTON_ITEM_SPACING,
                                  CGRectGetWidth(self.contentView.frame) - CGRectGetWidth(self.onoffSwitch.frame) - CUSTOM_BUTTON_LABEL_PADDING * 3,
