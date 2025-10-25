@@ -19,7 +19,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Custom buttons on iPhone need to be resized avoid partially being hidden
+        // Custom buttons on iPhone need to be resized to avoid being partially hidden
         CGFloat padding = IS_IPHONE ? ANCHOR_RIGHT_PEEK : 0;
         CGRect frame = self.contentView.frame;
         frame.origin.x = padding;
