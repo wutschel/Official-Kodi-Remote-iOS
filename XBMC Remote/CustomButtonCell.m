@@ -9,6 +9,10 @@
 #import "CustomButtonCell.h"
 #import "Utilities.h"
 
+#define CUSTOM_BUTTON_ITEM_SPACING 4.0
+#define CUSTOM_BUTTON_LABEL_PADDING 4.0
+#define CUSTOM_BUTTON_BACKGROUND_INSET 2.0
+
 @implementation CustomButtonCell
 
 @synthesize buttonLabel;
