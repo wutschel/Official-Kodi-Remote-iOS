@@ -59,8 +59,6 @@
                                 iconSize,
                                 iconSize);
         icon.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-        icon.hidden = NO;
-        icon.image = nil;
         icon.alpha = 0.9;
         [self.contentView addSubview:icon];
         self.buttonIcon = icon;
