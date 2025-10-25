@@ -33,12 +33,7 @@
         
         // Background view to better match a button style
         UIView *buttonBackground = [UIView new];
-        frame = self.frame;
-        frame.origin.y = CUSTOM_BUTTON_BACKGROUND_INSET;
-        frame.origin.x = CUSTOM_BUTTON_BACKGROUND_INSET;
-        frame.size.height -= CUSTOM_BUTTON_BACKGROUND_INSET * 2;
-        frame.size.width -= CUSTOM_BUTTON_BACKGROUND_INSET * 2;
-        buttonBackground.frame = frame;
+        buttonBackground.frame = CGRectInset(self.frame, CUSTOM_BUTTON_BACKGROUND_INSET, CUSTOM_BUTTON_BACKGROUND_INSET);
         buttonBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         buttonBackground.layer.cornerRadius = 8;
         buttonBackground.backgroundColor = CUSTOM_BUTTON_BACKGROUND;
