@@ -230,11 +230,13 @@
     NSInteger tableIdx = hitIndex.row;
     if (tableIdx < tableData.count) {
         NSMutableDictionary *params = tableData[tableIdx][@"action"][@"params"];
+        
+        // Store the new value
+        params[@"value"] = @(onoff.on);
+        
+        // Build and send JSON command
         NSString *command = tableData[tableIdx][@"action"][@"command"];
-        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:params[@"setting"], @"setting", @(onoff.on), @"value", nil];
-        if ([params respondsToSelector:@selector(setObject:forKey:)]) {
-            params[@"value"] = @(onoff.on);
-        }
+        NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:params[@"setting"], @"setting", params[@"value"], @"value", nil];
         [self xbmcAction:command params:parameters uiControl:onoff];
     }
 }
