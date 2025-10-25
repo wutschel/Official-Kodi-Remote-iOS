@@ -81,12 +81,10 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     [super setEditing:editing animated:animated];
     if (editing) {
-        // Disable the UISWitch and align the alpha of the icons
         self.onoffSwitch.enabled = NO;
         self.buttonIcon.alpha = 0.5;
     }
     else {
-        // Enable the UISWitch and align the alpha of the icons
         self.onoffSwitch.enabled = YES;
         self.buttonIcon.alpha = 0.9;
     }
