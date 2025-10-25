@@ -23,14 +23,6 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString*)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Custom buttons on iPhone need to be resized to avoid being partially hidden
-        CGFloat padding = IS_IPHONE ? ANCHOR_RIGHT_PEEK : 0;
-        CGRect frame = self.contentView.frame;
-        frame.origin.x = padding;
-        frame.size.width -= padding;
-        frame.size.height = CUSTOM_BUTTON_ITEM_HEIGHT;
-        self.contentView.frame = frame;
-        
         // Background view to better match a button style
         UIView *buttonBackground = [UIView new];
         buttonBackground.frame = CGRectInset(self.frame, CUSTOM_BUTTON_BACKGROUND_INSET, CUSTOM_BUTTON_BACKGROUND_INSET);
