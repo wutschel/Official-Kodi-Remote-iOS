@@ -232,7 +232,7 @@
     if (tableIdx < tableData.count) {
         NSMutableDictionary *params = tableData[tableIdx][@"action"][@"params"];
         
-        // Save value in tableData to avoid re-reading it via JSON when updsting dequeued cells in cellForRowAtIndexPath
+        // Save value in tableData to avoid re-reading it via JSON when updating dequeued cells in cellForRowAtIndexPath
         params[@"value"] = @(onoff.on);
         
         // Build and send JSON command
