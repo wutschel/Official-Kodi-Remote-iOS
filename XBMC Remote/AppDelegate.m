@@ -311,6 +311,28 @@
     return [self connectToServerFromList:url.host.stringByRemovingPercentEncoding];
 }
 
+- (void)application:(UIApplication*)application performActionForShortcutItem:(UIApplicationShortcutItem*)shortcutItem completionHandler:(void(^)(BOOL))completionHandler {
+    if ([shortcutItem.type isEqualToString:@"ConnectServer"]) {
+        // Use shortcut tile (= server description) to map to server list and connect the server.
+        [self connectToServerFromList:shortcutItem.localizedTitle];
+    }
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Add the server description and address to shortcutItems, which is shown when longpressing the app icon.
+    NSMutableArray *items = [[NSMutableArray alloc] initWithCapacity:self.arrayServerList.count];
+    for (NSDictionary *server in self.arrayServerList) {
+        UIApplicationShortcutIcon *icon = [UIApplicationShortcutIcon iconWithType:UIApplicationShortcutIconTypeFavorite];
+        UIApplicationShortcutItem *shortcut = [[UIApplicationShortcutItem alloc] initWithType:@"ConnectServer"
+                                                                               localizedTitle:server[@"serverDescription"]
+                                                                            localizedSubtitle:server[@"serverIP"]
+                                                                                         icon:icon
+                                                                                     userInfo:nil];
+        [items addObject:shortcut];
+    }
+    application.shortcutItems = [items copy];
+}
+
 - (void)applicationWillEnterForeground:(UIApplication*)application {
     [self setIdleTimerFromUserDefaults];
 }
