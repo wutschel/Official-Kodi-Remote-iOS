@@ -59,6 +59,7 @@
 		C7106D792D33C25400A96C93 /* BroadcastProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7106D782D33C25400A96C93 /* BroadcastProgressView.m */; };
 		C7106D7B2D33EEE000A96C93 /* ProgressBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7106D7A2D33EEE000A96C93 /* ProgressBarView.m */; };
 		C7106D842D33FBCE00A96C93 /* PlaylistProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = C7106D832D33FBCE00A96C93 /* PlaylistProgressView.m */; };
+		C72562E62EAF962100D038A9 /* test.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72562E52EAF962100D038A9 /* test.mm */; };
 		C72CDAF22DD27AB800AFB2FA /* LocalNetworkAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CDAF12DD27AB800AFB2FA /* LocalNetworkAlert.swift */; };
 		C74B9CB22E979E2F0029B27E /* CustomButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C74B9CB12E979E2F0029B27E /* CustomButtonCell.m */; };
 		C753585F2DE9A25F00952F0D /* LocalNetworkAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = C753585E2DE9A25F00952F0D /* LocalNetworkAccess.m */; };
@@ -276,6 +277,8 @@
 		C7106D832D33FBCE00A96C93 /* PlaylistProgressView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlaylistProgressView.m; sourceTree = "<group>"; };
 		C7106D852D33FBFC00A96C93 /* PlaylistProgressView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlaylistProgressView.h; sourceTree = "<group>"; };
 		C718444525FFD06300F5A060 /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
+		C72562E42EAF95CD00D038A9 /* test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = test.h; sourceTree = "<group>"; };
+		C72562E52EAF962100D038A9 /* test.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = test.mm; sourceTree = "<group>"; };
 		C72CDAF02DD27AB800AFB2FA /* Kodi Remote-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Kodi Remote-Bridging-Header.h"; sourceTree = "<group>"; };
 		C72CDAF12DD27AB800AFB2FA /* LocalNetworkAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNetworkAlert.swift; sourceTree = "<group>"; };
 		C740474E2E47347B008C1E70 /* gl-ES */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "gl-ES"; path = "gl-ES.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
@@ -583,6 +586,8 @@
 				0F554C21151D197F007E633F /* nib */,
 				0FCCA21717B25F07000FF09C /* Images.xcassets */,
 				C7478BF8257258E700161C1E /* Launch Screen.storyboard */,
+				C72562E52EAF962100D038A9 /* test.mm */,
+				C72562E42EAF95CD00D038A9 /* test.h */,
 			);
 			path = "XBMC Remote";
 			sourceTree = "<group>";
@@ -917,6 +922,7 @@
 				0FEA79FC165FBBED00BB281F /* XBMCVirtualKeyboard.m in Sources */,
 				C78C30FA28F8AADA0055CD95 /* SharingActivityItemSource.m in Sources */,
 				0F90904516E53C590021EFA9 /* Utilities.m in Sources */,
+				C72562E62EAF962100D038A9 /* test.mm in Sources */,
 				0FEAE76816EA632800387DED /* ActorCell.m in Sources */,
 				0F00207816EE247A003822B5 /* OBSlider.m in Sources */,
 				0F284A5216F63C9A00AFC1EF /* PosterLabel.m in Sources */,
