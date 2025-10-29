@@ -107,6 +107,11 @@
     if (itemIsActive) {
         return;
     }
+    if (item.family == FamilyAppSettings) {
+        NSURL *url = [[NSURL alloc] initWithString:UIApplicationOpenSettingsURLString];
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+        return;
+    }
     
     // Mark the active menu as selected
     [menuList selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];

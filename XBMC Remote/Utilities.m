@@ -1155,7 +1155,7 @@
         @"start_menu_search": @(TypeGlobalSearch),
         @"start_menu_files": @(TypeFiles),
         @"start_menu_addons": @(TypeAddons),
-        @"start_menu_settings": @(TypeSettings),
+        @"start_menu_settings": @(TypeKodiSettings),
     };
     MenuItemType startMenuType = [defaultMenus[startId] intValue];
     

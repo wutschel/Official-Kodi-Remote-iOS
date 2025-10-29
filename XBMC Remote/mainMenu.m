@@ -6172,11 +6172,18 @@
     menu_Addons.subItem.rowHeight = SETTINGS_ROW_HEIGHT;
     menu_Addons.subItem.thumbWidth = SETTINGS_THUMB_WIDTH;
     
+#pragma mark - App Settings
+    __auto_type menu_AppSettings = [mainMenu new];
+    menu_AppSettings.mainLabel = LOCALIZED_STR(@"App Settings");
+    menu_AppSettings.icon = @"icon_menu_settings";
+    menu_AppSettings.type = TypeAppSettings;
+    menu_AppSettings.family = FamilyAppSettings;
+    
 #pragma mark - Kodi Settings
     __auto_type menu_Settings = [mainMenu new];
     menu_Settings.mainLabel = LOCALIZED_STR(@"XBMC Settings");
     menu_Settings.icon = @"icon_menu_settings";
-    menu_Settings.type = TypeSettings;
+    menu_Settings.type = TypeKodiSettings;
     menu_Settings.family = FamilyDetailView;
     menu_Settings.enableSection = YES;
     menu_Settings.rowHeight = SETTINGS_ROW_HEIGHT;
@@ -6784,6 +6791,7 @@
     if ([self isMenuEntryEnabled:@"menu_settings"]) {
         [mainMenuItems addObject:menu_Settings];
     }
+    [mainMenuItems addObject:menu_AppSettings];
     
 #pragma mark - Build and Initialize Global Search Lookup
     

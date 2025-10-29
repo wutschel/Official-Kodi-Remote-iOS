@@ -174,6 +174,10 @@
     if (item.family == FamilyNowPlaying) {
         [AppDelegate.instance.windowController.stackScrollViewController offView];
     }
+    else if (item.family == FamilyAppSettings) {
+        NSURL *url = [[NSURL alloc] initWithString:UIApplicationOpenSettingsURLString];
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+    }
     else {
         if (lastSelected == indexPath.row) {
             [AppDelegate.instance.windowController.stackScrollViewController offView];
