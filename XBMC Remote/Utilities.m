@@ -1126,15 +1126,20 @@
 }
 
 + (void)setStyleOfMenuItems:(UITableView*)tableView active:(BOOL)active {
+    NSInteger lastRow = [tableView numberOfRowsInSection:0] - 1;
+    BOOL cellIsActive;
     for (NSIndexPath *indexPath in tableView.indexPathsForVisibleRows) {
         // The iPhone uses the top most cell as connection status. This should not be faded/unfaded.
-        if (IS_IPHONE && indexPath.row == 0 && indexPath.section == 0) {
-            continue;
+        if ((IS_IPHONE && indexPath.row == 0) || indexPath.row == lastRow) {
+            cellIsActive = YES;
+        }
+        else {
+            cellIsActive = active;
         }
         UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
         [UIView animateWithDuration:0.3
                          animations:^{
-                            [Utilities setStyleOfMenuItemCell:cell active:active];
+                            [Utilities setStyleOfMenuItemCell:cell active:cellIsActive];
                          }];
     }
 }

@@ -132,7 +132,8 @@
 }
 
 - (void)tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
-    [Utilities setStyleOfMenuItemCell:cell active:AppDelegate.instance.serverOnLine];
+    NSInteger lastRow = [tableView numberOfRowsInSection:0] - 1;
+    [Utilities setStyleOfMenuItemCell:cell active:AppDelegate.instance.serverOnLine || indexPath.row == lastRow];
     cell.backgroundColor = UIColor.clearColor;
 }
 
