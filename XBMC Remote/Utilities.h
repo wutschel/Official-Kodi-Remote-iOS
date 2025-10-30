@@ -66,6 +66,7 @@ typedef NS_ENUM(NSInteger, LogoBackgroundType) {
 + (UIAlertController*)createAlertCopyClipboard:(NSString*)title message:(NSString*)msg;
 + (UIAlertController*)createPowerControl;
 + (void)SFloadURL:(NSString*)url fromctrl:(UIViewController<SFSafariViewControllerDelegate>*)fromctrl;
++ (void)enterAppSettings;
 + (void)showMessage:(NSString*)messageText color:(UIColor*)messageColor;
 + (void)showLocalNetworkAccessError:(UIViewController*)viewCtrl;
 + (DSJSONRPC*)getJsonRPC;

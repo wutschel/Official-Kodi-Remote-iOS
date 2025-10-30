@@ -632,6 +632,11 @@
     }
 }
 
++ (void)enterAppSettings {
+    NSURL *url = [[NSURL alloc] initWithString:UIApplicationOpenSettingsURLString];
+    [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+}
+
 + (void)showLocalNetworkAccessError:(UIViewController*)viewCtrl {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL showLocalNetworkNotice = [userDefaults boolForKey:@"local_network_info_preference"];
