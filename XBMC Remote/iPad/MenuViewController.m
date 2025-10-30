@@ -162,7 +162,13 @@
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (!AppDelegate.instance.serverOnLine) {
+    mainMenu *item = mainMenuItems[indexPath.row];
+    if (item.family == FamilyAppSettings) {
+        NSURL *url = [[NSURL alloc] initWithString:UIApplicationOpenSettingsURLString];
+        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+        return;
+    }
+    else if (!AppDelegate.instance.serverOnLine) {
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
@@ -170,13 +176,8 @@
     // Mark the active menu as selected
     [tableView selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
     
-    mainMenu *item = mainMenuItems[indexPath.row];
     if (item.family == FamilyNowPlaying) {
         [AppDelegate.instance.windowController.stackScrollViewController offView];
-    }
-    else if (item.family == FamilyAppSettings) {
-        NSURL *url = [[NSURL alloc] initWithString:UIApplicationOpenSettingsURLString];
-        [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
     }
     else {
         if (lastSelected == indexPath.row) {

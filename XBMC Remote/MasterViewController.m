@@ -100,16 +100,16 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     mainMenu *item = self.mainMenu[indexPath.row];
-    if (!AppDelegate.instance.serverOnLine && item.family != FamilyServer) {
-        [menuList selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] animated:YES scrollPosition:UITableViewScrollPositionNone];
-        return;
-    }
-    if (itemIsActive) {
-        return;
-    }
     if (item.family == FamilyAppSettings) {
         NSURL *url = [[NSURL alloc] initWithString:UIApplicationOpenSettingsURLString];
         [UIApplication.sharedApplication openURL:url options:@{} completionHandler:nil];
+        return;
+    }
+    else if (!AppDelegate.instance.serverOnLine && item.family != FamilyServer) {
+        [menuList selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:indexPath.section] animated:YES scrollPosition:UITableViewScrollPositionNone];
+        return;
+    }
+    else if (itemIsActive) {
         return;
     }
     
