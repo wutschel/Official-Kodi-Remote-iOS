@@ -627,6 +627,10 @@
     label.frame = frame;
 }
 
+- (void)tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
+    [self layoutCell:cell forRowAtIndexPath:indexPath];
+}
+
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     static NSString *tableCellIdentifier = @"UITableViewCell";
     UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:tableCellIdentifier];
@@ -714,7 +718,6 @@
         textInputField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
         [cell.contentView addSubview:textInputField];
 	}
-    [self layoutCell:cell forRowAtIndexPath:indexPath];
     return cell;
 }
 
