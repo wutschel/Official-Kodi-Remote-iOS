@@ -627,6 +627,8 @@
     label.frame = frame;
 }
 
+#pragma mark - Table view delegate
+
 - (void)tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
     [self layoutCell:cell forRowAtIndexPath:indexPath];
 }
@@ -720,8 +722,6 @@
 	}
     return cell;
 }
-
-#pragma mark - Table view delegate
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
