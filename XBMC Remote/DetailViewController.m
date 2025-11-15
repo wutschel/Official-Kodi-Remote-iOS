@@ -1092,10 +1092,7 @@
                                options:UIViewAnimationOptionBeginFromCurrentState
                             animations:^{
                                 activeLayoutView.alpha = 1.0;
-                                CGRect frame = activeLayoutView.frame;
-                                frame.origin.x = viewWidth;
-                                frame.origin.y = 0;
-                                activeLayoutView.frame = frame;
+                                [activeLayoutView setOrigin:CGPointMake(viewWidth, 0)];
                             }
                             completion:^(BOOL finished) {
                                 [self changeViewMode:newViewMode];
@@ -2466,9 +2463,7 @@
     BOOL hasChild = method.count > 0;
     BOOL isSettingID = [item[@"family"] isEqualToString:@"id"];
     if (!thumbWidth && self.indexView.hidden && (hasChild || isSettingID)) {
-        frame = title.frame;
-        frame.size.width = frame.size.width - INDICATOR_SIZE - LABEL_PADDING;
-        title.frame = frame;
+        [title setWidth:title.frame.size.width - INDICATOR_SIZE - LABEL_PADDING];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
@@ -2485,11 +2480,8 @@
     else {
         genre.text = [item[@"genre"] stringByReplacingOccurrencesOfString:@"[CR]" withString:@"\n"];
     }
-
-    frame = runtimeyear.frame;
-    frame.origin.x = menuItem.maxXrightLabel - CGRectGetWidth(runtimeyear.frame);
-    runtimeyear.frame = frame;
-
+    
+    [runtimeyear setX:menuItem.maxXrightLabel - CGRectGetWidth(runtimeyear.frame)];
     if ([menuItem.showRuntime[chosenTab] boolValue]) {
         NSString *duration = @"";
         if (!menuItem.noConvertTime) {
@@ -2511,10 +2503,8 @@
     frame.origin.x = labelPosition;
     runtime.frame = frame;
     runtime.text = item[@"runtime"];
-
-    frame = rating.frame;
-    frame.origin.x = menuItem.maxXrightLabel - CGRectGetWidth(rating.frame);
-    rating.frame = frame;
+    
+    [rating setX:menuItem.maxXrightLabel - CGRectGetWidth(rating.frame)];
     rating.text = [Utilities getRatingFromItem:item[@"rating"]];
     cell.urlImageView.contentMode = UIViewContentModeScaleAspectFill;
     genre.hidden = NO;
@@ -2639,9 +2629,7 @@
             frame.size.width = title.frame.size.width;
             frame.size.height = cellHeight - frame.origin.y - SMALL_PADDING;
             genre.frame = frame;
-            frame = title.frame;
-            frame.origin.y = 0;
-            title.frame = frame;
+            [title setY:0];
             genre.font = [genre.font fontWithSize:12];
             genre.minimumScaleFactor = FONT_SCALING_DEFAULT;
             [genre sizeToFit];
@@ -2743,23 +2731,16 @@
     }
     if (!runtimeyear.hidden) {
         CGFloat runtimeYearWidth = MIN([runtimeyear getSize].width, CGRectGetWidth(runtimeyear.frame));
-        frame = genre.frame;
-        frame.size.width = menuItem.widthLabel - runtimeYearWidth - LABEL_PADDING;
-        genre.frame = frame;
+        [genre setWidth:menuItem.widthLabel - runtimeYearWidth - LABEL_PADDING];
     }
     if (!rating.hidden) {
         CGFloat ratingWidth = MIN([rating getSize].width, CGRectGetWidth(rating.frame));
-        frame = runtime.frame;
-        frame.size.width = menuItem.widthLabel - ratingWidth - LABEL_PADDING;
-        runtime.frame = frame;
+        [runtime setWidth:menuItem.widthLabel - ratingWidth - LABEL_PADDING];
     }
     
     NSString *playcount = [NSString stringWithFormat:@"%@", item[@"playcount"]];
     UIImageView *flagView = (UIImageView*)[cell viewWithTag:XIB_JSON_DATA_CELL_WATCHED_FLAG];
-    frame = flagView.frame;
-    frame.origin.x = flagX;
-    frame.origin.y = flagY;
-    flagView.frame = frame;
+    [flagView setOrigin:CGPointMake(flagX, flagY)];
     if ([playcount intValue]) {
         flagView.hidden = NO;
     }
@@ -3608,10 +3589,7 @@
                                        options:UIViewAnimationOptionBeginFromCurrentState
                                     animations:^{
                                         activeLayoutView.alpha = 1.0;
-                                        CGRect frame = activeLayoutView.frame;
-                                        frame.origin.x = viewWidth;
-                                        frame.origin.y = 0;
-                                        activeLayoutView.frame = frame;
+                                        [activeLayoutView setOrigin:CGPointMake(viewWidth, 0)];
                                     }
                                     completion:^(BOOL finished) {
                                         NSString *sortMethod = sortDictionary[@"method"][sort_method_index];
@@ -3633,10 +3611,7 @@
                                    options:UIViewAnimationOptionBeginFromCurrentState
                                 animations:^{
                                     activeLayoutView.alpha = 1.0;
-                                    CGRect frame = activeLayoutView.frame;
-                                    frame.origin.x = viewWidth;
-                                    frame.origin.y = 0;
-                                    activeLayoutView.frame = frame;
+                                    [activeLayoutView setOrigin:CGPointMake(viewWidth, 0)];
                                 }
                                 completion:^(BOOL finished) {
                                     sortAscDesc = !([sortAscDesc isEqualToString:@"ascending"] || sortAscDesc == nil) ? @"ascending" : @"descending";
@@ -4476,10 +4451,7 @@
         longTimeout.animationDuration = 5.0;
         longTimeout.animationRepeatCount = 0;
         longTimeout.center = activityIndicatorView.center;
-        CGRect frame = longTimeout.frame;
-        frame.origin.y = CGRectGetMaxY(activityIndicatorView.frame);
-        frame.origin.x -= MONKEY_OFFSET_X;
-        longTimeout.frame = frame;
+        [longTimeout setOrigin:CGPointMake(longTimeout.frame.origin.x - MONKEY_OFFSET_X, CGRectGetMaxY(activityIndicatorView.frame))];
         [longTimeout startAnimating];
         [self.view addSubview:longTimeout];
     }
@@ -5444,7 +5416,6 @@
     UIImage *imageOff = nil;
     UIImage *imageOn = nil;
     UIImage *img = nil;
-    CGRect frame;
     NSInteger count = buttons.count;
     // If >6 buttons are required, only use 4 normal buttons and keep 5th for "more items"
     if (count > MAX_NORMAL_BUTTONS + 1) {
@@ -5476,9 +5447,7 @@
         case 0:
             // no button, no toolbar
             button1.hidden = button2.hidden = button3.hidden = button4.hidden = button5.hidden = YES;
-            frame = dataList.frame;
-            frame.size.height = self.view.bounds.size.height;
-            dataList.frame = frame;
+            [dataList setHeight:self.view.bounds.size.height];
             break;
         case 1:
             button2.hidden = button3.hidden = button4.hidden = button5.hidden = YES;
@@ -5840,9 +5809,7 @@
     self.edgesForExtendedLayout = UIRectEdgeNone;
     dataList.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     
-    CGRect frame = dataList.frame;
-    frame.size.height = self.view.bounds.size.height;
-    dataList.frame = frame;
+    [dataList setHeight:self.view.bounds.size.height];
     buttonsViewBgToolbar.hidden = NO;
     
     __weak DetailViewController *weakSelf = self;
@@ -5911,7 +5878,7 @@
     bottomPadding = [Utilities getBottomPadding];
     if (IS_IPHONE) {
         if (bottomPadding > 0) {
-            frame = buttonsView.frame;
+            CGRect frame = buttonsView.frame;
             frame.size.height += bottomPadding;
             frame.origin.y -= bottomPadding;
             buttonsView.frame = frame;
@@ -5928,9 +5895,7 @@
     }
     
     // As default both list and grid views animate from right to left.
-    frame = dataList.frame;
-    frame.origin.x = viewWidth;
-    dataList.frame = frame;
+    [dataList setX:viewWidth];
     
     recentlyAddedView = [parameters[@"collectionViewRecentlyAdded"] boolValue];
     enableCollectionView = [self collectionViewIsEnabled];
@@ -5960,10 +5925,7 @@
     // to apply this change only after the library view has been initialized, as this
     // uses the list view frame to set its own frame.
     if (menuItem.type == TypeCustomButtonEntry && IS_IPHONE) {
-        frame = dataList.frame;
-        frame.origin.x = 0;
-        frame.origin.y = UIScreen.mainScreen.bounds.size.height;
-        dataList.frame = frame;
+        [dataList setOrigin:CGPointMake(0, UIScreen.mainScreen.bounds.size.height)];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -6160,9 +6122,7 @@
                               delay:0.0
                             options:UIViewAnimationOptionCurveEaseIn
                          animations:^{
-                             CGRect frame = activeLayoutView.frame;
-                             frame.origin.x = viewWidth;
-                             activeLayoutView.frame = frame;
+                             [activeLayoutView setX:viewWidth];
                          }
                          completion:^(BOOL finished) {
                              activeLayoutView.contentOffset = CGPointMake(0, iOSYDelta);

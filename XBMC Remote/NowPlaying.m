@@ -2485,9 +2485,7 @@
     playlistToolbarView.frame = frame;
     [self buildIpadPlaylistToolbar];
     
-    frame = toolbarBackground.frame;
-    frame.size.width = viewSize.width;
-    toolbarBackground.frame = frame;
+    [toolbarBackground setWidth:viewSize.width];
     
     backgroundImageView.frame = nowPlayingView.frame;
     playlistActionView.alpha = playlistView.alpha = isFullscreen ? 0 : 1;
@@ -2559,9 +2557,7 @@
 }
 
 - (void)setIphoneInterface {
-    CGRect frame = playlistActionView.frame;
-    frame.origin.y = CGRectGetMinY(playlistToolbarView.frame) - CGRectGetHeight(playlistActionView.frame);
-    playlistActionView.frame = frame;
+    [playlistActionView setY:CGRectGetMinY(playlistToolbarView.frame) - CGRectGetHeight(playlistActionView.frame)];
     playlistActionView.alpha = 0.0;
 }
 
@@ -2571,9 +2567,7 @@
     nowPlayingView.hidden = NO;
     playlistView.hidden = NO;
     
-    CGRect frame = playlistActionView.frame;
-    frame.origin.y = CGRectGetHeight(playlistTableView.frame) - CGRectGetHeight(playlistActionView.frame);
-    playlistActionView.frame = frame;
+    [playlistActionView setY:CGRectGetHeight(playlistTableView.frame) - CGRectGetHeight(playlistActionView.frame)];
     playlistActionView.alpha = 1.0;
     
     // Prepare iPad fullscreen toggle button
@@ -2872,18 +2866,10 @@
     [self setToolbar];
 
     if (bottomPadding > 0) {
-        CGRect frame = playlistToolbarView.frame;
-        frame.origin.y -= bottomPadding;
-        playlistToolbarView.frame = frame;
-        
-        frame = nowPlayingView.frame;
-        frame.size.height -= bottomPadding;
-        nowPlayingView.frame = frame;
-        
-        frame = playlistTableView.frame;
-        frame.size.height -= bottomPadding;
-        playlistView.frame = frame;
-        playlistTableView.frame = frame;
+        [playlistToolbarView offsetY:-bottomPadding];
+        [nowPlayingView setHeight:CGRectGetHeight(nowPlayingView.frame) - bottomPadding];
+        [playlistTableView setHeight:CGRectGetHeight(playlistTableView.frame) - bottomPadding];
+        playlistView.frame = playlistTableView.frame;
     }
     playlistTableView.contentInset = UIEdgeInsetsMake(0, 0, CGRectGetHeight(playlistActionView.frame), 0);
     self.edgesForExtendedLayout = UIRectEdgeNone;
