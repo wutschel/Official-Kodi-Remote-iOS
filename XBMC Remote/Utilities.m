@@ -1185,16 +1185,6 @@
     }
 }
 
-+ (void)imageView:(UIImageView*)view AnimDuration:(NSTimeInterval)seconds Image:(UIImage*)image {
-    [UIView transitionWithView:view
-                      duration:seconds
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{
-        view.image = image;
-                    }
-                    completion:nil];
-}
-
 + (float)getPercentElapsed:(NSDate*)startDate EndDate:(NSDate*)endDate {
     float total_seconds = [endDate timeIntervalSince1970] - [startDate timeIntervalSince1970];
     float elapsed_seconds = [[NSDate date] timeIntervalSince1970] - [startDate timeIntervalSince1970];
@@ -1495,6 +1485,22 @@
         self.alpha = alpha;
     }
                      completion:nil];
+}
+
+@end
+
+#pragma mark - UIImageView extensions
+
+@implementation UIImageView (Extensions)
+
+- (void)animateImage:(UIImage*)image duration:(NSTimeInterval)seconds {
+    [UIView transitionWithView:self
+                      duration:seconds
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+        self.image = image;
+    }
+                    completion:nil];
 }
 
 @end
