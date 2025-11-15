@@ -1185,16 +1185,6 @@
     }
 }
 
-+ (void)alphaView:(UIView*)view AnimDuration:(NSTimeInterval)seconds Alpha:(CGFloat)alphavalue {
-    [UIView animateWithDuration:seconds
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-        view.alpha = alphavalue;
-                     }
-                     completion:nil];
-}
-
 + (void)imageView:(UIImageView*)view AnimDuration:(NSTimeInterval)seconds Image:(UIImage*)image {
     [UIView transitionWithView:view
                       duration:seconds
@@ -1493,6 +1483,16 @@
                         options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
         [self setOrigin:origin];
+    }
+                     completion:nil];
+}
+
+- (void)animateAlpha:(CGFloat)alpha duration:(NSTimeInterval)seconds {
+    [UIView animateWithDuration:seconds
+                          delay:0.0
+                        options:UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+        self.alpha = alpha;
     }
                      completion:nil];
 }
