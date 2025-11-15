@@ -1243,7 +1243,7 @@
         [PartyModeButton animateX:-PartyModeButton.frame.size.width alpha:0.0 duration:0.3];
     }
     editTableButton.hidden = currentPlaylistID == PLAYERID_PICTURES;
-    [Utilities alphaView:noFoundLabel AnimDuration:0.2 Alpha:0.0];
+    [noFoundLabel animateAlpha:0.0 duration:0.2];
     [[Utilities getJsonRPC] callMethod:@"Playlist.GetItems"
                         withParameters:@{@"properties": @[@"thumbnail",
                                                           @"duration",
@@ -1267,12 +1267,12 @@
                    if ([methodResult isKindOfClass:[NSDictionary class]]) {
                        NSArray *playlistItems = methodResult[@"items"];
                        if (playlistItems.count == 0) {
-                           [Utilities alphaView:noFoundLabel AnimDuration:0.2 Alpha:1.0];
+                           [noFoundLabel animateAlpha:1.0 duration:0.2];
                            editTableButton.enabled = NO;
                            editTableButton.selected = NO;
                        }
                        else {
-                           [Utilities alphaView:noFoundLabel AnimDuration:0.2 Alpha:0.0];
+                           [noFoundLabel animateAlpha:0.0 duration:0.2];
                            editTableButton.enabled = YES;
                        }
                        NSString *serverURL = [Utilities getImageServerURL];
@@ -1355,7 +1355,7 @@
 
 - (void)showPlaylistTableAnimated:(BOOL)animated {
     if (playlistData.count == 0) {
-        [Utilities alphaView:noFoundLabel AnimDuration:0.2 Alpha:1.0];
+        [noFoundLabel animateAlpha:1.0 duration:0.2];
         [playlistTableView reloadData];
     }
     else {
@@ -1957,12 +1957,12 @@
 
 - (IBAction)stopUpdateProgressBar:(id)sender {
     updateProgressBar = NO;
-    [Utilities alphaView:scrabbingView AnimDuration:0.3 Alpha:1.0];
+    [scrabbingView animateAlpha:1.0 duration:0.3];
 }
 
 - (IBAction)startUpdateProgressBar:(id)sender {
     [self SimpleAction:@"Player.Seek" params:[Utilities buildPlayerSeekPercentageParams:currentPlayerID percentage:ProgressSlider.value] reloadPlaylist:NO startProgressBar:YES];
-    [Utilities alphaView:scrabbingView AnimDuration:0.3 Alpha:0.0];
+    [scrabbingView animateAlpha:0.0 duration:0.3];
 }
 
 - (IBAction)updateCurrentTime:(id)sender {
