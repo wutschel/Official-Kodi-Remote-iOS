@@ -1185,13 +1185,6 @@
     }
 }
 
-+ (void)SetView:(UIView*)view Alpha:(CGFloat)alphavalue XPos:(int)X {
-    view.alpha = alphavalue;
-    CGRect frame = view.frame;
-    frame.origin.x = X;
-    view.frame = frame;
-}
-
 + (void)AnimView:(UIView*)view AnimDuration:(NSTimeInterval)seconds Alpha:(CGFloat)alphavalue XPos:(int)X {
     [UIView animateWithDuration:seconds
                           delay:0.0
@@ -1501,6 +1494,13 @@
     CGRect frame = self.frame;
     frame.origin.y += offset;
     self.frame = frame;
+}
+
+- (void)setX:(CGFloat)x alpha:(CGFloat)alpha {
+    CGRect frame = self.frame;
+    frame.origin.x = x;
+    self.frame = frame;
+    self.alpha = alpha;
 }
 
 @end

@@ -1278,7 +1278,7 @@
     [self setButtonViewContent:chosenTab];
     [self checkDiskCache];
     
-    [Utilities SetView:activeLayoutView Alpha:1.0 XPos:viewWidth];
+    [activeLayoutView setX:viewWidth alpha:1.0];
     
     enableCollectionView = newEnableCollectionView;
     recentlyAddedView = [parameters[@"collectionViewRecentlyAdded"] boolValue];
@@ -3787,10 +3787,10 @@
             [self setCellLayoutParameters];
             if (forceCollection) {
                 forceCollection = NO;
-                [Utilities SetView:activeLayoutView Alpha:0.0 XPos:viewWidth];
+                [activeLayoutView setX:viewWidth alpha:0.0];
                 enableCollectionView = NO;
                 [self configureLibraryView];
-                [Utilities SetView:activeLayoutView Alpha:0.0 XPos:0];
+                [activeLayoutView setX:0 alpha:0.0];
             }
             [self setFlowLayoutParams];
             [collectionView.collectionViewLayout invalidateLayout];
@@ -3832,10 +3832,10 @@
             moreItemsViewController.view.hidden = YES;
             if (!enableCollectionView) {
                 forceCollection = YES;
-                [Utilities SetView:activeLayoutView Alpha:0.0 XPos:viewWidth];
+                [activeLayoutView setX:viewWidth alpha:0.0];
                 enableCollectionView = YES;
                 [self configureLibraryView];
-                [Utilities SetView:activeLayoutView Alpha:0.0 XPos:0];
+                [activeLayoutView setX:0 alpha:0.0];
             }
             else {
                 forceCollection = NO;
