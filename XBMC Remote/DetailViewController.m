@@ -4435,6 +4435,15 @@
             // Mark new user profile active
             AppDelegate.instance.currentProfile = profileName;
             [dataList reloadData];
+            
+            // Disconnect from server
+            [Utilities resetKodiServerParameters];
+            [Utilities saveLastServerIndex:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"XBMCServerHasChanged" object:nil];
+            
+            // Show pupup to inform user about need to manually reconnect
+            UIAlertController *alertCtrl = [Utilities createAlertOK:@"" message:LOCALIZED_STR(@"The user profile was changed. Please manually reconnect to the Kodi server.")];
+            [self presentViewController:alertCtrl animated:YES completion:nil];
         }
     }];
 }
