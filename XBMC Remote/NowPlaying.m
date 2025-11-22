@@ -280,7 +280,7 @@
 }
 
 - (UIImage*)imageWithBorderFromImage:(UIImage*)source {
-    return [Utilities applyRoundedEdgesImage:source];
+    return [source applyRoundedEdges];
 }
 
 - (void)updateRepeatButton:(NSString*)mode {
