@@ -257,10 +257,17 @@
         [serverListTableView setEditing:NO animated:YES];
         editTableButton.selected = NO;
         [serverListTableView reloadData];
+        
+        // Re-adde ECSlidingVC's panGesture
+        [self.navigationController.view addGestureRecognizer:self.slidingViewController.panGesture];
     }
     else {
         [serverListTableView setEditing:YES animated:YES];
         editTableButton.selected = YES;
+        
+        // Temporarily remove ECSlidingVC's panGesture to allow moving cells
+        // See https://stackoverflow.com/questions/9251735/cant-drag-uitableviewcell-from-its-current-position-when-reorder
+        [self.navigationController.view removeGestureRecognizer:self.slidingViewController.panGesture];
     }
 }
 
