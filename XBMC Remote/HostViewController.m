@@ -608,6 +608,8 @@
         textfield.layer.cornerRadius = 4;
         textfield.backgroundColor = [Utilities getSystemGray6];
         textfield.tintColor = [Utilities get1stLabelColor];
+        textfield.minimumFontSize = 10;
+        textfield.adjustsFontSizeToFitWidth = YES;
     }
     discoveredInstancesTableView.backgroundColor = [Utilities getSystemGray6];
     
