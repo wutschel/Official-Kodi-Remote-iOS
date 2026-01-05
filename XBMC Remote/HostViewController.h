@@ -25,7 +25,8 @@
     IBOutlet UITextField *mac_5_UI;
     IBOutlet UITextField *tcpPortUI;
     NSMutableArray *services;
-    BOOL searching;
+    BOOL discoveryIsSearching;
+    BOOL discoveryDidFail;
     NSNetServiceBrowser *netServiceBrowser;
     NSNetService *remoteService;
     NSTimer *discoveryTimeoutTimer;
