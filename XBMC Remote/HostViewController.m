@@ -200,7 +200,6 @@
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser*)browser {
     discoveryIsSearching = YES;
-    [self updateUI];
 }
 
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser*)browser {
