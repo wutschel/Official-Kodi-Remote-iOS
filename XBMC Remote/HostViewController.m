@@ -605,7 +605,7 @@
     for (UITextField *textfield in [self getAllEntryMaskLabels]) {
         textfield.layer.borderColor = UIColor.lightGrayColor.CGColor;
         textfield.layer.borderWidth = 1.0 / UIScreen.mainScreen.scale;
-        textfield.borderStyle = UITextBorderStyleRoundedRect;
+        textfield.layer.cornerRadius = 4;
         textfield.backgroundColor = [Utilities getSystemGray6];
         textfield.tintColor = [Utilities get1stLabelColor];
     }
