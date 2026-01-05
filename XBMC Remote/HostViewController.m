@@ -583,6 +583,12 @@
     howtoLabel.text = LOCALIZED_STR(@"How-to activate the remote app in Kodi");
     howtoLaterLabel.text = LOCALIZED_STR(@"Settings > Services > Control:\n1. Web Server > Allow remote control via HTTP\n2. Application Control > Allow remote control from applications on other systems");
     
+    descriptionLabel.minimumScaleFactor = FONT_SCALING_MIN;
+    hostLabel.minimumScaleFactor = FONT_SCALING_MIN;
+    macLabel.minimumScaleFactor = FONT_SCALING_MIN;
+    userLabel.minimumScaleFactor = FONT_SCALING_MIN;
+    preferenceLabel.minimumScaleFactor = FONT_SCALING_MIN;
+    
     [saveButton setTitle:LOCALIZED_STR(@"Save") forState:UIControlStateNormal];
     saveButton.layer.cornerRadius = BUTTON_RADIUS;
     saveButton.backgroundColor = BUTTON_COLOR;
