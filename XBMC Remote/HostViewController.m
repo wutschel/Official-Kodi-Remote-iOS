@@ -199,17 +199,16 @@
 # pragma mark - NSNetServiceBrowserDelegate Methods
 
 - (void)netServiceBrowserWillSearch:(NSNetServiceBrowser*)browser {
-    searching = YES;
-    [self updateUI];
+    discoveryIsSearching = YES;
 }
 
 - (void)netServiceBrowserDidStopSearch:(NSNetServiceBrowser*)browser {
-    searching = NO;
+    discoveryIsSearching = NO;
     [self updateUI];
 }
 
 - (void)netServiceBrowser:(NSNetServiceBrowser*)browser didNotSearch:(NSDictionary*)errorDict {
-    searching = NO;
+    discoveryIsSearching = NO;
     [self handleError:errorDict[NSNetServicesErrorCode]];
     [activityIndicatorView stopAnimating];
     startDiscover.enabled = YES;
@@ -224,7 +223,7 @@
     if ([type containsString:SERVICE_TYPE_HTTP]) {
         [services addObject:aNetService];
         if (!moreComing) {
-            [self stopDiscovery];
+            [self stopDiscover];
         }
     }
     else if ([name isEqualToString:descriptionUI.text]) {
@@ -250,20 +249,22 @@
 }
 
 - (void)updateUI {
-    if (!searching) {
-        NSInteger j = services.count;
-        if (j == 1) {
+    if (discoveryIsSearching || (discoveryDidFail && services.count)) {
+        return;
+    }
+    switch (services.count) {
+        case 0:
+            [Utilities AnimView:noInstances AnimDuration:0.3 Alpha:1.0 XPos:0];
+            break;
+            
+        case 1:
             [self resolveIPAddress:services[0]];
-        }
-        else {
-            if (j == 0) {
-                [Utilities AnimView:noInstances AnimDuration:0.3 Alpha:1.0 XPos:0];
-            }
-            else {
-                [discoveredInstancesTableView reloadData];
-                [Utilities AnimView:discoveredInstancesView AnimDuration:0.3 Alpha:1.0 XPos:0];
-            }
-        }
+            break;
+            
+        default:
+            [discoveredInstancesTableView reloadData];
+            [Utilities AnimView:discoveredInstancesView AnimDuration:0.3 Alpha:1.0 XPos:0];
+            break;
     }
 }
 
@@ -444,7 +445,13 @@
     [self fillServerDetailsForSegment:segmentServerType.selectedSegmentIndex];
 }
 
-- (void)stopDiscovery {
+- (void)handleDiscoverTimeout {
+    NSLog(@"Discovery timed out.");
+    discoveryDidFail = YES;
+    [self stopDiscover];
+}
+
+- (void)stopDiscover {
     [discoveryTimeoutTimer invalidate];
     [netServiceBrowser stop];
     [activityIndicatorView stopAnimating];
@@ -460,18 +467,20 @@
     [Utilities AnimView:noInstances AnimDuration:0.3 Alpha:0.0 XPos:self.view.frame.size.width];
     [Utilities AnimView:discoveredInstancesView AnimDuration:0.3 Alpha:1.0 XPos:self.view.frame.size.width];
 
-    searching = NO;
+    discoveryIsSearching = NO;
     netServiceBrowser.delegate = self;
     [netServiceBrowser searchForServicesOfType:SERVICE_TYPE_HTTP inDomain:DOMAIN_NAME];
     [self startDiscoveryTimeoutTimer];
 }
 
 - (void)startDiscoveryTimeoutTimer {
+    [discoveryTimeoutTimer invalidate];
     discoveryTimeoutTimer = [NSTimer scheduledTimerWithTimeInterval:DISCOVER_TIMEOUT
                                                              target:self
-                                                           selector:@selector(stopDiscovery)
+                                                           selector:@selector(handleDiscoverTimeout)
                                                            userInfo:nil
                                                             repeats:NO];
+    discoveryDidFail = NO;
 }
 
 #pragma mark - Segment control
