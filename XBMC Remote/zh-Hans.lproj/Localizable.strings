@@ -1,6 +1,6 @@
 "Music" = "音乐";
 "Movies" = "电影";
-"TV Shows" = "剧集";
+"TV Shows" = "电视剧";
 "Pictures" = "图片";
 "Now Playing" = "当前播放";
 "Remote Control" = "遥控器";
@@ -54,7 +54,7 @@
 "Album Details" = "专辑详情";
 "Movie Details" = "电影详情";
 "Episode Details" = "集详情";
-"TV Show Details" = "剧集详情";
+"TV Show Details" = "电视剧详情";
 "Music Video Details" = "音乐电视详情";
 "Details" = "详情";
 "Play Trailer" = "播放预告片";
@@ -91,7 +91,7 @@
 "EPISODES" = "集";
 "GENRE" = "类型";
 "STUDIO" = "制片";
-"TV SHOW" = "剧集";
+"TV SHOW" = "电视剧";
 "DIRECTOR" = "导演";
 "WRITER" = "编剧";
 "FIRST AIRED" = "首播";
