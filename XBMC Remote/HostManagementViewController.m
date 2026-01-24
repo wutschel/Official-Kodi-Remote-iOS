@@ -251,6 +251,14 @@
 	if (editingStyle == UITableViewCellEditingStyleDelete) {
         [AppDelegate.instance.arrayServerList removeObjectAtIndex:indexPath.row];
         [AppDelegate.instance saveServerList];
+        if (indexPath.row < [tableView numberOfRowsInSection:indexPath.section]) {
+            [tableView performBatchUpdates:^{
+                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
+            } completion:nil];
+        }
+        
+        // Be aware! Sending "XBMCServerHasChanged" results in calling reloadData. Therefore ensure this is not called
+        // between updating arrayServerList and changing tableView to avoid a crash due to inconsistent amount of rows.
         NSIndexPath *selectedPath = storeServerSelection;
         if (selectedPath) {
             if (indexPath.row < selectedPath.row) {
@@ -265,11 +273,6 @@
                 [Utilities saveLastServerIndex:nil];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"XBMCServerHasChanged" object:nil];
             }
-        }
-        if (indexPath.row < [tableView numberOfRowsInSection:indexPath.section]) {
-            [tableView performBatchUpdates:^{
-                [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationRight];
-            } completion:nil];
         }
         // Are there still editable entries?
         editTableButton.selected = editTableButton.enabled = AppDelegate.instance.arrayServerList.count > 0;
