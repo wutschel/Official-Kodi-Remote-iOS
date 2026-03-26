@@ -271,7 +271,7 @@
         // Are there still editable entries?
         if (AppDelegate.instance.arrayServerList.count == 0) {
             editTableButton.selected = editTableButton.enabled = NO;
-            [Utilities alphaView:noFoundLabel AnimDuration:0.2 Alpha:1.0];
+            [noFoundLabel animateAlpha:1.0 duration:0.2];
         }
     }
 }
