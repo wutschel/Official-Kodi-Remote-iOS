@@ -269,7 +269,7 @@
 - (void)changeLeftMenu:(CGFloat)maxMenuItems {
     CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxMenuItems) * PAD_MENU_HEIGHT;
     
-    // Keep seperator above playlist toolbar
+    // Keep separator above playlist toolbar
     if (tableHeight > CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) {
         tableHeight -= PAD_MENU_HEIGHT;
     }
