@@ -206,8 +206,7 @@
     if ([leftMenuView pointInside:locationPoint withEvent:event]) {
         // Change the left menu layout
         CGFloat maxMenuItems = MIN(locationPoint.y, CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) / PAD_MENU_HEIGHT;
-        CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxMenuItems) * PAD_MENU_HEIGHT;
-        [self changeLeftMenu:tableHeight];
+        [self changeLeftMenu:maxMenuItems];
     }
 }
 
@@ -222,8 +221,7 @@
         
         // Finalize the left menu layout
         NSInteger maxMenuItems = round(CGRectGetMinY(playlistHeader.frame) / PAD_MENU_HEIGHT);
-        CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxMenuItems) * PAD_MENU_HEIGHT;
-        [self changeLeftMenu:tableHeight];
+        [self changeLeftMenu:maxMenuItems];
         
         // Save configuration
         maxVisibleMenuItems = maxMenuItems;
@@ -265,7 +263,9 @@
     self.nowPlayingController.view.frame = frame;
 }
 
-- (void)changeLeftMenu:(CGFloat)tableHeight {
+- (void)changeLeftMenu:(CGFloat)maxMenuItems {
+    CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxMenuItems) * PAD_MENU_HEIGHT;
+    
     // Keep seperator above playlist toolbar
     if (tableHeight > CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) {
         tableHeight -= PAD_MENU_HEIGHT;
@@ -527,9 +527,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    // Finalize the left menu layout
-    CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxVisibleMenuItems) * PAD_MENU_HEIGHT;
-    [self changeLeftMenu:tableHeight];
+    [self changeLeftMenu:maxVisibleMenuItems];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -645,9 +643,7 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         [menuViewController viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
         [stackScrollViewController viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-        // Finalize the left menu layout
-        CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxVisibleMenuItems) * PAD_MENU_HEIGHT;
-        [self changeLeftMenu:tableHeight];
+        [self changeLeftMenu:maxVisibleMenuItems];
     }
                                  completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         // restore state
