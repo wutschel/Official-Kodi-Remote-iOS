@@ -277,7 +277,7 @@
     // Main menu
     [menuViewController setMenuHeight:tableHeight];
     
-    // Seperator
+    // Separator
     CGRect frame = playlistHeader.frame;
     frame.origin.y = tableHeight;
     playlistHeader.frame = frame;
@@ -302,7 +302,7 @@
     menuViewController.view.backgroundColor = UIColor.clearColor;
     [leftMenuView addSubview:menuViewController.view];
     
-    // Seperator
+    // Separator
     playlistHeader = [[UILabel alloc] initWithFrame:CGRectMake(0, tableHeight, PAD_MENU_TABLE_WIDTH, PLAYLIST_HEADER_HEIGHT)];
     playlistHeader.backgroundColor = UIColor.clearColor;
     playlistHeader.textColor = UIColor.lightGrayColor;
