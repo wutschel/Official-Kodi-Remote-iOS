@@ -205,7 +205,7 @@
     CGPoint locationPoint = [touch locationInView:leftMenuView];
     if ([leftMenuView pointInside:locationPoint withEvent:event]) {
         // Change the left menu layout
-        CGFloat maxMenuItems = locationPoint.y / PAD_MENU_HEIGHT;
+        CGFloat maxMenuItems = MIN(locationPoint.y, CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) / PAD_MENU_HEIGHT;
         CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxMenuItems) * PAD_MENU_HEIGHT;
         [self changeLeftMenu:tableHeight];
     }
@@ -226,6 +226,7 @@
         [self changeLeftMenu:tableHeight];
         
         // Save configuration
+        maxVisibleMenuItems = maxMenuItems;
         [self saveLeftMenuSplit:maxMenuItems];
         didTouchLeftMenu = NO;
     }
@@ -265,6 +266,11 @@
 }
 
 - (void)changeLeftMenu:(CGFloat)tableHeight {
+    // Keep seperator above playlist toolbar
+    if (tableHeight > CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) {
+        tableHeight -= PAD_MENU_HEIGHT;
+    }
+    
     // Main menu
     [menuViewController setMenuHeight:tableHeight];
     
@@ -322,8 +328,8 @@
     AppDelegate.instance.obj = [GlobalData getInstance];
     
     // Create the left menu
-    NSInteger maxMenuItems = [self loadLeftMenuSplit];
-    [self createLeftMenu:maxMenuItems];
+    maxVisibleMenuItems = [self loadLeftMenuSplit];
+    [self createLeftMenu:maxVisibleMenuItems];
     
     rootView = [[UIViewExt alloc] initWithFrame:CGRectMake(0, deltaY, self.view.frame.size.width, self.view.frame.size.height - deltaY)];
 	rootView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -519,6 +525,13 @@
                                                object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    // Finalize the left menu layout
+    CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxVisibleMenuItems) * PAD_MENU_HEIGHT;
+    [self changeLeftMenu:tableHeight];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     BOOL showSetup = AppDelegate.instance.obj.serverIP.length == 0;
@@ -632,6 +645,9 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         [menuViewController viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
         [stackScrollViewController viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+        // Finalize the left menu layout
+        CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxVisibleMenuItems) * PAD_MENU_HEIGHT;
+        [self changeLeftMenu:tableHeight];
     }
                                  completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         // restore state
