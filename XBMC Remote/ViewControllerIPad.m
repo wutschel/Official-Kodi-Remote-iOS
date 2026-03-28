@@ -205,8 +205,8 @@
     CGPoint locationPoint = [touch locationInView:leftMenuView];
     if ([leftMenuView pointInside:locationPoint withEvent:event]) {
         // Change the left menu layout
-        CGFloat maxMenuItems = MIN(locationPoint.y, CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) / PAD_MENU_HEIGHT;
-        [self changeLeftMenu:maxMenuItems];
+        CGFloat separatorPosition = MIN(locationPoint.y, CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT);
+        [self changeLeftMenu:separatorPosition];
     }
 }
 
@@ -224,7 +224,7 @@
         if (maxMenuItems * PAD_MENU_HEIGHT > CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) {
             maxMenuItems -= 1;
         }
-        [self changeLeftMenu:maxMenuItems];
+        [self changeLeftMenu:maxMenuItems * PAD_MENU_HEIGHT];
         
         // Save configuration
         maxVisibleMenuItems = maxMenuItems;
@@ -266,8 +266,8 @@
     self.nowPlayingController.view.frame = frame;
 }
 
-- (void)changeLeftMenu:(CGFloat)maxMenuItems {
-    CGFloat tableHeight = MIN([(NSMutableArray*)mainMenu count], maxMenuItems) * PAD_MENU_HEIGHT;
+- (void)changeLeftMenu:(CGFloat)tableHeight {
+    tableHeight = MIN([(NSMutableArray*)mainMenu count] * PAD_MENU_HEIGHT, tableHeight);
     
     // Keep separator above playlist toolbar
     if (tableHeight > CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) {
@@ -530,7 +530,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self changeLeftMenu:maxVisibleMenuItems];
+    [self changeLeftMenu:maxVisibleMenuItems * PAD_MENU_HEIGHT];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -646,7 +646,7 @@
     [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         [menuViewController viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
         [stackScrollViewController viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-        [self changeLeftMenu:maxVisibleMenuItems];
+        [self changeLeftMenu:maxVisibleMenuItems * PAD_MENU_HEIGHT];
     }
                                  completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
         // restore state
