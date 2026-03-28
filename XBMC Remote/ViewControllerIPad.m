@@ -220,7 +220,7 @@
         playlistHeader.textColor = UIColor.lightGrayColor;
         
         // Finalize the left menu layout. Snap back to last menu item with separator above playlist toolbar
-        NSInteger maxMenuItems = round(CGRectGetMinY(playlistHeader.frame) / PAD_MENU_HEIGHT);
+        NSUInteger maxMenuItems = round(CGRectGetMinY(playlistHeader.frame) / PAD_MENU_HEIGHT);
         if (maxMenuItems * PAD_MENU_HEIGHT > CGRectGetHeight(leftMenuView.frame) - PLAYLIST_HEADER_HEIGHT) {
             maxMenuItems -= 1;
         }
