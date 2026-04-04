@@ -1239,9 +1239,7 @@
 }
 
 - (void)setX:(CGFloat)x alpha:(CGFloat)alpha {
-    CGRect frame = self.frame;
-    frame.origin.x = x;
-    self.frame = frame;
+    [self setX:x];
     self.alpha = alpha;
 }
 
