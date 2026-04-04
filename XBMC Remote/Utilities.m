@@ -1194,19 +1194,13 @@
 
 @end
 
-#pragma mark - UILabel extensions
-
-@implementation UILabel (Extensions)
-
-- (CGSize)getSize {
-    return [self sizeThatFits:CGSizeMake(self.frame.size.width, CGFLOAT_MAX)];
-}
-
-@end
-
 #pragma mark - UIView extensions
 
 @implementation UIView (Extensions)
+
+- (CGSize)getFittingSize {
+    return [self sizeThatFits:CGSizeMake(self.frame.size.width, CGFLOAT_MAX)];
+}
 
 - (void)setX:(CGFloat)x {
     CGRect frame = self.frame;

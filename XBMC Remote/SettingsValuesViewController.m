@@ -675,7 +675,7 @@
 }
 
 - (void)setAutomaticLabelHeight:(UILabel*)label {
-    [label setHeight:[label getSize].height];
+    [label setHeight:[label getFittingSize].height];
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
