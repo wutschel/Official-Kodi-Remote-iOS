@@ -1243,34 +1243,34 @@
     self.alpha = alpha;
 }
 
-- (void)animateX:(CGFloat)x alpha:(CGFloat)alpha duration:(NSTimeInterval)seconds {
-    [UIView animateWithDuration:seconds
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
-        [self setX:x alpha:alpha];
+- (void)defaultAnimate:(void(^)(void))animations duration:(NSTimeInterval)seconds {
+    if (animations) {
+        [UIView animateWithDuration:seconds
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveEaseInOut
+                         animations:^{
+            animations();
+        }
+                         completion:nil];
     }
-                     completion:nil];
+}
+
+- (void)animateX:(CGFloat)x alpha:(CGFloat)alpha duration:(NSTimeInterval)seconds {
+    [self defaultAnimate:^{
+        [self setX:x alpha:alpha];
+    } duration:seconds];
 }
 
 - (void)animateOrigin:(CGPoint)origin duration:(NSTimeInterval)seconds {
-    [UIView animateWithDuration:seconds
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
+    [self defaultAnimate:^{
         [self setOrigin:origin];
-    }
-                     completion:nil];
+    } duration:seconds];
 }
 
 - (void)animateAlpha:(CGFloat)alpha duration:(NSTimeInterval)seconds {
-    [UIView animateWithDuration:seconds
-                          delay:0.0
-                        options:UIViewAnimationOptionCurveEaseInOut
-                     animations:^{
+    [self defaultAnimate:^{
         self.alpha = alpha;
-    }
-                     completion:nil];
+    } duration:seconds];
 }
 
 - (void)setCornerRadiusForRoundedEdges {
