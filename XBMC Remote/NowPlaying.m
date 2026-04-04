@@ -2865,7 +2865,7 @@
     [self setToolbar];
 
     if (bottomPadding > 0) {
-        [playlistToolbarView offsetY:-bottomPadding];
+        [playlistToolbarView offsetYBy:-bottomPadding];
         [nowPlayingView setHeight:CGRectGetHeight(nowPlayingView.frame) - bottomPadding];
         [playlistTableView setHeight:CGRectGetHeight(playlistTableView.frame) - bottomPadding];
         playlistView.frame = playlistTableView.frame;

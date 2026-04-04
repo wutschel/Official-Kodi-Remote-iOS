@@ -114,7 +114,7 @@ typedef NS_ENUM(NSInteger, LogoBackgroundType) {
 - (void)setOrigin:(CGPoint)origin;
 - (void)setHeight:(CGFloat)height;
 - (void)setWidth:(CGFloat)width;
-- (void)offsetY:(CGFloat)offset;
+- (void)offsetYBy:(CGFloat)offset;
 - (void)setX:(CGFloat)x alpha:(CGFloat)alpha;
 - (void)animateX:(CGFloat)x alpha:(CGFloat)alpha duration:(NSTimeInterval)seconds;
 - (void)animateOrigin:(CGPoint)origin duration:(NSTimeInterval)seconds;

@@ -1232,7 +1232,7 @@
     self.frame = frame;
 }
 
-- (void)offsetY:(CGFloat)offset {
+- (void)offsetYBy:(CGFloat)offset {
     CGRect frame = self.frame;
     frame.origin.y += offset;
     self.frame = frame;

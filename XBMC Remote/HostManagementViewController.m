@@ -499,9 +499,9 @@
     frame.size.height += bottomPadding;
     bottomToolbarEffect.frame = frame;
     
-    [addHostButton offsetY:-bottomPadding];
-    [editTableButton offsetY:-bottomPadding];
-    [serverInfoButton offsetY:-bottomPadding];
+    [addHostButton offsetYBy:-bottomPadding];
+    [editTableButton offsetYBy:-bottomPadding];
+    [serverInfoButton offsetYBy:-bottomPadding];
     
     frame = serverListTableView.frame;
     frame.origin.y = frame.origin.y + deltaY;
@@ -565,8 +565,8 @@
         self.navigationController.navigationBar.tintColor = ICON_TINT_COLOR;
     }
     else {
-        [supportedVersionView offsetY:deltaY];
-        [connectingActivityIndicator offsetY:deltaY];
+        [supportedVersionView offsetYBy:deltaY];
+        [connectingActivityIndicator offsetYBy:deltaY];
         
         UIImage *image = [UIImage imageNamed:@"kodi_logo_wide"];
         UIButton *xbmcLogo = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, image.size.width, image.size.height)];

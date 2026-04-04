@@ -631,7 +631,7 @@
         bottomPadding = SERVERPOPUP_BOTTOMPADDING;
     }
     if (bottomPadding > 0) {
-        [tipView offsetY:-bottomPadding];
+        [tipView offsetYBy:-bottomPadding];
     }
     
     // We use white fonts for the segment control

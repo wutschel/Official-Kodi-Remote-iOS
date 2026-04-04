@@ -208,9 +208,9 @@
         }
         // Place the up and down arrows. Keep them invisible for now.
         CGFloat bottomPadding = [Utilities getBottomPadding];
-        [arrow_continue_down offsetY:-bottomPadding];
+        [arrow_continue_down offsetYBy:-bottomPadding];
         arrow_continue_down.alpha = 0;
-        [arrow_back_up offsetY:scrollView.contentInset.top];
+        [arrow_back_up offsetYBy:scrollView.contentInset.top];
         arrow_back_up.alpha = 0;
     }
 }
@@ -598,7 +598,7 @@
         frame.size.height += lineSpacing * 2;
         starsView.frame = frame;
         
-        [voteLabel offsetY:-lineSpacing];
+        [voteLabel offsetYBy:-lineSpacing];
     }
     else {
         thumbWidth = (int)(PHONE_TV_SHOWS_BANNER_WIDTH * transform);

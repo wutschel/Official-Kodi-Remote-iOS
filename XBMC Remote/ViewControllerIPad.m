@@ -459,11 +459,11 @@
 
     int bottomPadding = [Utilities getBottomPadding];
     if (bottomPadding > 0) {
-        [volumeSliderView offsetY:-bottomPadding];
-        [powerButton offsetY:-bottomPadding];
-        [settingsButton offsetY:-bottomPadding];
-        [xbmcInfo offsetY:-bottomPadding];
-        [xbmcLogo offsetY:-bottomPadding];
+        [volumeSliderView offsetYBy:-bottomPadding];
+        [powerButton offsetYBy:-bottomPadding];
+        [settingsButton offsetYBy:-bottomPadding];
+        [xbmcInfo offsetYBy:-bottomPadding];
+        [xbmcLogo offsetYBy:-bottomPadding];
     }
     
     messagesView = [[MessagesView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, DEFAULT_MSG_HEIGHT) deltaY:0 deltaX:0];
