@@ -1420,23 +1420,22 @@
 @implementation UIImage (Extensions)
 
 - (UIImage*)setCornerRadiusForRoundedEdges {
-    UIImage *image = self;
-    if (image.size.width == 0 || image.size.height == 0) {
-        return image;
+    if (self.size.width == 0 || self.size.height == 0) {
+        return self;
     }
     
-    CGRect imageRect = CGRectMake(0, 0, image.size.width, image.size.height);
-    UIGraphicsBeginImageContextWithOptions(image.size, NO, 0);
+    CGRect imageRect = CGRectMake(0, 0, self.size.width, self.size.height);
+    UIGraphicsBeginImageContextWithOptions(self.size, NO, 0);
 
     // Set radius for corners
-    CGFloat radius = GET_ROUNDED_EDGES_RADIUS(image.size);
+    CGFloat radius = GET_ROUNDED_EDGES_RADIUS(self.size);
     
     // Define our path, capitalizing on UIKit's corner rounding magic
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:imageRect cornerRadius:radius];
     [path addClip];
 
     // Draw the image into the implicit context
-    [image drawInRect:imageRect];
+    [self drawInRect:imageRect];
      
     // Get image and cleanup
     UIImage *roundedCornerImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -1445,13 +1444,12 @@
 }
 
 - (UIImage*)applyRoundedEdges {
-    UIImage *image = self;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     BOOL corner_preference = [userDefaults boolForKey:@"rounded_corner_preference"];
     if (corner_preference) {
-        image = [image setCornerRadiusForRoundedEdges];
+        return [self setCornerRadiusForRoundedEdges];
     }
-    return image;
+    return self;
 }
 
 - (UIColor*)averageColor {
@@ -1467,12 +1465,11 @@
 }
 
 - (UIImage*)colorizeWithColor:(UIColor*)color {
-    UIImage *image = self;
-    if (color == nil || image.size.width == 0 || image.size.height == 0) {
-        return image;
+    if (color == nil || self.size.width == 0 || self.size.height == 0) {
+        return self;
     }
-    CGRect contextRect = (CGRect) {.origin = CGPointZero, .size = image.size};
-    UIImage *newImage = [image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    CGRect contextRect = (CGRect) {.origin = CGPointZero, .size = self.size};
+    UIImage *newImage = [self imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     UIGraphicsBeginImageContextWithOptions(newImage.size, NO, newImage.scale);
     [color set];
     [newImage drawInRect:contextRect];
