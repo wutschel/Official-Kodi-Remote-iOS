@@ -1243,7 +1243,7 @@
     self.alpha = alpha;
 }
 
-- (void)defaultAnimate:(void(^)(void))animations duration:(NSTimeInterval)seconds {
+- (void)defaultAnimate:(nullable void(^)(void))animations duration:(NSTimeInterval)seconds {
     if (animations) {
         [UIView animateWithDuration:seconds
                               delay:0.0
