@@ -5883,7 +5883,7 @@
              * Only required for iOS26 and until UIDesignRequiresCompatibility is removed. Once this flag is
              * removed, the UIToolbar is anyway transparent and the extension into safe area is not relevant anymore.
              */
-            frame = buttonsViewBgToolbar.frame;
+            CGRect frame = buttonsViewBgToolbar.frame;
             frame.size.height += 0.00000001;
             buttonsViewBgToolbar.frame = frame;
         }
