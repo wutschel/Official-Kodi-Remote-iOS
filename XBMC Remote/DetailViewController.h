@@ -7,7 +7,7 @@
 //
 
 #import "DSJSONRPC.h"
-#import "jsonDataCell.h"
+#import "JsonDataCell.h"
 #import "ShowInfoViewController.h"
 #import "mainMenu.h"
 #import "MoreItemsViewController.h"
@@ -22,7 +22,7 @@
 
 @interface DetailViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UISearchControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UISearchResultsUpdating, SFSafariViewControllerDelegate> {
     IBOutlet UITableView *dataList;
-    IBOutlet jsonDataCell *jsonCell;
+    IBOutlet JsonDataCell *jsonCell;
     NSMutableArray *filteredListContent;
     NSMutableArray *storeRichResults;
     IBOutlet UIActivityIndicatorView *activityIndicatorView;
