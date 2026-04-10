@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "DetailViewController.h"
 #import "CustomNavigationController.h"
-#import "customButton.h"
+#import "CustomButton.h"
 #import "ViewControllerIPad.h"
 #import "StackScrollViewController.h"
 #import "Utilities.h"
@@ -190,7 +190,7 @@
 }
 
 - (void)deleteCustomButton:(NSUInteger)idx {
-    customButton *arrayButtons = [customButton new];
+    CustomButton *arrayButtons = [CustomButton new];
     [arrayButtons.buttons removeObjectAtIndex:idx];
     [arrayButtons saveData];
     if (arrayButtons.buttons.count == 0) {
@@ -202,7 +202,7 @@
 
 - (void)loadCustomButtons {
     // Create and load custom buttons
-    customButton *arrayButtons = [customButton new];
+    CustomButton *arrayButtons = [CustomButton new];
     if (arrayButtons.buttons.count == 0) {
         editTableButton.enabled = NO;
         [noFoundLabel animateAlpha:1.0 duration:0.2];
@@ -279,7 +279,7 @@
     [tableData removeObjectAtIndex:sourceIndexPath.row];
     [tableData insertObject:objectMove atIndex:destinationIndexPath.row];
     
-    customButton *arrayButtons = [customButton new];
+    CustomButton *arrayButtons = [CustomButton new];
     objectMove = arrayButtons.buttons[sourceIndexPath.row];
     [arrayButtons.buttons removeObjectAtIndex:sourceIndexPath.row];
     [arrayButtons.buttons insertObject:objectMove atIndex:destinationIndexPath.row];
@@ -311,7 +311,7 @@
     UIAlertAction *updateButton = [UIAlertAction actionWithTitle:LOCALIZED_STR(@"Update label") style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         NSString *newLabel = alertCtrl.textFields[0].text;
         
-        customButton *arrayButtons = [customButton new];
+        CustomButton *arrayButtons = [CustomButton new];
         if (indexPath.row >= tableData.count ||
             indexPath.row >= arrayButtons.buttons.count ||
             indexPath.row >= [menuTableView numberOfRowsInSection:0]) {

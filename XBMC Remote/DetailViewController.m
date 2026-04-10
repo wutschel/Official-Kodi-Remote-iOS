@@ -24,7 +24,7 @@
 #import "UIScrollView+SVPullToRefresh.h"
 #import "BroadcastProgressView.h"
 #import "SettingsValuesViewController.h"
-#import "customButton.h"
+#import "CustomButton.h"
 #import "VersionCheck.h"
 #import "SharingActivityItemSource.h"
 #import "RemoteController.h"
@@ -3619,7 +3619,7 @@
 }
 
 - (void)saveCustomButton:(NSDictionary*)button {
-    customButton *arrayButtons = [customButton new];
+    CustomButton *arrayButtons = [CustomButton new];
     [arrayButtons.buttons addObject:button];
     [arrayButtons saveData];
     [Utilities showMessage:LOCALIZED_STR(@"Button added") color:SUCCESS_MESSAGE_COLOR];
