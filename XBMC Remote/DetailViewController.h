@@ -9,7 +9,7 @@
 #import "DSJSONRPC.h"
 #import "JsonDataCell.h"
 #import "ShowInfoViewController.h"
-#import "mainMenu.h"
+#import "MainMenu.h"
 #import "MoreItemsViewController.h"
 #import "Utilities.h"
 #import "BDKCollectionIndexView.h"
@@ -123,7 +123,7 @@
 }
 
 - (id)initWithFrame:(CGRect)frame;
-- (id)initWithNibName:(NSString*)nibNameOrNil withItem:(mainMenu*)item withFrame:(CGRect)frame bundle:(NSBundle*)nibBundleOrNil;
+- (id)initWithNibName:(NSString*)nibNameOrNil withItem:(MainMenu*)item withFrame:(CGRect)frame bundle:(NSBundle*)nibBundleOrNil;
 
 @property (nonatomic, strong) NSMutableArray *filteredListContent;
 @property (strong, nonatomic) id detailItem;

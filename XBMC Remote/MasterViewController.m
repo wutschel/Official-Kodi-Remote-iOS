@@ -7,7 +7,7 @@
 //
 
 #import "MasterViewController.h"
-#import "mainMenu.h"
+#import "MainMenu.h"
 #import "DetailViewController.h"
 #import "NowPlaying.h"
 #import "RemoteController.h"
@@ -50,7 +50,7 @@
 }
 
 - (void)tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath {
-    mainMenu *menuItem = self.mainMenuTable[indexPath.row];
+    MainMenu *menuItem = self.mainMenuTable[indexPath.row];
     [Utilities setStyleOfMenuItemCell:cell active:AppDelegate.instance.serverOnLine menuType:menuItem.type];
 }
 
@@ -65,7 +65,7 @@
         backgroundView.backgroundColor = MAINMENU_SELECTED_COLOR;
         cell.selectedBackgroundView = backgroundView;
     }
-    mainMenu *item = self.mainMenuTable[indexPath.row];
+    MainMenu *item = self.mainMenuTable[indexPath.row];
     NSString *iconName = item.icon;
     UIImageView *icon = (UIImageView*)[cell viewWithTag:XIB_MAIN_MENU_CELL_ICON];
     UILabel *title = (UILabel*)[cell viewWithTag:XIB_MAIN_MENU_CELL_TITLE];
@@ -96,7 +96,7 @@
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    mainMenu *item = self.mainMenuTable[indexPath.row];
+    MainMenu *item = self.mainMenuTable[indexPath.row];
     if (item.family == FamilyAppSettings) {
         [self enterAppSettings];
         
