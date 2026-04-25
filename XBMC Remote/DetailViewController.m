@@ -433,6 +433,11 @@
     return [item[@"hastimer"] boolValue] || [item[@"isrecording"] boolValue];
 }
 
+- (void)stopPullToRefreshViewAnimation {
+    [activeLayoutView.pullToRefreshView stopAnimating];
+    activeLayoutView.userInteractionEnabled = YES;
+}
+
 - (void)enterSubmenuForItem:(id)item params:(NSDictionary*)parameters {
     mainMenu *menuItem = [self getMainMenu:item];
     int activeTab = [self getActiveTab:item];
@@ -1188,8 +1193,7 @@
     if (!activityIndicatorView.hidden) {
         return;
     }
-    [activeLayoutView setUserInteractionEnabled:YES];
-    [activeLayoutView.pullToRefreshView stopAnimating];
+    [self stopPullToRefreshViewAnimation];
     
     mainMenu *menuItem = self.detailItem;
     NSDictionary *methods = nil;
@@ -4508,7 +4512,7 @@
 
 - (void)startRetrieveDataWithRefresh:(BOOL)forceRefresh {
     if (forceRefresh) {
-        [activeLayoutView setUserInteractionEnabled:NO];
+        activeLayoutView.userInteractionEnabled = NO;
     }
     mainMenu *menuItem = self.detailItem;
     if (chosenTab >= menuItem.mainParameters.count) {
@@ -4563,9 +4567,7 @@
         [self.filteredListContent removeAllObjects];
         self.richResults = richData;
         
-        // Stop refresh animation
-        [activeLayoutView.pullToRefreshView stopAnimating];
-        [activeLayoutView setUserInteractionEnabled:YES];
+        [self stopPullToRefreshViewAnimation];
         
         // Save and display
         mainMenu *menuItem = self.detailItem;
@@ -4906,22 +4908,19 @@
 }
 
 - (void)saveAndShowResultsRefresh:(BOOL)forceRefresh params:(NSMutableDictionary*)mutableParameters {
+    if (forceRefresh) {
+        [self stopPullToRefreshViewAnimation];
+    }
     if (filterModeType == ViewModeWatched ||
         filterModeType == ViewModeUnwatched ||
         filterModeType == ViewModeListened ||
         filterModeType == ViewModeNotListened) {
         if (forceRefresh) {
-            [activeLayoutView.pullToRefreshView stopAnimating];
-            [activeLayoutView setUserInteractionEnabled:YES];
             [self saveData:mutableParameters];
         }
         [self changeViewMode:filterModeType forceRefresh:forceRefresh];
     }
     else {
-        if (forceRefresh) {
-            [activeLayoutView.pullToRefreshView stopAnimating];
-            [activeLayoutView setUserInteractionEnabled:YES];
-        }
         [self saveData:mutableParameters];
         [self indexAndDisplayData];
     }
@@ -4937,8 +4936,7 @@
 
 - (void)showNoResultsFound:(NSMutableArray*)resultStoreArray refresh:(BOOL)forceRefresh {
     if (forceRefresh) {
-        [activeLayoutView.pullToRefreshView stopAnimating];
-        [activeLayoutView setUserInteractionEnabled:YES];
+        [self stopPullToRefreshViewAnimation];
     }
     [resultStoreArray removeAllObjects];
     [self.sections removeAllObjects];
