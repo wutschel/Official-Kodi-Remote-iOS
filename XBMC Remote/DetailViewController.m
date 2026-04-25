@@ -5358,7 +5358,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [self disableScrollsToTopPropertyOnAllSubviewsOf:self.slidingViewController.view ?: self.view];
-    [activeLayoutView setScrollsToTop:YES];
+    activeLayoutView.scrollsToTop = YES;
     if (albumColor != nil) {
         [self setNavigationBarTint:[Utilities textTintColor:albumColor]];
     }
