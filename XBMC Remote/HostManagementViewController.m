@@ -200,10 +200,7 @@
 }
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath {
-    if (AppDelegate.instance.arrayServerList.count == 0) {
-        [self deselectRowAtIndexPath:indexPath];
-    }
-    else {
+    if (AppDelegate.instance.arrayServerList.count > 0) {
         NSIndexPath *selectedPath = storeServerSelection;
         if (selectedPath && selectedPath.row == indexPath.row) {
             [self deselectServer];
