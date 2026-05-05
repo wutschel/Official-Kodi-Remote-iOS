@@ -433,6 +433,11 @@
     return [item[@"hastimer"] boolValue] || [item[@"isrecording"] boolValue];
 }
 
+- (void)stopPullToRefreshViewAnimation {
+    [activeLayoutView.pullToRefreshView stopAnimating];
+    activeLayoutView.userInteractionEnabled = YES;
+}
+
 - (void)enterSubmenuForItem:(id)item params:(NSDictionary*)parameters {
     MainMenu *menuItem = [self getMainMenu:item];
     int activeTab = [self getActiveTab:item];
@@ -1188,8 +1193,7 @@
     if (!activityIndicatorView.hidden) {
         return;
     }
-    [activeLayoutView setUserInteractionEnabled:YES];
-    [activeLayoutView.pullToRefreshView stopAnimating];
+    [self stopPullToRefreshViewAnimation];
     
     MainMenu *menuItem = self.detailItem;
     NSDictionary *methods = nil;
@@ -4508,7 +4512,7 @@
 
 - (void)startRetrieveDataWithRefresh:(BOOL)forceRefresh {
     if (forceRefresh) {
-        [activeLayoutView setUserInteractionEnabled:NO];
+        activeLayoutView.userInteractionEnabled = NO;
     }
     MainMenu *menuItem = self.detailItem;
     if (chosenTab >= menuItem.mainParameters.count) {
@@ -4563,9 +4567,7 @@
         [self.filteredListContent removeAllObjects];
         self.richResults = richData;
         
-        // Stop refresh animation
-        [activeLayoutView.pullToRefreshView stopAnimating];
-        [activeLayoutView setUserInteractionEnabled:YES];
+        [self stopPullToRefreshViewAnimation];
         
         // Save and display
         MainMenu *menuItem = self.detailItem;
@@ -4872,7 +4874,7 @@
                  }
                  // Single Movie Sets are handled seperately
                  if (ignoreSingleMovieSets) {
-                     if (!itemDict){
+                     if (!itemDict) {
                          [self showNoResultsFound:resultStoreArray refresh:forceRefresh];
                      }
                      return;
@@ -4906,22 +4908,19 @@
 }
 
 - (void)saveAndShowResultsRefresh:(BOOL)forceRefresh params:(NSMutableDictionary*)mutableParameters {
+    if (forceRefresh) {
+        [self stopPullToRefreshViewAnimation];
+    }
     if (filterModeType == ViewModeWatched ||
         filterModeType == ViewModeUnwatched ||
         filterModeType == ViewModeListened ||
         filterModeType == ViewModeNotListened) {
         if (forceRefresh) {
-            [activeLayoutView.pullToRefreshView stopAnimating];
-            [activeLayoutView setUserInteractionEnabled:YES];
             [self saveData:mutableParameters];
         }
         [self changeViewMode:filterModeType forceRefresh:forceRefresh];
     }
     else {
-        if (forceRefresh) {
-            [activeLayoutView.pullToRefreshView stopAnimating];
-            [activeLayoutView setUserInteractionEnabled:YES];
-        }
         [self saveData:mutableParameters];
         [self indexAndDisplayData];
     }
@@ -4937,8 +4936,7 @@
 
 - (void)showNoResultsFound:(NSMutableArray*)resultStoreArray refresh:(BOOL)forceRefresh {
     if (forceRefresh) {
-        [activeLayoutView.pullToRefreshView stopAnimating];
-        [activeLayoutView setUserInteractionEnabled:YES];
+        [self stopPullToRefreshViewAnimation];
     }
     [resultStoreArray removeAllObjects];
     [self.sections removeAllObjects];
@@ -5357,13 +5355,8 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    if (self.slidingViewController.view != nil) {
-        [self disableScrollsToTopPropertyOnAllSubviewsOf:self.slidingViewController.view];
-    }
-    else {
-        [self disableScrollsToTopPropertyOnAllSubviewsOf:self.view];
-    }
-    [activeLayoutView setScrollsToTop:YES];
+    [self disableScrollsToTopPropertyOnAllSubviewsOf:self.slidingViewController.view ?: self.view];
+    activeLayoutView.scrollsToTop = YES;
     if (albumColor != nil) {
         [self setNavigationBarTint:[Utilities textTintColor:albumColor]];
     }

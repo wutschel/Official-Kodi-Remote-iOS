@@ -186,7 +186,7 @@
     [Utilities saveLastServerIndex:nil];
 }
 
-- (void)selectServer:(NSNotification*)notification  {
+- (void)selectServer:(NSNotification*)notification {
     // userInfo == nil means no valid server was found from the list in application:openURL:options:.
     if (!notification.userInfo) {
         [self deselectServer];

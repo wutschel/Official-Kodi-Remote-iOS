@@ -1000,10 +1000,10 @@
     voteLabel.numberOfLines = 2;
     voteLabel.textColor = subLabel1.textColor;
     
-    numVotesLabel.frame  = CGRectMake(voteLabel.frame.origin.x,
-                                      CGRectGetMaxY(voteLabel.frame) + VERTICAL_PADDING,
-                                      voteLabel.frame.size.width,
-                                      numVotesLabel.frame.size.height);
+    numVotesLabel.frame = CGRectMake(voteLabel.frame.origin.x,
+                                     CGRectGetMaxY(voteLabel.frame) + VERTICAL_PADDING,
+                                     voteLabel.frame.size.width,
+                                     numVotesLabel.frame.size.height);
     
     jewelView.autoresizingMask = UIViewAutoresizingNone;
     voteLabel.autoresizingMask = UIViewAutoresizingNone;

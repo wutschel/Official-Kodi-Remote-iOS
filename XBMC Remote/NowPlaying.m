@@ -941,7 +941,7 @@
     songSampleRate.hidden = NO;
     songSampleRateImage.image = nil;
     
-    itemDescription.font  = [UIFont systemFontOfSize:descriptionFontSize];
+    itemDescription.font = [UIFont systemFontOfSize:descriptionFontSize];
 }
 
 - (void)loadAudioCodecDetails {
@@ -964,7 +964,7 @@
             // Convert from Hz to kHz. Show 1/10th fraction, if not zero
             NSNumber *srate = [Utilities getNumberFromItem:methodResult[@"currentaudiostream"][@"samplerate"]];
             BOOL needsFraction = [srate integerValue] / 100 - ([srate integerValue] / 1000) * 10 > 0;
-            NSString *formatString = needsFraction ? @"%.1f" : @"%.0f" ;
+            NSString *formatString = needsFraction ? @"%.1f" : @"%.0f";
             kHz = [NSString stringWithFormat:formatString, [srate floatValue] / 1000];
         }
             
@@ -1039,7 +1039,7 @@
             songBitRateImage.image = [self loadImageFromName:@"icon_aspect"];
             songBitRateImage.hidden = songBitRate.hidden = aspect.length == 0;
             
-            itemDescription.font  = [UIFont systemFontOfSize:descriptionFontSize];
+            itemDescription.font = [UIFont systemFontOfSize:descriptionFontSize];
         }];
     }];
 }
@@ -1590,7 +1590,7 @@
         [button setImage:buttonImage forState:UIControlStateNormal];
         [button setImage:buttonImage forState:UIControlStateHighlighted];
         [button setImage:buttonImage forState:UIControlStateSelected];
-                     } 
+                     }
                      completion:nil
     ];
 }
