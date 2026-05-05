@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "mainMenu.h"
+#import "MainMenu.h"
 #import "MasterViewController.h"
 #import "ViewControllerIPad.h"
 #import "GlobalData.h"
@@ -133,7 +133,7 @@
     obj = [GlobalData getInstance];
     
     // Create the menu tree
-    mainMenuItems = [mainMenu generateMenus];
+    mainMenuItems = [MainMenu generateMenus];
     
     // Initialize controllers
     self.serverName = LOCALIZED_STR(@"No connection");

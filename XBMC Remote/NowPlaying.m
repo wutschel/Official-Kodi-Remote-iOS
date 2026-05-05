@@ -7,7 +7,7 @@
 //
 
 #import "NowPlaying.h"
-#import "mainMenu.h"
+#import "MainMenu.h"
 #import "GlobalData.h"
 #import "SDImageCache.h"
 #import "RemoteController.h"
@@ -1410,7 +1410,7 @@
     }];
 }
 
-- (void)showInfo:(NSDictionary*)item menuItem:(mainMenu*)menuItem activeTab:(int)activeTab indexPath:(NSIndexPath*)indexPath {
+- (void)showInfo:(NSDictionary*)item menuItem:(MainMenu*)menuItem activeTab:(int)activeTab indexPath:(NSIndexPath*)indexPath {
     NSDictionary *methods = menuItem.mainMethod[activeTab];
     NSDictionary *parameters = menuItem.mainParameters[activeTab];
     NSDictionary *mainFields = menuItem.mainFields[activeTab];
@@ -2010,7 +2010,7 @@
         return;
     }
     int activeTab = -1;
-    mainMenu *menuItem = nil;
+    MainMenu *menuItem = nil;
     notificationName = @"";
     if ([item[@"type"] isEqualToString:@"song"]) {
         notificationName = @"MainMenuDeselectSection";
@@ -2141,7 +2141,7 @@
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"playlistCellIdentifier"];
     if (cell == nil) {
-        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"playlistCellView" owner:self options:nil];
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PlaylistCellView" owner:self options:nil];
         cell = nib[0];
         UILabel *mainLabel = (UILabel*)[cell viewWithTag:XIB_PLAYLIST_CELL_MAINTITLE];
         UILabel *subLabel = (UILabel*)[cell viewWithTag:XIB_PLAYLIST_CELL_SUBTITLE];
