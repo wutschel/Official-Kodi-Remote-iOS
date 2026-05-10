@@ -5538,6 +5538,7 @@
     UIEdgeInsets viewInsets = dataList.contentInset;
     viewInsets.top = [self getTableInsetTop];
     dataList.contentInset = viewInsets;
+    dataList.scrollIndicatorInsets = viewInsets;
     dataList.indicatorStyle = UIScrollViewIndicatorStyleDefault;
     
     CGRect frame = maskView.frame;
