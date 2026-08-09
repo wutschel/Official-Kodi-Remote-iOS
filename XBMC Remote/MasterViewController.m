@@ -26,11 +26,6 @@
 #define CONNECTION_STATUS_PADDING 4
 #define CONNECTION_STATUS_SIZE 8
 
-@interface MasterViewController () {
-    NSMutableArray *_objects;
-}
-@end
-
 @implementation MasterViewController
 	
 - (void)changeServerStatus:(BOOL)status infoText:(NSString*)infoText icon:(NSString*)iconName {
