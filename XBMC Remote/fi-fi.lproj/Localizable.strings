@@ -21,7 +21,7 @@
 "Movie Sets" = "Elokuvakokoelmat";
 "Type" = "Tyyppi";
 "Albums" = "Albumit";
-"Artists" = "Esittäjät";
+"Artists" = "Artistit";
 "Genres" = "Lajityypit";
 "Added Albums" = "Lisätyt albumit";
 "Recently added albums" = "Viimeksi lisätyt albumit";
@@ -56,8 +56,8 @@
 "Search Wikipedia" = "Hae Wikipediasta";
 "Search last.fm charts" = "Hae Last.fm-listoilta";
 "Album Tracks" = "Albumin kappaleet";
-"Artist Albums" = "Esittäjän albumit";
-"Artist Details" = "Esittäjän tiedot";
+"Artist Albums" = "Artistin albumit";
+"Artist Details" = "Artistin tiedot";
 "Album Details" = "Albumin tiedot";
 "Movie Details" = "Elokuvan tiedot";
 "Movie Set Details" = "Elokuvakokoelman tiedot";
@@ -105,7 +105,7 @@
 "FIRST AIRED" = "ENSIESITYS";
 "SUMMARY" = "TIIVISTELMÄ";
 "PLOT OUTLINE" = "JUONIKUVAUS";
-"ARTIST" = "ESITTÄJÄ";
+"ARTIST" = "ARTISTI";
 "YEAR" = "VUOSI";
 "ALBUM LABEL" = "ALBUMIN LEVY-YHTIÖ";
 "DESCRIPTION" = "KUVAUS";
@@ -206,7 +206,7 @@
 "Not watched" = "Katsomaton";
 "Watched one time" = "Katsottu kerran";
 "Watched %@ times" = "Katsottu %@ kertaa";
-"Artist" = "Esittäjä";
+"Artist" = "Artisti";
 "Year" = "Vuosi";
 "Play count" = "Toistokerrat";
 "Track" = "Kappale";

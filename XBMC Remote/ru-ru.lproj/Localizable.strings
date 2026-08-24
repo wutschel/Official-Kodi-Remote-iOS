@@ -295,3 +295,5 @@
 "Kodi \"Krypton\" version 17 or later is required to access user profiles." = "Для доступа к профилям пользователей требуется Kodi «Krypton» версии 17 или более поздней.";
 "It seems local network access is not enabled for the Kodi Remote App. This is required for the app to find and connect to Kodi servers in your local network." = "Похоже, что для приложения Kodi Remote не включён доступ к локальной сети. Это необходимо для того, чтобы приложение могло найти серверы Kodi в вашей локальной сети и подключиться к ним.";
 "The local network access can be enabled in the iOS network or in the app settings. You might need to reset your network settings, restart your iOS device or even remove/re-install the app to let this take effect." = "Доступ к локальной сети можно включить в сети iOS или в настройках приложения. Возможно, вам потребуется сбросить настройки сети, перезагрузить устройство iOS или даже удалить/переустановить приложение для вступления в силу.";
+"Supports Kodi version %@ or higher" = "Поддерживается Kodi версии %@ или выше";
+"Kodi version %d not supported." = "Версия Kodi %d не поддерживается.";
