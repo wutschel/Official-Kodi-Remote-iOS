@@ -104,7 +104,7 @@ NSInputStream *inStream;
 
         case NSStreamEventOpenCompleted:
             AppDelegate.instance.serverTCPConnectionOpen = YES;
-            [self notifyJsonConnected:YES];
+            [self notifyTcpConnected:YES];
             break;
             
         case NSStreamEventHasBytesAvailable:
@@ -147,14 +147,14 @@ NSInputStream *inStream;
             [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
             theStream.delegate = nil;
             [[NSNotificationCenter defaultCenter] postNotificationName:@"tcpJSONRPCConnectionClosed" object:nil userInfo:nil];
-            [self notifyJsonConnected:NO];
+            [self notifyTcpConnected:NO];
             break;
         default:
             break;
     }
 }
 
-- (void)notifyJsonConnected:(BOOL)hasTcpConnection {
+- (void)notifyTcpConnected:(BOOL)hasTcpConnection {
     NSString *connectionIcon = hasTcpConnection ? @"connection_on" : @"connection_on_notcp";
     NSString *connectionName = infoTitle ?: @"";
     NSDictionary *params = @{
@@ -164,11 +164,11 @@ NSInputStream *inStream;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"XBMCServerConnectionSuccess" object:nil userInfo:params];
 }
 
-- (void)notifyTcpConnected:(BOOL)hasJsonConnection {
-    NSString *connectionIcon = hasJsonConnection ? @"connection_on_notcp" : @"connection_off";
-    NSString *connectionName = hasJsonConnection ? (infoTitle ?: @"") : LOCALIZED_STR(@"No connection");
+- (void)notifyHttpConnected:(BOOL)hasHttpConnection {
+    NSString *connectionIcon = hasHttpConnection ? @"connection_on_notcp" : @"connection_off";
+    NSString *connectionName = hasHttpConnection ? (infoTitle ?: @"") : LOCALIZED_STR(@"No connection");
     NSDictionary *params = @{
-        @"status": @(hasJsonConnection),
+        @"status": @(hasHttpConnection),
         @"message": connectionName,
         @"icon_connection": connectionIcon,
     };
@@ -182,7 +182,7 @@ NSInputStream *inStream;
 
 - (void)notifyConnectionProblem {
     if (AppDelegate.instance.serverOnLine) {
-        [self notifyTcpConnected:NO];
+        [self notifyHttpConnected:NO];
     }
     [self notifyShowSetupMenu:YES];
 }
@@ -238,7 +238,7 @@ NSInputStream *inStream;
                                  serverInfo[@"major"],
                                  serverInfo[@"minor"],
                                  serverInfo[@"tag"]];
-                    [self notifyTcpConnected:YES];
+                    [self notifyHttpConnected:YES];
                     [self notifyShowSetupMenu:NO];
                 }
                 else {
