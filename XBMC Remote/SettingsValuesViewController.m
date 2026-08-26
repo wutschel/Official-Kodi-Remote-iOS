@@ -32,10 +32,6 @@
 #define SCRUBBINGTEXT_HEIGHT 18
 #define SCRUBBINGTEXT_PADDING 5
 
-@interface SettingsValuesViewController ()
-
-@end
-
 @implementation SettingsValuesViewController
 
 - (id)initWithFrame:(CGRect)frame withItem:(id)item {

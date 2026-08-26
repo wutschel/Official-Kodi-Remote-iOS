@@ -11,10 +11,6 @@
 #import "AppDelegate.h"
 #import "Utilities.h"
 
-@interface InitialSlidingViewController ()
-
-@end
-
 @implementation InitialSlidingViewController
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {

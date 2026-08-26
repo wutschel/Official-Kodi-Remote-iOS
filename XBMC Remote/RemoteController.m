@@ -54,10 +54,6 @@
 
 static void *TorchRemoteContext = &TorchRemoteContext;
 
-@interface RemoteController ()
-
-@end
-
 @implementation RemoteController
 
 @synthesize holdKeyTimer;

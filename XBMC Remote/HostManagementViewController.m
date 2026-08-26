@@ -24,10 +24,6 @@
 #define XIB_HOST_MGMT_CELL_LABEL 2
 #define XIB_HOST_MGMT_CELL_IP 3
 
-@interface HostManagementViewController ()
-
-@end
-
 @implementation HostManagementViewController
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
