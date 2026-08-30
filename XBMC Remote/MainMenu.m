@@ -4545,9 +4545,11 @@
         },
         @{
             @"method": @"PVR.GetTimers",
+            @"timerListView": @YES,
         },
         @{
             @"method": @"PVR.GetTimers",
+            @"timerListView": @YES,
         },
     ] mutableCopy];
     
@@ -5101,9 +5103,11 @@
         },
         @{
             @"method": @"PVR.GetTimers",
+            @"timerListView": @YES,
         },
         @{
             @"method": @"PVR.GetTimers",
+            @"timerListView": @YES,
         },
     ] mutableCopy];
     
