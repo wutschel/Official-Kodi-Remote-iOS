@@ -22,10 +22,6 @@
 
 @import QuartzCore;
 
-@interface NowPlaying ()
-
-@end
-
 @implementation NowPlaying
 
 @synthesize detailItem = _detailItem;

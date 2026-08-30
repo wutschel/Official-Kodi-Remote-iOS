@@ -42,10 +42,6 @@
 #define CD_HEIGHT_IPAD 380
 #define CD_HEIGHT_IPHONE 290
 
-@interface ShowInfoViewController ()
-
-@end
-
 @implementation ShowInfoViewController
 
 @synthesize kenView;

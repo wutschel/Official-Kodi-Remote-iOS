@@ -12,10 +12,6 @@
 
 #define XIB_APPNAME_HEIGHT 24
 
-@interface AppInfoViewController ()
-
-@end
-
 @implementation UITextView (DisableCopyPaste)
 
 - (BOOL)canBecomeFirstResponder {

@@ -14,8 +14,6 @@
 #import "Utilities.h"
 #import "InitialSlidingViewController.h"
 
-// + 2 to cover two single-line separators
-#define HOSTMANAGERVC_MSG_HEIGHT (supportedVersionView.frame.size.height + 2)
 #define MARGIN 5
 #define LABEL_SPACING 8
 #define LABEL_HEIGHT 42
@@ -25,10 +23,6 @@
 #define XIB_HOST_MGMT_CELL_ICON 1
 #define XIB_HOST_MGMT_CELL_LABEL 2
 #define XIB_HOST_MGMT_CELL_IP 3
-
-@interface HostManagementViewController ()
-
-@end
 
 @implementation HostManagementViewController
 

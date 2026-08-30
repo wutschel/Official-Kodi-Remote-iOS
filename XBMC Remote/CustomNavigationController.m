@@ -8,10 +8,6 @@
 
 #import "CustomNavigationController.h"
 
-@interface CustomNavigationController ()
-
-@end
-
 @implementation CustomNavigationController
 
 - (id)initWithNibName:(NSString*)nibNameOrNil bundle:(NSBundle*)nibBundleOrNil {
