@@ -6,10 +6,10 @@
  * file that was distributed with this source code.
  */
 
-#import "Utilities.h"
 #import "SDWebImageDownloader.h"
 #import "SDWebImageDownloaderOperation.h"
 #import "SDWebImageManager.h"
+#import "Utilities.h"
 #import <ImageIO/ImageIO.h>
 
 static NSString *const kProgressCallbackKey = @"progress";
