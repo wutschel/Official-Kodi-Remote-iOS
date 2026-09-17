@@ -21,6 +21,7 @@
 - (void)simpleAction:(NSString*)action params:(NSDictionary*)params success:(NSString*)successMessage failure:(NSString*)failureMessage;
 - (void)playerAction:(NSString*)action params:(NSDictionary*)params playerid:(int)playerid;
 - (void)playerAction:(NSString*)action params:(NSDictionary*)params;
+- (void)playerPlayPause;
 - (void)playerOpen:(NSDictionary*)params indicator:(UIActivityIndicatorView*)cellActivityIndicator;
 - (void)playlistAdd:(NSDictionary*)params indicator:(UIActivityIndicatorView*)cellActivityIndicator;
 - (void)playlistInsert:(NSDictionary*)params indicator:(UIActivityIndicatorView*)cellActivityIndicator;

@@ -1555,9 +1555,7 @@
             break;
             
         case TAG_ID_PLAYPAUSE:
-            action = @"Player.PlayPause";
-            params = nil;
-            [self playerAction:action params:nil];
+            [self playerPlayPause];
             break;
             
         case TAG_ID_STOP:

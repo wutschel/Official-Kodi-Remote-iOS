@@ -71,6 +71,108 @@
     }];
 }
 
+- (void)processFoundPlaylists:(NSMutableArray*)nonemptyPlaylists {
+    switch (nonemptyPlaylists.count) {
+        // More than one playlist is non-empty. Present an action sheet to let the user select the playlist to play.
+        case 3:
+        case 2:
+        {
+            UIAlertController *alertCtrl = [UIAlertController alertControllerWithTitle:LOCALIZED_STR(@"Select Playlist") message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+            
+            UIAlertAction *action_cancel = [UIAlertAction actionWithTitle:LOCALIZED_STR(@"Cancel") style:UIAlertActionStyleCancel handler:nil];
+            
+            NSArray *actionTitles = @[
+                LOCALIZED_STR(@"Music"),
+                LOCALIZED_STR(@"Videos"),
+                LOCALIZED_STR(@"Pictures"),
+            ];
+            for (id item in nonemptyPlaylists) {
+                int playlistId = [item intValue];
+                UIAlertAction *action = [UIAlertAction actionWithTitle:actionTitles[playlistId] style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                    [[Utilities getJsonRPC]
+                     callMethod:@"Player.Open"
+                     withParameters:@{@"item": @{@"position": @(0), @"playlistid": @(playlistId)}}];
+                }];
+                [alertCtrl addAction:action];
+            }
+            [alertCtrl addAction:action_cancel];
+            alertCtrl.modalPresentationStyle = UIModalPresentationPopover;
+            
+            UIPopoverPresentationController *popPresenter = [alertCtrl popoverPresentationController];
+            if (popPresenter != nil) {
+                popPresenter.sourceView = self.view;
+                popPresenter.sourceRect = self.view.bounds;
+            }
+            [self presentViewController:alertCtrl animated:YES completion:nil];
+            break;
+        }
+            
+        // Only one playlist was not empty, play the first item of it.
+        case 1:
+        {
+            int playlistId = [nonemptyPlaylists[0] intValue];
+            [[Utilities getJsonRPC]
+             callMethod:@"Player.Open"
+             withParameters:@{@"item": @{@"position": @(0), @"playlistid": @(playlistId)}}];
+            break;
+        }
+        
+        // All playlists were empty. Do nothing.
+        case 0:
+        default:
+            break;
+    }
+}
+
+- (void)recursiveCheckPlaylistArray:(NSArray*)playlistIds index:(int)index foundPlaylists:(NSMutableArray*)nonemptyPlaylists {
+    int playlistId = [playlistIds[index] intValue];
+    [[Utilities getJsonRPC] callMethod:@"Playlist.GetItems"
+                        withParameters:@{@"properties": @[@"title"],
+                                         @"playlistid": @(playlistId)}
+                          onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
+        if (error == nil && methodError == nil && [methodResult isKindOfClass:[NSDictionary class]]) {
+            NSArray *playlistItems = methodResult[@"items"];
+            if ([playlistItems isKindOfClass:[NSArray class]] && [playlistItems count] > 0) {
+                [nonemptyPlaylists addObject:playlistIds[index]];
+            }
+            if (index + 1 < playlistIds.count) {
+                // Check next playlist
+                [self recursiveCheckPlaylistArray:playlistIds
+                                            index:index + 1
+                                   foundPlaylists:nonemptyPlaylists];
+            }
+            else {
+                // Checked last playlist, now process the results.
+                [self processFoundPlaylists:nonemptyPlaylists];
+            }
+        }
+    }];
+}
+
+- (void)playerPlayPause {
+    [[Utilities getJsonRPC] callMethod:@"Player.GetActivePlayers" withParameters:@{} onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
+        if (error == nil && methodError == nil && [methodResult isKindOfClass:[NSArray class]]) {
+            if ([methodResult count] > 0) {
+                // There is a player active, just address play/pause
+                int playerID = [Utilities getActivePlayerID:methodResult];
+                [self playerAction:@"Player.PlayPause" params:nil playerid:playerID];
+            }
+            else {
+                // There is no player active. Iterate through all playlists and either play show options to user.
+                NSArray *playlistIds = @[
+                    @(PLAYERID_MUSIC),
+                    @(PLAYERID_VIDEO),
+                    @(PLAYERID_PICTURES),
+                ];
+                NSMutableArray *nonemptyPlaylists = [NSMutableArray new];
+                [self recursiveCheckPlaylistArray:playlistIds
+                                            index:0
+                                   foundPlaylists:nonemptyPlaylists];
+            }
+        }
+    }];
+}
+
 - (void)playerOpen:(NSDictionary*)params indicator:(UIActivityIndicatorView*)cellActivityIndicator {
     [cellActivityIndicator startAnimating];
     [[Utilities getJsonRPC] callMethod:@"Player.Open" withParameters:params onCompletion:^(NSString *methodName, NSInteger callId, id methodResult, DSJSONRPCError *methodError, NSError *error) {
