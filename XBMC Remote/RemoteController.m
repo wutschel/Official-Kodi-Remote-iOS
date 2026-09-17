@@ -680,9 +680,7 @@ static void *TorchRemoteContext = &TorchRemoteContext;
             break;
             
         case TAG_BUTTON_PLAY_PAUSE:
-            action = @"Player.PlayPause";
-            params = nil;
-            [self playerAction:action params:nil];
+            [self playerPlayPause];
             break;
             
         case TAG_BUTTON_SEEK_FORWARD:
